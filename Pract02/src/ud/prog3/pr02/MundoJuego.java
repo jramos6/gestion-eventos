@@ -1,5 +1,7 @@
 package ud.prog3.pr02;
 
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 /** "Mundo" del juego del coche.
@@ -8,9 +10,18 @@ import javax.swing.JPanel;
  * @author Andoni EguÌluz Mor·n
  * Facultad de IngenierÌa - Universidad de Deusto
  */
+
 public class MundoJuego {
 	private JPanel panel;  // panel visual del juego
 	CocheJuego miCoche;    // Coche del juego
+	boolean [] aBoolean = new boolean [4];	//Creamos array de booleanos:
+		
+	public void inicializarArrayFalse(boolean [] aBoolean){
+		for(int i=0; i<4; i++){
+			aBoolean[i]=false;
+		}
+	}
+	
 	
 	/** Construye un mundo de juego
 	 * @param panel	Panel visual del juego
@@ -108,4 +119,46 @@ public class MundoJuego {
 		return vel + (acel*tiempo);
 	}
 	
+	/**
+	 * Si han pasado más de 1,2 segundos desde la última, crea una estrella nueva en una posición aleatoria
+	 * y la añade al mundo y al panel visual
+	 */
+	protected long horaMilisec; //Atributo para guardar la hora en milisegundos
+	
+	public void creaEstrella(ArrayList <JLabelEstrella> aEstrellas){
+		for(int i=0; i<100;i++){
+			if(System.currentTimeMillis()>1.2){
+			JLabelEstrella e = new JLabelEstrella(); //Creamos una nueva estrella
+			aEstrellas.add(e); //Añadimos nueva estrella en el array
+			horaMilisec = System.currentTimeMillis(); //Guardar el tiempo en milisegundos de la creación de la última estrella
+			
+			}
+		}
+	}
+	
+	/**
+	 * Quita todas las estrellas que lleven en pantalla demasiado tiempo
+	 * y rota 10 grados las que sigan estando
+	 * @param maxTiempo		Tiempo máximo para que se mantengan las estrellas (msegs)
+	 * @return Número de estrellas quitadas
+	 */
+	public int quitaYRotaEstrellas(long maxTiempo){
+		int numEstrellasQuitadas=0; //Variable que recoge el número de estrellas quitadas
+		maxTiempo=6; //Tiempo máximo para que se mantengan las estrellas
+		
+		
+		return numEstrellasQuitadas;
+	}
+	
+	/**
+	 * Calcula si hay choques del coche con alguna estrella (o varias). Se considera el choque si
+	 * se tocan las esferas lógicas del coche y las estrellas. Si es así, las elimina.
+	 * @return Número de estrellas eliminadas
+	 */
+	public int choquesConEstrellas(){
+		int numEstrellasEliminadas=0;
+		
+		
+		return numEstrellasEliminadas;
+	}
 }
