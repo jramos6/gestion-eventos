@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class MundoJuego {
 	private JPanel panel;  // panel visual del juego
 	CocheJuego miCoche;    // Coche del juego
-	boolean [] aBoolean = new boolean [4];	//Creamos array de booleanos:
+	
 		
 	public void inicializarArrayFalse(boolean [] aBoolean){
 		for(int i=0; i<4; i++){
