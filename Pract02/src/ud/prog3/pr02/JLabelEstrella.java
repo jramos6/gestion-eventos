@@ -19,7 +19,7 @@ public class JLabelEstrella extends JLabel {
 	private static final boolean DIBUJAR_ESFERA_ESTRELLA = true;  // Dibujado (para depuraciÛn) del bounding circle de choque del coche
 	private long horaEstrella;
 	
-	/** Construye y devuelve el JLabel del coche con su gr·fico y tamaÒo
+	/** Construye y devuelve el JLabel de la estrella con su gráfico y tamaño
 	 */
 	public JLabelEstrella() {
 		// Esto se harÌa para acceder por sistema de ficheros
@@ -39,9 +39,9 @@ public class JLabelEstrella extends JLabel {
 	// giro
 	private double miGiro = Math.PI/2;
 	/** Cambia el giro del JLabel
-	 * @param gradosGiro	Grados a los que tiene que "apuntar" el coche,
+	 * @param gradosGiro	Grados a los que tiene que "apuntar" la estrella,
 	 * 						considerados con el 0 en el eje OX positivo,
-	 * 						positivo en sentido antihorario, negativo horario.
+	 * 						positivo en sentido contrario a las horas.
 	 */
 	public void setGiro( double gradosGiro ) {
 		// De grados a radianes...

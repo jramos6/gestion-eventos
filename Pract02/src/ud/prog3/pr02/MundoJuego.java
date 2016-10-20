@@ -5,6 +5,13 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+/**
+ * ENLACES IMPORTANTES:
+ * @author: Aitor Santamaria Zuluaga
+ * GIT: 
+ */
+
+
 /** "Mundo" del juego del coche.
  * Incluye las fÌsicas para el movimiento y los choques de objetos.
  * Representa un espacio 2D en el que se mueven el coche y los objetos de puntuaciÛn.
@@ -195,6 +202,7 @@ public class MundoJuego {
 			
 		}
 	}
+
 	
 	/**
 	 * Calcula si hay choques del coche con alguna estrella (o varias). Se considera el choque si
