@@ -89,11 +89,15 @@ public class VentanaJuego extends JFrame {
 						switch (e.getKeyCode()) {
 							case KeyEvent.VK_UP: {
 								//miCoche.acelera( +5, 1 );
+								double f = miCoche.fuerzaAceleracionAdelante();
+								MundoJuego.aplicarFuerza(f, miCoche);
 								aBooleano[1]=false;
 								break;
 							}
 							case KeyEvent.VK_DOWN: {
 								//miCoche.acelera( -5, 1 );
+								double g = miCoche.fuerzaAceleracionAtras();
+								MundoJuego.aplicarFuerza(g, miCoche);
 								aBooleano[3]=false;
 								break;
 							}
@@ -210,7 +214,7 @@ public class VentanaJuego extends JFrame {
 				}if(aBooleano[3]=true){
 					miCoche.acelera( -5, 1 );
 				}
-				
+				miMundo.creaEstrella();
 				// Dormir el hilo 40 milisegundos
 				try {
 					Thread.sleep( 40 );
@@ -218,6 +222,15 @@ public class VentanaJuego extends JFrame {
 				}
 			}
 		}
+		
+		/** Quita todas las estrellas que lleven en pantalla demasiado tiempo
+		* y rota 10 grados las que sigan estando
+		* @param maxTiempo Tiempo máximo para que se mantengan las estrellas (msegs) * @return Número de estrellas quitadas */
+		public int quitaYRotaEstrellas( long maxTiempo ){
+			
+			return 0;
+		          }
+		
 		/** Ordena al hilo detenerse en cuanto sea posible
 		 */
 		public void acaba() {

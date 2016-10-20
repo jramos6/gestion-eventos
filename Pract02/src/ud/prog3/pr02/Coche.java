@@ -10,6 +10,11 @@ public class Coche {
 	protected double posX;  // PosiciÛn en X (horizontal)
 	protected double posY;  // PosiciÛn en Y (vertical)
 	protected String piloto;  // Nombre de piloto
+	protected static final double MASA=1;
+	protected static final double COEF_RZTO_SUELO=15.5;
+	protected static final double COEF_RZTO_AIRE=0.35;
+	protected static final double FUERZA_BASE_ADELANTE=2000;
+	protected static final double FUERZA_BASE_ATRAS=1000;
 	
 	// Constructores
 	
@@ -97,6 +102,28 @@ public class Coche {
 		setPosX( posX + MundoJuego.calcMovtoX( miVelocidad, miDireccionActual, tiempoDeMovimiento ) );
 		setPosY( posY + MundoJuego.calcMovtoY( miVelocidad, miDireccionActual, tiempoDeMovimiento ) );
 	}
+	
+	  public double fuerzaAceleracionAdelante() {
+          if (miVelocidad<=-150) return FUERZA_BASE_ADELANTE;
+          else if (miVelocidad<=0)
+                return FUERZA_BASE_ADELANTE*(-miVelocidad/150*0.5+0.5);
+          else if (miVelocidad<=250)
+                return FUERZA_BASE_ADELANTE*(miVelocidad/250*0.5+0.5);
+          else if (miVelocidad<=750)
+                return FUERZA_BASE_ADELANTE;
+          else return FUERZA_BASE_ADELANTE*(-(miVelocidad-1000)/250);
+	  }
+	  
+	  public double fuerzaAceleracionAtras() {
+          if (miVelocidad<=-350) return FUERZA_BASE_ATRAS*((miVelocidad+500)/150+1);
+          else if (miVelocidad<=-200)
+                return FUERZA_BASE_ATRAS;
+          else if (miVelocidad<=0)
+                return FUERZA_BASE_ATRAS*(miVelocidad+200/200*0.7+1);
+          else if (miVelocidad<=250)
+                return FUERZA_BASE_ATRAS*(miVelocidad/250*0.55+0.3);
+          else return 850;
+	  }
 	
 	@Override
 	public String toString() {
