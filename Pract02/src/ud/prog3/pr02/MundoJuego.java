@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 /**
  * ENLACES IMPORTANTES:
  * @author: Aitor Santamaria Zuluaga
- * GIT: 
+ * GIT: https://github.com/aitorsanta/ud-prog3-pr02.git
+ * GANTTER: invitación enviada al correo
  */
 
 
