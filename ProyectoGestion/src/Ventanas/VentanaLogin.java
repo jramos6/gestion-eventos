@@ -1,9 +1,14 @@
+package Ventanas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import BasesDeDatos.BD;
+import Data.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -18,7 +23,7 @@ import javax.swing.JPasswordField;
 
 public class VentanaLogin extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel contentPane, pnlNorte, panelSur;
 	private JTextField txtUsuario;
 	private JPasswordField txtContrasenia;
 	private JTextField txtNombre;
@@ -49,6 +54,7 @@ public class VentanaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
+		BD BD = new BD();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,7 +62,7 @@ public class VentanaLogin extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JPanel pnlNorte = new JPanel();
+		pnlNorte = new JPanel();
 		pnlNorte.setBackground(Color.CYAN);
 		contentPane.add(pnlNorte, BorderLayout.NORTH);
 		
@@ -65,7 +71,7 @@ public class VentanaLogin extends JFrame {
 		lblParaContinuar.setBackground(Color.CYAN);
 		pnlNorte.add(lblParaContinuar);
 		
-		JPanel panelSur = new JPanel();
+		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		JButton btnVolver = new JButton("Volver");
@@ -80,18 +86,6 @@ public class VentanaLogin extends JFrame {
 				//Activamos campos para registro del usuario:
 				
 				campoRegistro();
-				
-				
-				
-			}
-		});
-		btnRegistrarse.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		panelSur.add(btnRegistrarse);
-		
-		JButton btnAcceder = new JButton("Acceder");
-		btnAcceder.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
 				
 				//Una vez clickado el botón aceptar:
 				// 1. Comprobamos que los datos estén bien
@@ -114,14 +108,86 @@ public class VentanaLogin extends JFrame {
 					}
 				}else{
 					if(txtUsu.equals("") || txtContr1.equals("")){
-						JOptionPane.showMessageDialog(null, "Error! No se pueden dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Error! No es posible dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
 						vaciarCampos();
 					}
 				}
 				
 				
 				//Comprobamos que el usuario no está repetido (mirando en la BD) TODO
+				Usuario u = BD.obtenerUsuario(txtUsu);
 				
+				
+				
+				//Comprobamos que las dos contraseñas coincidan (en caso de registro)
+				
+				if(activado==true){
+					if(!txtContr1.equals(txtContr2)){
+						JOptionPane.showMessageDialog(null, "Error! Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
+						vaciarCamposContrasenia();
+					}
+					
+				}
+				
+				
+				//Comprobamos que la edad sea positiva (en caso de registro) 
+				
+				
+				
+				
+			}
+		});
+		btnRegistrarse.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
+		panelSur.add(btnRegistrarse);
+		
+		JButton btnAcceder = new JButton("Acceder");
+		btnAcceder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//Una vez clickado el botón aceptar:
+				// 1. Comprobamos que los datos estén bien
+				// 2. Pasamos a la siguiente ventana  
+			
+				//Comprobamos que ningún campo está vacío:
+				
+				String txtNom = txtNombre.getText();
+				String txtDni = txtDNI.getText();
+				String txtContr1 = txtContrasenia.getText();
+				String txtContr2 = txtContra2.getText();
+				String txtEd = txtEdad.getText();
+				String txtUsu = txtUsuario.getText();
+				
+				
+				if(activado==true){
+					if(txtNom.equals("") || txtDni.equals("") || txtContr1.equals("") || txtContr2.equals("") || txtEd.equals("") || txtUsu.equals("")){
+						JOptionPane.showMessageDialog(null, "Error! No se pueden dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
+						vaciarCampos();
+					}
+				}else{
+					if(txtUsu.equals("") || txtContr1.equals("")){
+						JOptionPane.showMessageDialog(null, "Error! No es posible dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
+						vaciarCampos();
+					}
+				}
+				
+				
+				//Comprobamos que el usuario está en la BD 
+				
+				Usuario u = BD.obtenerUsuario(txtUsu);
+				
+				if (u == null) {
+					JOptionPane.showMessageDialog(null, "Lo sentimos, el usuario no está registrado en la Base de Datos", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+					campoRegistro();
+				} else if (!u.getContras().equals(txtContr1)) {
+					JOptionPane.showMessageDialog(null, "Lo sentimos, la contraseña es incorrecta", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					// new ABRIR UNA NUEVA VENTANA (LA SIGUIENTE A ESTA) TODO
+					//ventana.dispose();
+				}
+			
 				
 				//Comprobamos que las dos contraseñas coincidan (en caso de registro)
 				
