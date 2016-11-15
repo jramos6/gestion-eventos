@@ -33,6 +33,8 @@ public class VentanaLogin extends JFrame {
 	private JLabel lblRepitaContrasea;
 	private JPasswordField txtContra2;
 	private boolean activado=false;
+	private boolean estaRegistrandose=false;
+	public static BD BaDa;
 
 	/**
 	 * Launch the application.
@@ -54,7 +56,7 @@ public class VentanaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
-		BD BD = new BD();
+		BD BaDa = new BD();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -83,56 +85,13 @@ public class VentanaLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				//Escondemos el botón registrarse
+				
+				btnRegistrarse.setVisible(false);
+				
 				//Activamos campos para registro del usuario:
 				
-				campoRegistro();
-				
-				//Una vez clickado el botón aceptar:
-				// 1. Comprobamos que los datos estén bien
-				// 2. Pasamos a la siguiente ventana TODO 
-			
-				//Comprobamos que ningún campo está vacío:
-				
-				String txtNom = txtNombre.getText();
-				String txtDni = txtDNI.getText();
-				String txtContr1 = txtContrasenia.getText();
-				String txtContr2 = txtContra2.getText();
-				String txtEd = txtEdad.getText();
-				String txtUsu = txtUsuario.getText();
-				
-				
-				if(activado==true){
-					if(txtNom.equals("") || txtDni.equals("") || txtContr1.equals("") || txtContr2.equals("") || txtEd.equals("") || txtUsu.equals("")){
-						JOptionPane.showMessageDialog(null, "Error! No se pueden dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
-						vaciarCampos();
-					}
-				}else{
-					if(txtUsu.equals("") || txtContr1.equals("")){
-						JOptionPane.showMessageDialog(null, "Error! No es posible dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
-						vaciarCampos();
-					}
-				}
-				
-				
-				//Comprobamos que el usuario no está repetido (mirando en la BD) TODO
-				Usuario u = BD.obtenerUsuario(txtUsu);
-				
-				
-				
-				//Comprobamos que las dos contraseñas coincidan (en caso de registro)
-				
-				if(activado==true){
-					if(!txtContr1.equals(txtContr2)){
-						JOptionPane.showMessageDialog(null, "Error! Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
-						vaciarCamposContrasenia();
-					}
-					
-				}
-				
-				
-				//Comprobamos que la edad sea positiva (en caso de registro) 
-				
-				
+				campoRegistro();	
 				
 				
 			}
@@ -158,49 +117,87 @@ public class VentanaLogin extends JFrame {
 				String txtEd = txtEdad.getText();
 				String txtUsu = txtUsuario.getText();
 				
+				//Si activado esta en true significa que es un nuevo registro
 				
 				if(activado==true){
-					if(txtNom.equals("") || txtDni.equals("") || txtContr1.equals("") || txtContr2.equals("") || txtEd.equals("") || txtUsu.equals("")){
-						JOptionPane.showMessageDialog(null, "Error! No se pueden dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
+					//Nuevo registro para la base de datos
+					
+					//1- Comprobamos que todos los campos estan escritos
+					
+					if(txtDni.equals("")||txtNom.equals("")||txtUsu.equals("")||txtContr1.equals("")||txtContr2.equals("")||txtEd.equals("") ){
+						JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+						//Si ha escrito algo en uno de los campos los borramos
 						vaciarCampos();
-					}
-				}else{
-					if(txtUsu.equals("") || txtContr1.equals("")){
-						JOptionPane.showMessageDialog(null, "Error! No es posible dejar campos en blanco", "Error!", JOptionPane.ERROR_MESSAGE);
-						vaciarCampos();
-					}
-				}
-				
-				
-				//Comprobamos que el usuario está en la BD 
-				
-				Usuario u = BD.obtenerUsuario(txtUsu);
-				
-				if (u == null) {
-					JOptionPane.showMessageDialog(null, "Lo sentimos, el usuario no está registrado en la Base de Datos", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
-					campoRegistro();
-				} else if (!u.getContras().equals(txtContr1)) {
-					JOptionPane.showMessageDialog(null, "Lo sentimos, la contraseña es incorrecta", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
-					// new ABRIR UNA NUEVA VENTANA (LA SIGUIENTE A ESTA) TODO
-					//ventana.dispose();
-				}
-			
-				
-				//Comprobamos que las dos contraseñas coincidan (en caso de registro)
-				
-				if(activado==true){
-					if(!txtContr1.equals(txtContr2)){
-						JOptionPane.showMessageDialog(null, "Error! Las contraseñas no coinciden", "Error!", JOptionPane.ERROR_MESSAGE);
-						vaciarCamposContrasenia();
 					}
 					
+					//2-Comprobamos que los campos tienen un tipo de datos correcto
+					
+					/* DNI: length = 9
+					 * Edad: 0-140
+					 */
+					
+					if(txtDni.length()!=9){ //DNI de tamaño 9
+						JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 12345678A");
+						txtEdad.setText("");
+					}
+					
+					if(txtEd.startsWith("-")){ //Descartamos los numeros negativos
+						JOptionPane.showMessageDialog(null, "Edad incorrecta. No se puede tener una edad negativa");
+						txtEdad.setText("");
+					}
+					
+					if(txtEd.length()==1 || txtEd.startsWith("1") && !(txtEd.endsWith("8") || txtEd.endsWith("9"))){ //Descartamos a niñ@s menores de 18 años
+						JOptionPane.showMessageDialog(null, "Para usar este programa hay que tener al menos 18 años");
+						txtEdad.setText("");
+					}
+					
+					//3- Comprobamos que el usuario no existe
+					Usuario u = BD.obtenerUsuario(txtUsu);
+					if(u!=null){
+						JOptionPane.showMessageDialog(null, "El nombre de usuario escogido ya existe. Por favor, introduzca otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
+						txtUsuario.setText("");
+					}
+					
+					
+					//4- Comprobamos que las contraseñas coinciden entre sí
+					
+					if(!txtContr1.equals(txtContr2)){
+						JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+						vaciarCamposContrasenia(); //Vaciamos sólo los campos de contraseñas
+					}
+					
+					//5- registramos el nuevo usuario en la base de datos:
+					
+						//Nombre DNI usuario contra edad TODO
+					
+					// NO SE COMO CONIO METER UN USUARIO NUEVO EN LA BD u = new Usuario(txtNom, txtDni, txtUsu, txtContr1, txtEdad.);
+					
+					
+				}else{
+					//Usuario que existe en la base de datos
+					
+					//1- Comprobamos que los campos de usuario y contraseña estan escritos
+					
+					if(txtUsu.equals("")|| txtContr1.equals("")){
+						JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+						//Si ha escrito algo en un campo lo borramos
+						vaciarCampos();
+					}
+					
+					
+					//2- Comprobamos que el usuario existe en la base de datos
+					Usuario u = BD.obtenerUsuario(txtUsu);
+					if(u==null){
+						JOptionPane.showMessageDialog(null, "El nombre de usuario escogido no existe. Por favor, regístrese", "Error", JOptionPane.ERROR_MESSAGE);
+						txtUsuario.setText("");
+						txtContrasenia.setText("");
+					}
 				}
+	
+				//Cuando se registra satisfactoriamente 
 				
+				JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 				
-				//Comprobamos que la edad sea positiva (en caso de registro) TODO (preguntar como se hace...)
 				
 				
 			}
@@ -306,11 +303,26 @@ public class VentanaLogin extends JFrame {
 	
 	
 	/**
+	 * Método para desactivar los campos de registro
+	 */
+	private void camposDisableados(){
+		lblNombre.setEnabled(false);
+		lblDNI.setEnabled(false);
+		lblEdad.setEnabled(false);
+		txtNombre.setEnabled(false);
+		txtDNI.setEnabled(false);
+		txtEdad.setEnabled(false);
+		txtContra2.setEnabled(false);
+		lblRepitaContrasea.setEnabled(false);
+	}
+	
+	/**
 	 * Método para activar los campos de registro:
 	 */
 	private void campoRegistro(){
 		
 		activado=true;
+		estaRegistrandose=true;
 		
 		lblNombre.setEnabled(true);
 		lblDNI.setEnabled(true);

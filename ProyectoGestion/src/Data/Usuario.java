@@ -8,13 +8,13 @@ public class Usuario {
 		private String contras;
 		
 		
-		public Usuario(String dni, String nom, int edad, String contras, String usuario) {
+		public Usuario(String nom, String dni, String txtUsu, String contras, int edad) {
 			super();
 			this.dni = dni;
 			this.nombre = nombre;
 			this.edad = edad;
 			this.contras = contras;
-			this.usuario = usuario;
+			this.usuario = txtUsu;
 		}
 		
 		

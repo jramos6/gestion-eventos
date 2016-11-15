@@ -35,7 +35,7 @@ public class BD {
 	{
 		try {
 			Class.forName("org.sqlite.JDBC");
-			connect= DriverManager.getConnection("jdbc:sqlite:Newton.db");
+			connect= DriverManager.getConnection("jdbc:sqlite:DBproyecto.db");
 			crearSentencia();
 		}catch(Exception e)
 		{
@@ -84,7 +84,7 @@ public class BD {
 		try {
 			ResultSet rs = stm.executeQuery(query);
 			if(rs.next()) //Si la select ha devuelto filas
-				u=new Usuario(rs.getString("dni"),rs.getString("nombre"),rs.getInt("edad"),rs.getString("contrasenia"),rs.getString("usuario"));
+				u=new Usuario(rs.getString("nombre"), rs.getString("dni"),rs.getString("usuario"),rs.getString("contrasenia"),rs.getInt("edad"));
 			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block  
@@ -94,7 +94,7 @@ public class BD {
 	}
 	
 	public void insertarNuevoUsuario(Usuario u){
-		String query = "INSERT INTO cliente (dni,nombre,edad,contrasenia,foto) VALUES ('"+u.getDni()+"','"+u.getNombre()+"',"+u.getEdad()+",'"+u.getContras()+"','"+u.getUsuario()+"')";
+		String query = "INSERT INTO cliente (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+u.getDni()+"','"+u.getNombre()+"',"+u.getEdad()+",'"+u.getContras()+"','"+u.getUsuario()+"')";
 		try {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
