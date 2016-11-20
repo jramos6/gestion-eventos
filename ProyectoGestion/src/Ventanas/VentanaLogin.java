@@ -34,7 +34,7 @@ public class VentanaLogin extends JFrame {
 	private JPasswordField txtContra2;
 	private boolean activado=false;
 	private boolean estaRegistrandose=false;
-	public static BD BaDa;
+	public static BD b;
 
 	/**
 	 * Launch the application.
@@ -56,7 +56,7 @@ public class VentanaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
-		BD BaDa = new BD();
+		b = new BD();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -104,7 +104,7 @@ public class VentanaLogin extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//Una vez clickado el botón aceptar:
+				//Una vez clickado el botón acceder:
 				// 1. Comprobamos que los datos estén bien
 				// 2. Pasamos a la siguiente ventana  
 			
@@ -168,10 +168,10 @@ public class VentanaLogin extends JFrame {
 					
 					//5- registramos el nuevo usuario en la base de datos:
 					
-						//Nombre DNI usuario contra edad TODO
-					
-					// NO SE COMO CONIO METER UN USUARIO NUEVO EN LA BD u = new Usuario(txtNom, txtDni, txtUsu, txtContr1, txtEdad.);
-					
+						//Nombre DNI usuario contra edad AKATSA!! TODO
+			 
+							//b.insertarNuevoUsuario(u);
+							b.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
 					
 				}else{
 					//Usuario que existe en la base de datos
@@ -191,14 +191,15 @@ public class VentanaLogin extends JFrame {
 						JOptionPane.showMessageDialog(null, "El nombre de usuario escogido no existe. Por favor, regístrese", "Error", JOptionPane.ERROR_MESSAGE);
 						txtUsuario.setText("");
 						txtContrasenia.setText("");
+					}else{
+						//Cuando se registra satisfactoriamente 
+						
+						JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario.getText(), "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+						
+						//TODO Aquí hay que pasar a la siguiente ventana
 					}
 				}
 	
-				//Cuando se registra satisfactoriamente 
-				
-				JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-				
-				
 				
 			}
 		});

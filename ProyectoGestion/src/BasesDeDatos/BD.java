@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import Data.Usuario;
 
 public class BD {
@@ -93,8 +96,10 @@ public class BD {
 		return u;
 	}
 	
-	public void insertarNuevoUsuario(Usuario u){
-		String query = "INSERT INTO cliente (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+u.getDni()+"','"+u.getNombre()+"',"+u.getEdad()+",'"+u.getContras()+"','"+u.getUsuario()+"')";
+
+	public void insertarNuevoUsuario(String Nombre, String DNI, String Usuario, String Contrasenia,
+			int Edad){
+		String query = "INSERT INTO USUARIO (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+Nombre+"','"+DNI+"',"+Usuario+",'"+Contrasenia+"',"+Edad+")";
 		try {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
@@ -103,6 +108,7 @@ public class BD {
 		}
 	}
 
-
+	
+	
 	
 }
