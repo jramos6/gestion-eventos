@@ -35,6 +35,7 @@ public class VentanaLogin extends JFrame {
 	private boolean activado=false;
 	private boolean estaRegistrandose=false;
 	public static BD b;
+	
 
 	/**
 	 * Launch the application.
@@ -76,7 +77,18 @@ public class VentanaLogin extends JFrame {
 		panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
+		JFrame vl = this;
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Conectamos con la ventana principal		
+				vl.dispose();
+				VentanaPrincipal v = new VentanaPrincipal();
+				v.setVisible(true);
+				
+			}
+		});
 		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelSur.add(btnVolver);
 		
@@ -167,8 +179,6 @@ public class VentanaLogin extends JFrame {
 					}
 					
 					//5- registramos el nuevo usuario en la base de datos:
-					
-						//Nombre DNI usuario contra edad AKATSA!! TODO
 			 
 							//b.insertarNuevoUsuario(u);
 							b.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
@@ -197,6 +207,10 @@ public class VentanaLogin extends JFrame {
 						JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario.getText(), "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 						
 						//TODO Aquí hay que pasar a la siguiente ventana
+						
+						vl.dispose();
+						VentanaEventos v = new VentanaEventos();
+						v.setVisible(true);
 					}
 				}
 	

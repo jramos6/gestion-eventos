@@ -99,7 +99,7 @@ public class BD {
 
 	public void insertarNuevoUsuario(String Nombre, String DNI, String Usuario, String Contrasenia,
 			int Edad){
-		String query = "INSERT INTO USUARIO (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+Nombre+"','"+DNI+"',"+Usuario+",'"+Contrasenia+"',"+Edad+")";
+		String query = "INSERT INTO USUARIO (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+Nombre+"','"+DNI+"','"+Usuario+"','"+Contrasenia+"',"+Edad+")";
 		try {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
