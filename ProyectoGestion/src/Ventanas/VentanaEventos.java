@@ -15,6 +15,9 @@ import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -75,16 +78,22 @@ public class VentanaEventos extends JFrame {
 		});
 		panelSur.add(btnVolver);
 		
+		JComboBox comboTipoEventos = new JComboBox();
 		
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//tenemos que comprobar que el número de invitados es mayor que 0
-				if(!txtNumInvitados.getText().equals("") && Integer.parseInt(txtNumInvitados.getText())>0){
-					JOptionPane.showMessageDialog(null, "Error, número");
+				if(txtNumInvitados.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "Error, introduzca número de invitados");
+					txtNumInvitados.setText("");	
 					
-					
+				} else if(Integer.parseInt(txtNumInvitados.getText())<1){
+					JOptionPane.showMessageDialog(null, "Error, número de invitados demasiado pequeño. Vuelva a introducir número de invitados");
+					txtNumInvitados.setText("");	
+				} else{
+					System.out.println(comboTipoEventos.getSelectedItem());
 				}
 				
 				
@@ -105,8 +114,15 @@ public class VentanaEventos extends JFrame {
 		JLabel lblTipoEvento = new JLabel("Tipo evento:");
 		panelCentro.add(lblTipoEvento);
 		
-		JComboBox comboTipoEventos = new JComboBox();
 		comboTipoEventos.setModel(new DefaultComboBoxModel(new String[] {"", "Cultural", "Laboral", "Social"}));
+		/*comboTipoEventos.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(comboTipoEventos.getSelectedItem());
+			}
+		});*/
 		panelCentro.add(comboTipoEventos);
 		
 		JLabel lblNmeroDeInvitados = new JLabel("Número de invitados:");
