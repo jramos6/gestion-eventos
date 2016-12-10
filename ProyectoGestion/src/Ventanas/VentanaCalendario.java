@@ -8,19 +8,18 @@ import org.freixas.jcalendar.JCalendar;
 import org.freixas.jcalendar.JCalendarCombo;
  
 /**
- *
- * @author beastieux
+ * Clase calendario: muestra por pantalla un calendario
  */
 public class VentanaCalendario extends JFrame {
-    public VentanaCalendario()
-    {
+  
+	public VentanaCalendario(){
       JCalendar calEjemplo1=new  JCalendar();
       calEjemplo1.addDateListener(new DateListener() {
 		
 		@Override
 		public void dateChanged(DateEvent arg0) {
-			// TODO Auto-generated method stub
-			System.out.println(calEjemplo1.getDate());
+			
+			System.out.println(calEjemplo1.getDate().getDate());
 			
 		}
 	});
