@@ -97,8 +97,7 @@ public class BD {
 	}
 	
 
-	public void insertarNuevoUsuario(String Nombre, String DNI, String Usuario, String Contrasenia,
-			int Edad){
+	public void insertarNuevoUsuario(String Nombre, String DNI, String Usuario, String Contrasenia,int Edad){
 		String query = "INSERT INTO USUARIO (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+Nombre+"','"+DNI+"','"+Usuario+"','"+Contrasenia+"',"+Edad+")";
 		try {
 			stm.executeUpdate(query);
@@ -106,6 +105,21 @@ public class BD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String nombreUsuario(String usuario){ //TODO Esto es txapu
+		String query;
+		
+		query="SELECT Nombre FROM USUARIO='"+usuario+"'";
+		try {
+			ResultSet re=stm.executeQuery(query);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return query;
 	}
 
 	

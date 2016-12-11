@@ -19,6 +19,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaComida extends JFrame {
 
@@ -64,7 +66,28 @@ public class VentanaComida extends JFrame {
 		JPanel panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		JButton btnMenPrincipal = new JButton("Menú principal");
+		btnMenPrincipal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Volvemos al menú inicial
+			}
+		});
+		panelSur.add(btnMenPrincipal);
+		
+		JFrame vc = this;
+		JButton btnCancelar = new JButton("Volver");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Volvemos a la página de datos generales de evento
+				
+				VentanaEventos ve = new VentanaEventos();
+				ve.setVisible(true);
+				vc.dispose();
+				
+			}
+		});
 		panelSur.add(btnCancelar);
 		
 		JButton btnAceptar = new JButton("Aceptar");
@@ -159,18 +182,12 @@ public class VentanaComida extends JFrame {
 		JRadioButton rdbtnSi = new JRadioButton("Sí");
 		panelSN_1.add(rdbtnSi);
 		
-		JRadioButton rdbtnNo = new JRadioButton("No");
-		panelSN_1.add(rdbtnNo);
-		
 		JPanel panelSN_2 = new JPanel();
 		panelAdic.add(panelSN_2);
 		panelSN_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JRadioButton rdbtnS = new JRadioButton("Sí");
 		panelSN_2.add(rdbtnS);
-		
-		JRadioButton rdbtnNo_1 = new JRadioButton("No");
-		panelSN_2.add(rdbtnNo_1);
 	}
 	/**
 	 * Método para establecer el precio del menú basandonos en la elección del usuario

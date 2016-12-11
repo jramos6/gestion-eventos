@@ -69,7 +69,7 @@ public class VentanaLogin extends JFrame {
 		pnlNorte.setBackground(Color.CYAN);
 		contentPane.add(pnlNorte, BorderLayout.NORTH);
 		
-		JLabel lblParaContinuar = new JLabel("Para continuar introduzca los datos:");
+		JLabel lblParaContinuar = new JLabel("Introduzca los datos:");
 		lblParaContinuar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		lblParaContinuar.setBackground(Color.CYAN);
 		pnlNorte.add(lblParaContinuar);
@@ -206,11 +206,11 @@ public class VentanaLogin extends JFrame {
 						
 						JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario.getText(), "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 						
-						//TODO Aquí hay que pasar a la siguiente ventana
-						
-						vl.dispose();
-						VentanaEventos v = new VentanaEventos();
+						//Aquí pasamos a la siguiente ventana
+
+						VentanaMenuUsuario v = new VentanaMenuUsuario();
 						v.setVisible(true);
+						vl.dispose();
 					}
 				}
 	

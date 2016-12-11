@@ -81,6 +81,7 @@ public class VentanaEventos extends JFrame {
 		JComboBox comboTipoEventos = new JComboBox();
 		
 		JButton btnSiguiente = new JButton("Siguiente");
+		
 		btnSiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -93,10 +94,12 @@ public class VentanaEventos extends JFrame {
 					JOptionPane.showMessageDialog(null, "Error, número de invitados demasiado pequeño. Vuelva a introducir número de invitados");
 					txtNumInvitados.setText("");	
 				} else{
-					System.out.println(comboTipoEventos.getSelectedItem());
+					System.out.println(comboTipoEventos.getSelectedItem());	
+				//Conectamos con la ventana de comida:
+				VentanaComida vc = new VentanaComida();
+				vc.setVisible(true);
+				ve.dispose();
 				}
-				
-				
 			}
 		});
 		panelSur.add(btnSiguiente);
