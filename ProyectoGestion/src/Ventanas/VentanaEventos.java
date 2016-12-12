@@ -33,7 +33,7 @@ public class VentanaEventos extends JFrame {
 	 */
 	public VentanaEventos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,21 +71,25 @@ public class VentanaEventos extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//tenemos que comprobar que el número de invitados es mayor que 0
-				if(txtNumInvitados.getText().equals("")){
-					JOptionPane.showMessageDialog(null, "Error, introduzca número de invitados");
-					txtNumInvitados.setText("");	
-					
-				} else if(Integer.parseInt(txtNumInvitados.getText())<1){
-					JOptionPane.showMessageDialog(null, "Error, número de invitados demasiado pequeño. Vuelva a introducir número de invitados");
-					txtNumInvitados.setText("");	
-				}else if(txtNumInvitados.getText().equals()){ //Comprobar que es un número, y no letras
+				try{
+					if(txtNumInvitados.getText().equals("")){
+						JOptionPane.showMessageDialog(null, "Error, introduzca número de invitados");
+						txtNumInvitados.setText("");	
+						
+					} else if(Integer.parseInt(txtNumInvitados.getText())<1){
+						JOptionPane.showMessageDialog(null, "Error, número de invitados demasiado pequeño. Vuelva a introducir número de invitados");
+						txtNumInvitados.setText("");	
+						
+					}else{
+						System.out.println(comboTipoEventos.getSelectedItem());	
+					//Conectamos con la ventana de comida:
+					VentanaComida vc = new VentanaComida();
+					vc.setVisible(true);
+					ve.dispose();
+					}
+				}
+				catch(NumberFormatException e1){
 					JOptionPane.showMessageDialog(null, "Introduzca un número válido, por favor");
-				}else{
-					System.out.println(comboTipoEventos.getSelectedItem());	
-				//Conectamos con la ventana de comida:
-				VentanaComida vc = new VentanaComida();
-				vc.setVisible(true);
-				ve.dispose();
 				}
 			}
 		});

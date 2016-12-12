@@ -21,19 +21,22 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class VentanaComida extends JFrame {
 
 	private JPanel contentPane;
-
+	private JTextField txtImporteAPagar;
+	private double suma;
+	private long milisegundos;
 	/**
 	 * Create the frame.
 	 */
 	public VentanaComida() {
 		int eleccionMenu=0;
-		
+		suma=0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -52,11 +55,12 @@ public class VentanaComida extends JFrame {
 		
 		JFrame vc = this;
 		JButton btnMenPrincipal = new JButton("Menú principal");
+		btnMenPrincipal.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		btnMenPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos al menú inicial
-				VentanaMenuUsuario vmu = new VentanaMenuUsuario();
+				VentanaMenuUsuario vmu = new VentanaMenuUsuario(getTitle());
 				vmu.setVisible(true);
 				vc.dispose();
 			}
@@ -65,6 +69,7 @@ public class VentanaComida extends JFrame {
 		
 		
 		JButton btnCancelar = new JButton("Volver");
+		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -79,7 +84,13 @@ public class VentanaComida extends JFrame {
 		panelSur.add(btnCancelar);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		panelSur.add(btnAceptar);
+		
+		txtImporteAPagar = new JTextField();
+		txtImporteAPagar.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		panelSur.add(txtImporteAPagar);
+		txtImporteAPagar.setColumns(10);
 		
 		JPanel panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
@@ -103,7 +114,12 @@ public class VentanaComida extends JFrame {
 		lblMen1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "1. PRIMEROS PLATOS: \n- Ensalada de marisco y setas \n- Percebes \n- Changurro \n- Micuit de pato \n- Revuelto de setas \n2. SEGUNDOS PLATOS \n- Solomillo con salsa de queso y almendras y pimientos verdes \n- Lubina al horno con patatas panaderas \n3. POSTRES: \n- Helado de idiazabal con tarta de queso y frambuesa \n- Sorbete de limón \n\n50€/persona","Menú 1", JOptionPane.INFORMATION_MESSAGE);
+				milisegundos = System.currentTimeMillis();
+				
+			}
+			public void mouseExited(MouseEvent e){
+				if(System.currentTimeMillis()-milisegundos>=3000)
+					JOptionPane.showMessageDialog(null, "1. PRIMEROS PLATOS: \n- Ensalada de marisco y setas \n- Percebes \n- Changurro \n- Micuit de pato \n- Revuelto de setas \n2. SEGUNDOS PLATOS \n- Solomillo con salsa de queso y almendras y pimientos verdes \n- Lubina al horno con patatas panaderas \n3. POSTRES: \n- Helado de idiazabal con tarta de queso y frambuesa \n- Sorbete de limón \n\n50€/persona","Menú 1", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		lblMen1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -130,10 +146,29 @@ public class VentanaComida extends JFrame {
 		panel.add(lblMen3);
 		
 		JButton btnMen1 = new JButton("1");
+		btnMen1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				suma = suma + 50;
+				txtImporteAPagar.setText("Importe a pagar: " + suma + "euros");
+			}
+		});
 		panel.add(btnMen1);
 		
 		
 		JButton btnMen2 = new JButton("2");
+		btnMen2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				suma = suma + 150;
+				txtImporteAPagar.setText("Importe a pagar: " + suma + "euros");
+	
+			}
+		});
 		panel.add(btnMen2);
 		
 		JButton btnMen3 = new JButton("3");

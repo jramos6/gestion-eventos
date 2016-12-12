@@ -1,6 +1,7 @@
 package Ventanas;
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.freixas.jcalendar.DateEvent;
 import org.freixas.jcalendar.DateListener;
@@ -10,9 +11,9 @@ import org.freixas.jcalendar.JCalendarCombo;
 /**
  * Clase calendario: muestra por pantalla un calendario
  */
-public class VentanaCalendario extends JFrame {
+public class PanelCalendario extends JPanel {
   
-	public VentanaCalendario(){
+	public PanelCalendario(){
       JCalendar calEjemplo1=new  JCalendar();
       calEjemplo1.addDateListener(new DateListener() {
 		
@@ -30,11 +31,7 @@ public class VentanaCalendario extends JFrame {
       this.setLayout(new FlowLayout());
       this.setSize(600, 300);
  
-      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+     
     }
  
-    public static void main(String args[]) {
-        VentanaCalendario obj = new VentanaCalendario();
-        obj.setVisible(true);
-    }
 }
