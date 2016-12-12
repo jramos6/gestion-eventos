@@ -50,16 +50,20 @@ public class VentanaComida extends JFrame {
 		JPanel panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
+		JFrame vc = this;
 		JButton btnMenPrincipal = new JButton("Menú principal");
 		btnMenPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos al menú inicial
+				VentanaMenuUsuario vmu = new VentanaMenuUsuario();
+				vmu.setVisible(true);
+				vc.dispose();
 			}
 		});
 		panelSur.add(btnMenPrincipal);
 		
-		JFrame vc = this;
+		
 		JButton btnCancelar = new JButton("Volver");
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -147,31 +151,14 @@ public class VentanaComida extends JFrame {
 		
 		JPanel panelAdic = new JPanel();
 		panelCentro.add(panelAdic);
-		panelAdic.setLayout(new GridLayout(0, 2, 0, 0));
+		panelAdic.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		JLabel lblCafsInfusiones = new JLabel("Cafés - infusiones");
-		lblCafsInfusiones.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCafsInfusiones.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		panelAdic.add(lblCafsInfusiones);
+		JRadioButton rdbtnCafsInfusiones = new JRadioButton("Cafés - infusiones");
+		panelAdic.add(rdbtnCafsInfusiones);
 		
-		JLabel lblVinos = new JLabel("Vinos");
-		lblVinos.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVinos.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		panelAdic.add(lblVinos);
+		JRadioButton rdbtnVinos = new JRadioButton("Vinos");
+		panelAdic.add(rdbtnVinos);
 		
-		JPanel panelSN_1 = new JPanel();
-		panelAdic.add(panelSN_1);
-		panelSN_1.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JRadioButton rdbtnSi = new JRadioButton("Sí");
-		panelSN_1.add(rdbtnSi);
-		
-		JPanel panelSN_2 = new JPanel();
-		panelAdic.add(panelSN_2);
-		panelSN_2.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JRadioButton rdbtnS = new JRadioButton("Sí");
-		panelSN_2.add(rdbtnS);
 	}
 	/**
 	 * Método para establecer el precio del menú basandonos en la elección del usuario

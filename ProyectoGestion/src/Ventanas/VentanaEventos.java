@@ -78,7 +78,9 @@ public class VentanaEventos extends JFrame {
 				} else if(Integer.parseInt(txtNumInvitados.getText())<1){
 					JOptionPane.showMessageDialog(null, "Error, número de invitados demasiado pequeño. Vuelva a introducir número de invitados");
 					txtNumInvitados.setText("");	
-				} else{
+				}else if(txtNumInvitados.getText().equals()){ //Comprobar que es un número, y no letras
+					JOptionPane.showMessageDialog(null, "Introduzca un número válido, por favor");
+				}else{
 					System.out.println(comboTipoEventos.getSelectedItem());	
 				//Conectamos con la ventana de comida:
 				VentanaComida vc = new VentanaComida();
