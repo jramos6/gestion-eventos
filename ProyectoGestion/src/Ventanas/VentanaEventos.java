@@ -27,21 +27,6 @@ public class VentanaEventos extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNumInvitados;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaEventos frame = new VentanaEventos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
