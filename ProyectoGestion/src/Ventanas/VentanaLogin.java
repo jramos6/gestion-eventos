@@ -20,6 +20,8 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentanaLogin extends JFrame {
 
@@ -41,6 +43,7 @@ public class VentanaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
+		setResizable(false);
 		b = new BD();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -209,18 +212,18 @@ public class VentanaLogin extends JFrame {
 		panelCentro.setLayout(null);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(190, 74, 130, 26);
+		txtUsuario.setBounds(281, 108, 130, 26);
 		panelCentro.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		lblUsuario = new JLabel("Usuario: ");
 		lblUsuario.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		lblUsuario.setBounds(117, 79, 61, 16);
+		lblUsuario.setBounds(208, 113, 61, 16);
 		panelCentro.add(lblUsuario);
 		
 		lblContra = new JLabel("Contraseña:");
 		lblContra.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		lblContra.setBounds(94, 113, 84, 16);
+		lblContra.setBounds(185, 164, 84, 16);
 		panelCentro.add(lblContra);
 		
 		JButton button = new JButton("?");
@@ -237,7 +240,7 @@ public class VentanaLogin extends JFrame {
 		panelCentro.add(button);
 		
 		txtContrasenia = new JPasswordField();
-		txtContrasenia.setBounds(190, 108, 130, 26);
+		txtContrasenia.setBounds(281, 159, 130, 26);
 		panelCentro.add(txtContrasenia);
 		
 		//Por defecto los parámetros a partir de este punto serán invisibles y estarán desabilitados. Para activarlos -> método campoRegistro()
@@ -246,13 +249,13 @@ public class VentanaLogin extends JFrame {
 		lblNombre.setEnabled(false);
 		lblNombre.setVisible(false);
 		lblNombre.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		lblNombre.setBounds(117, 15, 61, 16);
+		lblNombre.setBounds(208, 15, 61, 16);
 		panelCentro.add(lblNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.setEnabled(false);
 		txtNombre.setVisible(false);
-		txtNombre.setBounds(190, 10, 130, 26);
+		txtNombre.setBounds(281, 10, 130, 26);
 		panelCentro.add(txtNombre);
 		txtNombre.setColumns(10);
 		
@@ -260,13 +263,13 @@ public class VentanaLogin extends JFrame {
 		lblDNI.setEnabled(false);
 		lblDNI.setVisible(false);
 		lblDNI.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		lblDNI.setBounds(137, 46, 41, 16);
+		lblDNI.setBounds(228, 62, 41, 16);
 		panelCentro.add(lblDNI);
 		
 		txtDNI = new JTextField();
 		txtDNI.setEnabled(false);
 		txtDNI.setVisible(false);
-		txtDNI.setBounds(190, 41, 130, 26);
+		txtDNI.setBounds(281, 57, 130, 26);
 		panelCentro.add(txtDNI);
 		txtDNI.setColumns(10);
 		
@@ -274,13 +277,13 @@ public class VentanaLogin extends JFrame {
 		lblEdad.setEnabled(false);
 		lblEdad.setVisible(false);
 		lblEdad.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		lblEdad.setBounds(137, 173, 41, 16);
+		lblEdad.setBounds(228, 248, 41, 16);
 		panelCentro.add(lblEdad);
 		
 		txtEdad = new JTextField();
 		txtEdad.setEnabled(false);
 		txtEdad.setVisible(false);
-		txtEdad.setBounds(190, 168, 130, 26);
+		txtEdad.setBounds(281, 243, 130, 26);
 		panelCentro.add(txtEdad);
 		txtEdad.setColumns(10);
 		
@@ -288,13 +291,13 @@ public class VentanaLogin extends JFrame {
 		lblRepitaContrasea.setEnabled(false);
 		lblRepitaContrasea.setVisible(false);
 		lblRepitaContrasea.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		lblRepitaContrasea.setBounds(48, 146, 130, 16);
+		lblRepitaContrasea.setBounds(139, 210, 130, 16);
 		panelCentro.add(lblRepitaContrasea);
 		
 		txtContra2 = new JPasswordField();
 		txtContra2.setEnabled(false);
 		txtContra2.setVisible(false);
-		txtContra2.setBounds(190, 141, 130, 26);
+		txtContra2.setBounds(281, 205, 130, 26);
 		panelCentro.add(txtContra2);
 		
 		

@@ -72,13 +72,13 @@ public class VentanaEventos extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				//tenemos que comprobar que el número de invitados es mayor que 0
 				try{
-					if(txtNumInvitados.getText().equals("")){
+					if(getTxtNumInvitados().getText().equals("")){
 						JOptionPane.showMessageDialog(null, "Error, introduzca número de invitados");
-						txtNumInvitados.setText("");	
+						getTxtNumInvitados().setText("");	
 						
-					} else if(Integer.parseInt(txtNumInvitados.getText())<1){
+					} else if(Integer.parseInt(getTxtNumInvitados().getText())<1){
 						JOptionPane.showMessageDialog(null, "Error, número de invitados demasiado pequeño. Vuelva a introducir número de invitados");
-						txtNumInvitados.setText("");	
+						getTxtNumInvitados().setText("");	
 						
 					}else{
 						System.out.println(comboTipoEventos.getSelectedItem());	
@@ -126,10 +126,10 @@ public class VentanaEventos extends JFrame {
 		panelCentro.add(panel);
 		panel.setLayout(null);
 		
-		txtNumInvitados = new JTextField();
-		txtNumInvitados.setBounds(74, 17, 130, 26);
-		panel.add(txtNumInvitados);
-		txtNumInvitados.setColumns(10);
+		setTxtNumInvitados(new JTextField());
+		getTxtNumInvitados().setBounds(74, 17, 130, 26);
+		panel.add(getTxtNumInvitados());
+		getTxtNumInvitados().setColumns(10);
 		
 		JLabel lblPresupuestoInicial = new JLabel("Presupuesto inicial:");
 		panelCentro.add(lblPresupuestoInicial);
@@ -137,5 +137,14 @@ public class VentanaEventos extends JFrame {
 		JComboBox comboPresupInic = new JComboBox();
 		comboPresupInic.setModel(new DefaultComboBoxModel(new String[] {"", "10€ - 100€", "100€ - 500€", "500€ - 1.500€", "1.500€ -10.000€", "Más de 10.000€ "}));
 		panelCentro.add(comboPresupInic);
+	}
+
+
+	public JTextField getTxtNumInvitados() {
+		return txtNumInvitados;
+	}
+	
+	public void setTxtNumInvitados(JTextField txtNumInvitados) {
+		this.txtNumInvitados = txtNumInvitados;
 	}
 }

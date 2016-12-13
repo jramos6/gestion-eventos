@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,13 +29,14 @@ public class VentanaComida extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtImporteAPagar;
 	private double suma;
-	private long milisegundos;
+	private int numInvitados;
+
 	/**
 	 * Create the frame.
 	 */
 	public VentanaComida() {
-		int eleccionMenu=0;
 		suma=0;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -55,7 +57,7 @@ public class VentanaComida extends JFrame {
 		
 		JFrame vc = this;
 		JButton btnMenPrincipal = new JButton("Menú principal");
-		btnMenPrincipal.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		btnMenPrincipal.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		btnMenPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -69,7 +71,7 @@ public class VentanaComida extends JFrame {
 		
 		
 		JButton btnCancelar = new JButton("Volver");
-		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -84,11 +86,14 @@ public class VentanaComida extends JFrame {
 		panelSur.add(btnCancelar);
 		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		btnAceptar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		panelSur.add(btnAceptar);
 		
+		JLabel lblTotal = new JLabel("Total -->");
+		panelSur.add(lblTotal);
+		
 		txtImporteAPagar = new JTextField();
-		txtImporteAPagar.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		txtImporteAPagar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		panelSur.add(txtImporteAPagar);
 		txtImporteAPagar.setColumns(10);
 		
@@ -110,49 +115,45 @@ public class VentanaComida extends JFrame {
 		panelCentro.add(panel);
 		panel.setLayout(new GridLayout(2, 3, 0, 0));
 		
-		JLabel lblMen1 = new JLabel("Menú 1");
-		lblMen1.addMouseListener(new MouseAdapter() {
+		JButton botMen1 = new JButton("Ver Menú 1");
+		botMen1.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent e) {
-				milisegundos = System.currentTimeMillis();
-				
-			}
-			public void mouseExited(MouseEvent e){
-				if(System.currentTimeMillis()-milisegundos>=3000)
-					JOptionPane.showMessageDialog(null, "1. PRIMEROS PLATOS: \n- Ensalada de marisco y setas \n- Percebes \n- Changurro \n- Micuit de pato \n- Revuelto de setas \n2. SEGUNDOS PLATOS \n- Solomillo con salsa de queso y almendras y pimientos verdes \n- Lubina al horno con patatas panaderas \n3. POSTRES: \n- Helado de idiazabal con tarta de queso y frambuesa \n- Sorbete de limón \n\n50€/persona","Menú 1", JOptionPane.INFORMATION_MESSAGE);
+			public void mouseClicked(MouseEvent e) {	
+				JOptionPane.showMessageDialog(null, "1. PRIMEROS PLATOS: \n- Ensalada de marisco y setas \n- Percebes \n- Changurro \n- Micuit de pato \n- Revuelto de setas \n2. SEGUNDOS PLATOS \n- Solomillo con salsa de queso y almendras y pimientos verdes \n- Lubina al horno con patatas panaderas \n3. POSTRES: \n- Helado de idiazabal con tarta de queso y frambuesa \n- Sorbete de limón \n\n50€/persona","Menú 1", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		lblMen1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblMen1);
+		botMen1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(botMen1);
 		
-		JLabel lblMen2 = new JLabel("Menú 2");
-		lblMen2.addMouseListener(new MouseAdapter() {
+		JButton botMen2 = new JButton("Ver Menú 2");
+		botMen2.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				JOptionPane.showMessageDialog(null, "1. PRIMEROS PLATOS: \n- Jamón ibérico \n- Cigala \n -Foie \n- Almejas a la marinera \n - Fritos variados \n2. SEGUNDOS PLATOS: \n- Entrecot con pimientos rojos \n- Rape a la marinera \n3. POSTRES: \n- Sorbete de mandarina \n- Tarta panchineta \n\n35€/persona","Menú 2", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		lblMen2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblMen2);
+		botMen2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(botMen2);
 		
-		JLabel lblMen3 = new JLabel("Menú 3");
-		lblMen3.addMouseListener(new MouseAdapter() {
+		JButton botMen3 = new JButton("Ver Menú 3");
+		botMen3.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				JOptionPane.showMessageDialog(null, "1. PRIMEROS PLATOS: \n- Croquetas caseras\n- Ensalada de Ventresca, piquillo y ajo \n- Foie de hígado de pato \n- Hojaldre con hongos sobre crema de habitas \n2. SEGUNDOS PLATOS: \n- Bacalao a la vizcaína \n- Entrecot con guarnición \n- Lomos de merluza con almejas \n- Entrecot con guarnición \n3. POSTRES: \n- Tarta casera con helado de vainilla con cookies\n \n60€/persona","Menú 3", JOptionPane.INFORMATION_MESSAGE);;
 			}
 		});
-		lblMen3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblMen3);
+		botMen3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(botMen3);
 		
 		JButton btnMen1 = new JButton("1");
 		btnMen1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				// Aquí debería recibir el número de invitados que hay inscritos y multiplicarlo por el valor del menú TODO
+				
 				suma = suma + 50;
-				txtImporteAPagar.setText("Importe a pagar: " + suma + "euros");
+				txtImporteAPagar.setText(suma + " €");
 			}
 		});
 		panel.add(btnMen1);
@@ -163,15 +164,25 @@ public class VentanaComida extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				suma = suma + 150;
-				txtImporteAPagar.setText("Importe a pagar: " + suma + "euros");
+				
+				suma = suma + 35;
+				txtImporteAPagar.setText(suma + " €");
 	
 			}
 		});
 		panel.add(btnMen2);
 		
 		JButton btnMen3 = new JButton("3");
+		btnMen3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				suma = suma + 60;
+				txtImporteAPagar.setText(suma + " €");
+	
+			}
+		});
 		panel.add(btnMen3);
 		
 		JPanel panelMenus = new JPanel();
@@ -180,10 +191,7 @@ public class VentanaComida extends JFrame {
 		
 		JLabel lblAdicional = new JLabel("Adicional");
 		panelMenus.add(lblAdicional);
-		precioMenu(eleccionMenu=1);
-		precioMenu(eleccionMenu=2);
-		precioMenu(eleccionMenu=3);
-		
+
 		JPanel panelAdic = new JPanel();
 		panelCentro.add(panelAdic);
 		panelAdic.setLayout(new GridLayout(2, 0, 0, 0));
@@ -195,19 +203,5 @@ public class VentanaComida extends JFrame {
 		panelAdic.add(rdbtnVinos);
 		
 	}
-	/**
-	 * Método para establecer el precio del menú basandonos en la elección del usuario
-	 */
-	public double precioMenu(int eleccionMenu){
-		double precioIndividual=0;
-		if(eleccionMenu==1){
-			precioIndividual=50;
-		}else if(eleccionMenu==2){
-			precioIndividual=35;
-		}else{
-			precioIndividual=12.5;
-		}
-		return precioIndividual;
-	}
-		
+	
 }
