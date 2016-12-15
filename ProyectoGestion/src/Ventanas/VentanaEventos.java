@@ -31,9 +31,9 @@ public class VentanaEventos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaEventos() {
+	public VentanaEventos(int x, int y) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(x, y, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -83,7 +83,7 @@ public class VentanaEventos extends JFrame {
 					}else{
 						System.out.println(comboTipoEventos.getSelectedItem());	
 					//Conectamos con la ventana de comida:
-					VentanaComida vc = new VentanaComida();
+					VentanaComida vc = new VentanaComida(txtNumInvitados.getText());
 					vc.setVisible(true);
 					ve.dispose();
 					}

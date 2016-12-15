@@ -37,7 +37,8 @@ public class VentanaLogin extends JFrame {
 	private boolean activado=false;
 	private boolean estaRegistrandose=false;
 	public static BD b;
-	
+	private String usuAdmin="admin123";
+	private String contraAdmin="123";
 
 	/**
 	 * Create the frame.
@@ -189,15 +190,27 @@ public class VentanaLogin extends JFrame {
 						txtUsuario.setText("");
 						txtContrasenia.setText("");
 					}else{
-						//Cuando se registra satisfactoriamente 
+						//Cuando se registra satisfactoriamente TODO como hacer que ponga txtNombre, en vez de usuario
+						
+						//Si el usuario se trata del administrador abrimos una ventana a la que solo pueden acceder los administradores
+						if(txtUsu.equals(usuAdmin) && txtContr1.equals(contraAdmin)){
+								VentanaAdministrador va= new VentanaAdministrador();
+								va.setVisible(true);
+								vl.dispose();
+						}else{
+							
+						
 						
 						JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario.getText(), "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 						
 						//Aquí pasamos a la siguiente ventana
 
+						BD.obtenerUsuario(txtUsu);
+						
 						VentanaMenuUsuario v = new VentanaMenuUsuario(txtUsuario.getText());
 						v.setVisible(true);
 						vl.dispose();
+						}
 					}
 				}
 	

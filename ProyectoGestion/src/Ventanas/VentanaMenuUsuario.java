@@ -78,7 +78,7 @@ public class VentanaMenuUsuario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				VentanaEventos ve = new VentanaEventos();
+				VentanaEventos ve = new VentanaEventos(100,100);
 				ve.setVisible(true);
 				vmu.dispose();
 				}

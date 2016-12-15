@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
@@ -75,8 +76,28 @@ public class VentanaPrincipal extends JFrame {
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) { //Hacer la ventana de salida TODO
-				Thread t = new Thread();
-				
+				Thread t = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String mensaje=".";
+						JFrame v = new JFrame();
+						v.setTitle(mensaje);
+						v.setVisible(true);
+						for(int i=0;i<10;i++){
+							mensaje = mensaje + ".";
+							v.setTitle(mensaje);
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+				});
+				t.start();
 				System.exit(0);
 			}
 		});

@@ -34,9 +34,9 @@ public class VentanaComida extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaComida() {
+	public VentanaComida(String numInvitados) {
 		suma=0;
-		
+		this.numInvitados = Integer.parseInt(numInvitados);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -77,7 +77,7 @@ public class VentanaComida extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos a la página de datos generales de evento
 				
-				VentanaEventos ve = new VentanaEventos();
+				VentanaEventos ve = new VentanaEventos(100,100);
 				ve.setVisible(true);
 				vc.dispose();
 				
@@ -150,9 +150,9 @@ public class VentanaComida extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Aquí debería recibir el número de invitados que hay inscritos y multiplicarlo por el valor del menú TODO
+
 				
-				suma = suma + 50;
+				suma = suma + 50*VentanaComida.this.numInvitados;
 				txtImporteAPagar.setText(suma + " €");
 			}
 		});
