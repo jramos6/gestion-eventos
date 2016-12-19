@@ -25,7 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VentanaMusica extends JFrame implements MouseListener{
+public class VentanaMusica extends JFrame{
 
 	private JPanel contentPane, panelCentroBaile ;
 	private JTextField textFieldPrecio;
@@ -34,30 +34,16 @@ public class VentanaMusica extends JFrame implements MouseListener{
 	private JComboBox comboBoxDuracion,comboBoxTipoMusica, comboBoxTipoBaile, comboBoxDuracionBaile;
 	private JRadioButton radioButtonBaile, radioButtonMusica ;
     private int x,y;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaMusica frame = new VentanaMusica(100,100);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private JTextField txtNumInvitados;
+    
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMusica(int x, int y) {
+	public VentanaMusica() {
 		this.x=x;
 		this.y=y;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(x, y, 600, 400);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -78,7 +64,7 @@ public class VentanaMusica extends JFrame implements MouseListener{
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaEventos ve = new VentanaEventos(x,y);
+				VentanaEscoger ve = new VentanaEscoger(txtNumInvitados.getText());
 				ve.setVisible(true);
 				vm.dispose();
 			}
@@ -318,39 +304,5 @@ public class VentanaMusica extends JFrame implements MouseListener{
 		
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		x=this.getX();
-		y=this.getY();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void mouseDragged(MouseEvent e){
-		x=this.getX();
-		y=this.getY();
-	}
 
 }

@@ -31,9 +31,9 @@ public class VentanaEventos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaEventos(int x, int y) {
+	public VentanaEventos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(x, y, 600, 400);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -81,11 +81,13 @@ public class VentanaEventos extends JFrame {
 						getTxtNumInvitados().setText("");	
 						
 					}else{
-						System.out.println(comboTipoEventos.getSelectedItem());	
-					//Conectamos con la ventana de comida:
-					VentanaComida vc = new VentanaComida(txtNumInvitados.getText());
-					vc.setVisible(true);
-					ve.dispose();
+							
+					//Conectamos con la ventana de escoger:
+					
+					VentanaEscoger vs = new VentanaEscoger(txtNumInvitados.getText());	
+						vs.setVisible(true);
+						ve.dispose();
+						
 					}
 				}
 				catch(NumberFormatException e1){
@@ -127,7 +129,7 @@ public class VentanaEventos extends JFrame {
 		panel.setLayout(null);
 		
 		setTxtNumInvitados(new JTextField());
-		getTxtNumInvitados().setBounds(74, 17, 130, 26);
+		getTxtNumInvitados().setBounds(72, 35, 130, 26);
 		panel.add(getTxtNumInvitados());
 		getTxtNumInvitados().setColumns(10);
 		
