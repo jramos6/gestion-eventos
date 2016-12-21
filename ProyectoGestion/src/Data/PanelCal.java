@@ -1,5 +1,4 @@
 package Data;
-import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 import org.freixas.jcalendar.DateEvent;
@@ -27,10 +26,8 @@ public class PanelCal extends JPanel {
  
       this.add(calEjemplo1);
       this.add(calEjemplo2);
-      this.setLayout(new FlowLayout());
-      this.setSize(600, 300);
- 
-     
+
+  
     }
  
 }

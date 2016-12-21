@@ -24,7 +24,6 @@ public class BD {
 		try {
 			stm = connect.createStatement();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -55,7 +54,6 @@ public class BD {
 		try {
 			stm.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -69,7 +67,6 @@ public class BD {
 			cerrarSentencia();
 			connect.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -78,7 +75,11 @@ public class BD {
 		conectar();
 	}
 	
-
+	/**
+	 * Método para obtener un usuario completo desde la BD
+	 * @param usuario
+	 * @return
+	 */
 	public static Usuario obtenerUsuario(String usuario){
 		String query;
 		Usuario u=null;
@@ -90,23 +91,33 @@ public class BD {
 				u=new Usuario(rs.getString("nombre"), rs.getString("dni"),rs.getString("usuario"),rs.getString("contrasenia"),rs.getInt("edad"));
 			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block  
 			e.printStackTrace();
 		} 
 		return u;
 	}
 	
-
+	/**
+	 * Método para insertar nuevo usuario en la base de datos
+	 * @param Nombre
+	 * @param DNI
+	 * @param Usuario
+	 * @param Contrasenia
+	 * @param Edad
+	 */
 	public void insertarNuevoUsuario(String Nombre, String DNI, String Usuario, String Contrasenia,int Edad){
 		String query = "INSERT INTO USUARIO (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+Nombre+"','"+DNI+"','"+Usuario+"','"+Contrasenia+"',"+Edad+")";
 		try {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Método para mostrar los nombres de los usuarios desde la BD
+	 * @param usuario
+	 * @return
+	 */
 	public String nombreUsuario(String usuario){ //TODO Esto es txapu
 		String query;
 		
@@ -115,14 +126,26 @@ public class BD {
 			ResultSet re=stm.executeQuery(query);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return query;
 	}
-
-	
+	/**
+	 * Método para introducir un nuevo evento en la base de datos
+	 * @param presupuesto
+	 * @param invitados
+	 * @param codigo
+	 * @param actividad
+	 */
+	public void insertarNuevoEventos(int presupuesto, int invitados, int codigo, String actividad){
+		String query = "INSERT INTO Eventos (presupuesto, invitados, codigo, actividad) VALUES ("+presupuesto+","+invitados+","+codigo+",'"+actividad+"')";
+		try {
+			stm.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

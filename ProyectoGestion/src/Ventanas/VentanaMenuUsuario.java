@@ -12,6 +12,8 @@ import org.sqlite.core.DB;
 import BasesDeDatos.BD;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -70,6 +72,7 @@ public class VentanaMenuUsuario extends JFrame {
 		contentPane.add(panelEste, BorderLayout.EAST);
 		
 		JPanel panelCentro = new JPanel();
+		panelCentro.setBackground(Color.BLUE);
 		contentPane.add(panelCentro, BorderLayout.CENTER);
 		panelCentro.setLayout(new GridLayout(3, 0, 0, 0));
 		
@@ -83,7 +86,7 @@ public class VentanaMenuUsuario extends JFrame {
 				vmu.dispose();
 				}
 		});
-		btnNuevaReserva.setBackground(Color.WHITE);
+		btnNuevaReserva.setBackground(java.awt.Color.YELLOW);
 		panelCentro.add(btnNuevaReserva);
 		
 		JButton btnMisReservas = new JButton("Mis reservas");
@@ -91,12 +94,18 @@ public class VentanaMenuUsuario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//TODO Sacar la información referente a las reservas del usuario
-				
+				JOptionPane.showMessageDialog(null, "Página en construcción, disculpe las molestias");
 			}
 		});
 		panelCentro.add(btnMisReservas);
 		
 		JButton btnCalendario = new JButton("Calendario");
+		btnCalendario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Página en construcción, disculpe las molestias");
+			}
+		});
 		panelCentro.add(btnCalendario);
 	}
 

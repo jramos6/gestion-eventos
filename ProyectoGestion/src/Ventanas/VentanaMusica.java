@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -33,15 +35,14 @@ public class VentanaMusica extends JFrame{
 	private JLabel lblTipo, lblDuracin, lblPrecio, lblBaile, lblTipo_1, lblDuracin_1, lblPrecio_1, lblMusica;
 	private JComboBox comboBoxDuracion,comboBoxTipoMusica, comboBoxTipoBaile, comboBoxDuracionBaile;
 	private JRadioButton radioButtonBaile, radioButtonMusica ;
-    private int x,y;
 	private JTextField txtNumInvitados;
+	private JButton btnMenPrincipal;
+
     
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMusica() {
-		this.x=x;
-		this.y=y;
+	public VentanaMusica(String numInvitados) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -61,17 +62,31 @@ public class VentanaMusica extends JFrame{
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		VentanaMusica vm=this;
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(txtNumInvitados.getText());
+				VentanaEscoger ve = new VentanaEscoger(numInvitados);
 				ve.setVisible(true);
 				vm.dispose();
 			}
 		});
+		
+		btnMenPrincipal = new JButton("Menú principal");
+		btnMenPrincipal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Volvemos al menú inicial
+				JOptionPane.showMessageDialog(null, "Cancelando reserva");
+				
+				VentanaMenuUsuario vmu = new VentanaMenuUsuario(getTitle());
+				vmu.setVisible(true);
+				vm.dispose();
+			}
+		});
+		panelSur.add(btnMenPrincipal);
 		panelSur.add(btnVolver);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		JButton btnAceptar = new JButton("Confirmar");
 		panelSur.add(btnAceptar);
 		
 		JPanel panelOeste = new JPanel();

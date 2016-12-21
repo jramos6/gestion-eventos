@@ -70,6 +70,8 @@ public class VentanaComida extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos al menú inicial
+				JOptionPane.showMessageDialog(null, "Cancelando reserva");
+				
 				VentanaMenuUsuario vmu = new VentanaMenuUsuario(getTitle());
 				vmu.setVisible(true);
 				vc.dispose();
@@ -78,30 +80,23 @@ public class VentanaComida extends JFrame {
 		panelSur.add(btnMenPrincipal);
 		
 		
-		JButton btnCancelar = new JButton("Volver");
+		JButton btnCancelar = new JButton("Confirmar");
 		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos a la página de datos generales de evento
 				
-				VentanaEscoger ve = new VentanaEscoger(txtNumInvitados.getText());
+				VentanaEscoger ve = new VentanaEscoger(numInvitados);
 				ve.setVisible(true);
 				vc.dispose();
 				
 			}
 		});
-		panelSur.add(btnCancelar);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
-		btnAceptar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		panelSur.add(btnAceptar);
+		JButton btnCancelar_1 = new JButton("Cancelar");
+		panelSur.add(btnCancelar_1);
+		panelSur.add(btnCancelar);
 		
 		JLabel lblTotal = new JLabel("Total =");
 		panelSur.add(lblTotal);

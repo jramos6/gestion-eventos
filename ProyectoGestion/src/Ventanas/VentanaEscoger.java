@@ -6,8 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicScrollPaneUI.VSBChangeListener;
+
 import java.awt.GridLayout;
 import java.awt.JobAttributes;
+import java.awt.TrayIcon.MessageType;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -44,10 +47,29 @@ public class VentanaEscoger extends JFrame {
 		JPanel panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
+		VentanaEscoger vs = this;
 		JButton btnCerrarSesin = new JButton("Cerrar Sesión");
+		btnCerrarSesin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Hasta la próxima");
+				
+				VentanaLogin vl = new VentanaLogin();
+				vl.setVisible(true);
+				vs.dispose();
+			}
+		});
 		panelSur.add(btnCerrarSesin);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaEventos ve = new VentanaEventos();
+				ve.setVisible(true);
+				vs.dispose();
+			}
+		});
 		panelSur.add(btnVolver);
 		
 		JPanel panelEste = new JPanel();
@@ -69,7 +91,7 @@ public class VentanaEscoger extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				VentanaComida vc = new VentanaComida(txtNumInvitados.getText());
+				VentanaComida vc = new VentanaComida(numInvitados);
 				vc.setVisible(true);
 				ve.dispose();
 			}
@@ -83,7 +105,7 @@ public class VentanaEscoger extends JFrame {
 		btnMsica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaMusica vm = new VentanaMusica();
+				VentanaMusica vm = new VentanaMusica(numInvitados);
 				vm.setVisible(true);
 				ve.dispose();
 				
