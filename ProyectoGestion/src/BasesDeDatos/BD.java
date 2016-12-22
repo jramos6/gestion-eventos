@@ -9,6 +9,7 @@ import java.sql.Statement;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Data.Evento;
 import Data.Usuario;
 
 public class BD {
@@ -32,7 +33,6 @@ public class BD {
 	/**
 	 * Método para conectarse a la BD
 	 */
-
 	public void conectar()
 	{
 		try {
@@ -147,5 +147,19 @@ public class BD {
 		}
 	}
 	
-	
+	public static Evento obtenerEvento(String usuario){
+		String query;
+		Evento ev=null;
+		
+		query="SELECT * FROM Eventos WHERE USUARIO='"+usuario+"'"; 
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			if(rs.next()) //Si la select ha devuelto filas
+				ev=new Evento(rs.getDouble("presupuesto"), rs.getInt("invitados"), rs.getInt("codigo"), rs.getString("actividad"));
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return ev;
+	}
 }

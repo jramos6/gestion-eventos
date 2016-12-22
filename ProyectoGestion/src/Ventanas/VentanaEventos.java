@@ -32,6 +32,7 @@ public class VentanaEventos extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaEventos() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();

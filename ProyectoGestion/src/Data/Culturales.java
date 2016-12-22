@@ -2,15 +2,15 @@ package Data;
 
 public class Culturales extends Evento{
 
-private String funcion;
+private static String funcion;
 
 public Culturales() {
-	super();
+	super(presupuesto, codigo, codigo, funcion);
 	// TODO Auto-generated constructor stub
 }
 
 public Culturales(double presupuesto, int invitados, String lugar, int fecha) {
-	super(presupuesto, invitados, lugar, fecha);
+	super(presupuesto, invitados, codigo, actividad);
 	// TODO Auto-generated constructor stub
 }
 

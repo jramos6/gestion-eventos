@@ -30,6 +30,7 @@ public class VentanaMenuUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaMenuUsuario(String nomUsuario) {
+		setResizable(false);
 		this.nomUsuario=nomUsuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -93,8 +94,9 @@ public class VentanaMenuUsuario extends JFrame {
 		btnMisReservas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TODO Sacar la información referente a las reservas del usuario
-				JOptionPane.showMessageDialog(null, "Página en construcción, disculpe las molestias");
+				VentanaMisReservas vmr = new VentanaMisReservas();
+				vmr.setVisible(true);
+				vmu.dispose();
 			}
 		});
 		panelCentro.add(btnMisReservas);

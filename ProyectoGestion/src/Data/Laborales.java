@@ -3,16 +3,16 @@ package Data;
 public class Laborales extends Evento  {
 
 
-private String sala;
+private static String sala;
 private String servicio;
 
 
 	public Laborales() {
-		super();
+		super(presupuesto, codigo, codigo, sala);
 		// TODO Auto-generated constructor stub
 	}
 	public Laborales(double presupuesto, int invitados, String lugar, int fecha) {
-		super(presupuesto, invitados, lugar, fecha);
+		super(presupuesto, invitados, codigo, actividad);
 		// TODO Auto-generated constructor stub
 		
 		

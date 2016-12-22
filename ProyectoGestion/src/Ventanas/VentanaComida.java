@@ -37,11 +37,13 @@ public class VentanaComida extends JFrame {
 	private JComboBox comboBoxCatering; 
 	private JButton botMen1, botMen2, botMen3;
 	private JTextField txtNumInvitados;
+	private String nomUsuario;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaComida(String numInvitados) {
+		setResizable(false);
 		suma=0;
 		this.numInvitados = Integer.parseInt(numInvitados);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,6 +97,14 @@ public class VentanaComida extends JFrame {
 		});
 		
 		JButton btnCancelar_1 = new JButton("Cancelar");
+		btnCancelar_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaEscoger ve = new VentanaEscoger(numInvitados);
+				ve.setVisible(true);
+				vc.dispose();
+			}
+		});
 		panelSur.add(btnCancelar_1);
 		panelSur.add(btnCancelar);
 		

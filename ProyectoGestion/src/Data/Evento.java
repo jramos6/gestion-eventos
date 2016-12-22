@@ -3,21 +3,18 @@ package Data;
 
 public class Evento {
 	
-	protected double presupuesto;
+	protected static double presupuesto;
 	protected int invitados;
-	protected String lugar;
-	protected int fecha;
+	protected static int codigo;
+	protected static String actividad;
 
-	public Evento() {
-		
-	}
 
-	public Evento(double presupuesto, int invitados, String lugar, int fecha) {
+	public Evento(double presupuesto, int invitados, int codigo, String actividad) {
 	super();
 	this.presupuesto = presupuesto;
 	this.invitados = invitados;
-	this.lugar = lugar;
-	this.fecha = fecha;
+	this.codigo = codigo;
+	this.actividad = actividad;
 }
 
 	public double getPresupuesto() {
@@ -36,27 +33,28 @@ public class Evento {
 		this.invitados = invitados;
 	}
 
-	public String getLugar() {
-		return lugar;
+	public int getCodigo() {
+		return codigo;
 	}
 
-	public void setLugar(String lugar) {
-		this.lugar = lugar;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
-	public int getFecha() {
-		return fecha;
+	public String getActividad() {
+		return actividad;
 	}
 
-	public void setFecha(int fecha) {
-		this.fecha = fecha;
+	public void setActividad(String actividad) {
+		this.actividad = actividad;
 	}
 
 	@Override
 	public String toString() {
-		return "Evento [presupuesto=" + presupuesto + ", invitados=" + invitados + ", lugar=" + lugar + ", fecha="
-				+ fecha + "]";
+		return "Evento [presupuesto=" + presupuesto + ", invitados=" + invitados + ", codigo=" + codigo + ", actividad="
+				+ actividad + "]";
 	}
+
 	
 	
 }

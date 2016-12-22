@@ -2,15 +2,15 @@ package Data;
 
 public class Sociales extends Evento {
 
-	private String restaurante;
+	private static String restaurante;
 	private boolean transporte;
 	
 	public Sociales() {
-		super();
+		super(presupuesto, codigo, codigo, restaurante);
 		
 	}
 	public Sociales(double presupuesto, int invitados, String lugar, int fecha) {
-		super(presupuesto, invitados, lugar, fecha);
+		super(presupuesto, invitados, codigo, actividad);
 	}
 	public String getRestaurante() {
 		return restaurante;

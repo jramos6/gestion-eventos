@@ -43,6 +43,7 @@ public class VentanaMusica extends JFrame{
 	 * Create the frame.
 	 */
 	public VentanaMusica(String numInvitados) {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -87,6 +88,14 @@ public class VentanaMusica extends JFrame{
 		panelSur.add(btnVolver);
 		
 		JButton btnAceptar = new JButton("Confirmar");
+		btnAceptar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaEscoger ve = new VentanaEscoger(numInvitados);
+				ve.setVisible(true);
+				vm.dispose();
+			}
+		});
 		panelSur.add(btnAceptar);
 		
 		JPanel panelOeste = new JPanel();
