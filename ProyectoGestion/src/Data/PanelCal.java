@@ -1,4 +1,7 @@
 package Data;
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.freixas.jcalendar.DateEvent;
@@ -22,12 +25,17 @@ public class PanelCal extends JPanel {
 			
 		}
 	});
-      JCalendarCombo calEjemplo2=new  JCalendarCombo();
+    //  JCalendarCombo calEjemplo2=new  JCalendarCombo();
  
       this.add(calEjemplo1);
-      this.add(calEjemplo2);
+      //this.add(calEjemplo2);
 
   
     }
- 
+ public static void main(String[] args) {
+	JFrame f = new JFrame();
+	f.setBounds(100, 100, 600, 400);
+	f.add(new PanelCal(),BorderLayout.CENTER);
+	f.setVisible(true);
+}
 }

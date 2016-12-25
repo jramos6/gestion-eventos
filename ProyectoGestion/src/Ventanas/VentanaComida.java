@@ -32,7 +32,7 @@ public class VentanaComida extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtImporteAPagar;
 	private double suma;
-	private int numInvitados;
+	private int numIn;
 	private JRadioButton radioButton1, radioButton2, radioButton3, rdbtnVinos, rdbtnCafsInfusiones;
 	private JComboBox comboBoxCatering; 
 	private JButton botMen1, botMen2, botMen3;
@@ -45,7 +45,7 @@ public class VentanaComida extends JFrame {
 	public VentanaComida(String numInvitados) {
 		setResizable(false);
 		suma=0;
-		this.numInvitados = Integer.parseInt(numInvitados);
+		this.numIn = Integer.parseInt(numInvitados);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -202,19 +202,19 @@ public class VentanaComida extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 
-				double totalMenu1=50*VentanaComida.this.numInvitados;
+				double totalMenu1=50*VentanaComida.this.numIn;
 				
 				if(radioButton2.isSelected()){
 					radioButton2.setSelected(false);
-					suma=suma-35*VentanaComida.this.numInvitados;
+					suma=suma-35*VentanaComida.this.numIn;
 				}
 				if(radioButton3.isSelected()){
 					radioButton3.setSelected(false);
-					suma=suma-60*VentanaComida.this.numInvitados;
+					suma=suma-60*VentanaComida.this.numIn;
 				}
 				
 				if(radioButton1.isSelected()){ 
-					suma = suma + 50*VentanaComida.this.numInvitados;
+					suma = suma + 50*VentanaComida.this.numIn;
 					txtImporteAPagar.setText(suma + " €");
 				}else{
 					txtImporteAPagar.setText(suma-(totalMenu1) + " €");
@@ -231,16 +231,16 @@ public class VentanaComida extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(radioButton1.isSelected()){
 					radioButton1.setSelected(false);
-					suma=suma-50*VentanaComida.this.numInvitados;
+					suma=suma-50*VentanaComida.this.numIn;
 				}
 				if(radioButton3.isSelected()){
 					radioButton3.setSelected(false);
-					suma=suma-60*VentanaComida.this.numInvitados;
+					suma=suma-60*VentanaComida.this.numIn;
 				}
 				
-				double totalMenu2=35*VentanaComida.this.numInvitados;
+				double totalMenu2=35*VentanaComida.this.numIn;
 				if(radioButton2.isSelected()){ 
-					suma = suma + 35*VentanaComida.this.numInvitados;
+					suma = suma + 35*VentanaComida.this.numIn;
 					txtImporteAPagar.setText(suma + " €");
 				}else{
 					txtImporteAPagar.setText(suma-(totalMenu2) + " €");
@@ -258,16 +258,16 @@ public class VentanaComida extends JFrame {
 				
 				if(radioButton1.isSelected()){
 					radioButton1.setSelected(false);
-					suma=suma-50*VentanaComida.this.numInvitados;
+					suma=suma-50*VentanaComida.this.numIn;
 				}
 				if(radioButton2.isSelected()){
 					radioButton2.setSelected(false);
-					suma=suma-35*VentanaComida.this.numInvitados;
+					suma=suma-35*VentanaComida.this.numIn;
 				}
 				
-				double totalMenu3=60*VentanaComida.this.numInvitados;
+				double totalMenu3=60*VentanaComida.this.numIn;
 				if(radioButton3.isSelected()){ 
-					suma = suma + 60*VentanaComida.this.numInvitados;
+					suma = suma + 60*VentanaComida.this.numIn;
 					txtImporteAPagar.setText(suma + " €");
 				}else{
 					txtImporteAPagar.setText(suma-(totalMenu3) + " €");
@@ -301,7 +301,7 @@ public class VentanaComida extends JFrame {
 		rdbtnCafsInfusiones.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				double totalCafes=4*VentanaComida.this.numInvitados;
+				double totalCafes=4*VentanaComida.this.numIn;
 				if(rdbtnCafsInfusiones.isSelected()){ //Precios: cafes más infusiones = 4€
 					suma = suma + totalCafes;
 					txtImporteAPagar.setText(suma + " €");
@@ -317,7 +317,7 @@ public class VentanaComida extends JFrame {
 		rdbtnVinos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				double totalVinos=12*VentanaComida.this.numInvitados;
+				double totalVinos=12*VentanaComida.this.numIn;
 				if(rdbtnVinos.isSelected()){ //Precios: vinos = 12€
 					suma = suma + totalVinos;
 					txtImporteAPagar.setText(suma + " €");

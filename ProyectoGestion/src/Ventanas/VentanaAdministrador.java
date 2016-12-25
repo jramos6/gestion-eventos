@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 public class VentanaAdministrador extends JFrame {
 
 	private JPanel contentPane;
+	private String numInvitados;
 
 	/**
 	 * Create the frame.
@@ -92,28 +93,6 @@ public class VentanaAdministrador extends JFrame {
 		btnBloquearAplicacin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				/*
-				//TODO esto hay que arreglarlo --> La ventana interna no sale muy bien... Y además va quitando espacio al Grid panel
-				JPanel p = new JPanel();
-				p.setLayout(new FlowLayout());
-				p.add (new JLabel("Una etiqueta"));
-				p.add (new JTextField(10));
-				
-				JInternalFrame bloqueo = new JInternalFrame();
-				bloqueo.setLocation(150, 150);
-				bloqueo.add(p);
-				
-				bloqueo.pack();
-				
-				//Le damos la opcion de ser cerrado
-				bloqueo.setClosable(true);
-				
-				// Se mete el bloque en el panelCentro y se hace visible
-				panelCentro.add(bloqueo);
-				
-				bloqueo.setVisible(true);
-			*/
 				
 				VentanaBloqueo vb = new VentanaBloqueo();
 				vb.setVisible(true);
@@ -132,6 +111,15 @@ public class VentanaAdministrador extends JFrame {
 		panelDrch.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JButton btnCalendario = new JButton("Calendario");
+		btnCalendario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaCalendario vc = new VentanaCalendario(numInvitados);
+				vc.setVisible(true);
+				va.dispose();
+				
+			}
+		});
 		panelDrch.add(btnCalendario);
 		
 		JButton btnltimosRegistros = new JButton("Últimos registros");

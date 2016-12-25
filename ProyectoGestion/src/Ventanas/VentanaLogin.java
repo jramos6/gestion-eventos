@@ -197,6 +197,7 @@ public class VentanaLogin extends JFrame {
 								VentanaAdministrador va= new VentanaAdministrador();
 								va.setVisible(true);
 								vl.dispose();
+								u.esAdmin=true;
 						}else{
 							
 						

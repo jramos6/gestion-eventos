@@ -26,6 +26,7 @@ public class VentanaEventos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNumInvitados;
+	private String numInvitados;
 
 
 	/**
@@ -83,10 +84,10 @@ public class VentanaEventos extends JFrame {
 						
 					}else{
 							
-					//Conectamos con la ventana de escoger:
+					//Conectamos con la ventana de calendario:
 					
-					VentanaEscoger vs = new VentanaEscoger(txtNumInvitados.getText());	
-						vs.setVisible(true);
+					VentanaCalendario vc = new VentanaCalendario(txtNumInvitados.getText());	
+						vc.setVisible(true);
 						ve.dispose();
 						
 					}
@@ -116,7 +117,7 @@ public class VentanaEventos extends JFrame {
 			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
+				// TODO Imprime por pantalla la selección del comboBox
 				System.out.println(comboTipoEventos.getSelectedItem());
 			}
 		});*/

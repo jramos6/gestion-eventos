@@ -6,6 +6,7 @@ public class Usuario {
 		private String usuario;
 		private int edad;
 		private String contras;
+		public boolean esAdmin=false;
 		
 		
 		public Usuario(String nom, String dni, String txtUsu, String contras, int edad) {
@@ -62,6 +63,18 @@ public class Usuario {
 
 		public void setContras(String contras) {
 			this.contras = contras;
+		}
+
+
+
+		public boolean isEsAdmin() {
+			return esAdmin;
+		}
+
+
+
+		public void setEsAdmin(boolean esAdmin) {
+			this.esAdmin = esAdmin;
 		}
 
 

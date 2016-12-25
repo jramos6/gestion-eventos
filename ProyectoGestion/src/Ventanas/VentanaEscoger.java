@@ -66,8 +66,8 @@ public class VentanaEscoger extends JFrame {
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEventos ve = new VentanaEventos();
-				ve.setVisible(true);
+				VentanaEspacio vp = new VentanaEspacio(numInvitados);
+				vp.setVisible(true);
 				vs.dispose();
 			}
 		});
