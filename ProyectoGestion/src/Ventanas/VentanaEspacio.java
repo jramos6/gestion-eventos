@@ -6,7 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Data.Espacios;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -22,6 +27,8 @@ public class VentanaEspacio extends JFrame {
 	private JPanel contentPane;
 	
 	private JTextField txtNumInvitados;
+	private JRadioButton radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7;
+	private JLabel lblPre1,lblPre2,lblPre3,lblPre4,lblPre5,lblPre6,lblPre7;
 
 	/**
 	 * Create the frame.
@@ -62,9 +69,36 @@ public class VentanaEspacio extends JFrame {
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEscoger ves = new VentanaEscoger(numInvitados);
-				ves.setVisible(true);
-				vs.dispose();
+				
+				//Ponemos el booleano de el espacio elegido en true, para que la siguiente vez aparezca como reservado
+				
+				Espacios es = new Espacios();
+				
+				if(radioButton1.isSelected()){
+					es.comedorGrande=true;
+					siguienteVentana(numInvitados, vs);
+				}else if(radioButton2.isSelected()){
+					es.comedorMediano=true;
+					siguienteVentana(numInvitados, vs);
+				}else if(radioButton3.isSelected()){
+					es.comedorPequenio=true;
+					siguienteVentana(numInvitados, vs);
+				}else if(radioButton4.isSelected()){
+					es.reunionGrande=true;
+					siguienteVentana(numInvitados, vs);
+				}else if(radioButton5.isSelected()){
+					es.reunionPequenio=true;
+					siguienteVentana(numInvitados, vs);
+				}else if(radioButton6.isSelected()){
+					es.musicaGrande=true;
+					siguienteVentana(numInvitados, vs);
+				}else if(radioButton7.isSelected()){
+					es.musicaPequenio=true;
+					siguienteVentana(numInvitados, vs);
+				}else{
+					JOptionPane.showMessageDialog(null, "Elija un espacio");
+				}
+
 			}
 		});
 		panelS.add(btnAceptar);
@@ -77,49 +111,264 @@ public class VentanaEspacio extends JFrame {
 		
 		JPanel panelC = new JPanel();
 		contentPane.add(panelC, BorderLayout.CENTER);
-		panelC.setLayout(new GridLayout(0, 2, 0, 0));
+		panelC.setLayout(new GridLayout(0, 4, 0, 0));
 		
-		JLabel lblComedorGrande = new JLabel("1) Comedor grande: (300 personas)");
+		JLabel lblComedorGrande = new JLabel("1) Comedor grande:");
 		panelC.add(lblComedorGrande);
 		
-		JRadioButton radioButton1 = new JRadioButton("");
+		radioButton1 = new JRadioButton("");
+		radioButton1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(radioButton2.isSelected()){
+					radioButton2.setSelected(false);
+					
+				}
+				if(radioButton3.isSelected()){
+					radioButton3.setSelected(false);
+				}
+				if(radioButton4.isSelected()){
+					radioButton4.setSelected(false);
+				}
+				if(radioButton5.isSelected()){
+					radioButton5.setSelected(false);
+				}
+				if(radioButton6.isSelected()){
+					radioButton6.setSelected(false);
+				}
+				if(radioButton7.isSelected()){
+					radioButton7.setSelected(false);
+				}
+				
+				
+			}
+		});
+		
+		JLabel lblNewLabelComGrandeCap = new JLabel("  (300 personas)");
+		panelC.add(lblNewLabelComGrandeCap);
 		panelC.add(radioButton1);
 		
-		JLabel lblComedorMediano = new JLabel("2) Comedor mediano: (100 personas)");
+		lblPre1 = new JLabel("200 €");
+		panelC.add(lblPre1);
+		
+		JLabel lblComedorMediano = new JLabel("2) Comedor mediano:");
 		panelC.add(lblComedorMediano);
 		
-		JRadioButton radioButton2 = new JRadioButton("");
+		radioButton2 = new JRadioButton("");
+		radioButton2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(radioButton1.isSelected()){
+					radioButton1.setSelected(false);
+				}
+				if(radioButton3.isSelected()){
+					radioButton3.setSelected(false);
+				}
+				if(radioButton4.isSelected()){
+					radioButton4.setSelected(false);
+				}
+				if(radioButton5.isSelected()){
+					radioButton5.setSelected(false);
+				}
+				if(radioButton6.isSelected()){
+					radioButton6.setSelected(false);
+				}
+				if(radioButton7.isSelected()){
+					radioButton7.setSelected(false);
+				}
+			}
+		});
+		
+		JLabel lblPersonas = new JLabel("  (100 personas)");
+		panelC.add(lblPersonas);
 		panelC.add(radioButton2);
 		
-		JLabel lblComedorPequeo = new JLabel("3) Comedor pequeño: (50 personas)");
+		lblPre2 = new JLabel("150 €");
+		panelC.add(lblPre2);
+		
+		JLabel lblComedorPequeo = new JLabel("3) Comedor pequeño:");
 		panelC.add(lblComedorPequeo);
 		
-		JRadioButton radioButton3 = new JRadioButton("");
+		radioButton3 = new JRadioButton("");
+		radioButton3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(radioButton1.isSelected()){
+					radioButton1.setSelected(false);
+				}
+				if(radioButton2.isSelected()){
+					radioButton2.setSelected(false);
+				}
+				if(radioButton4.isSelected()){
+					radioButton4.setSelected(false);
+				}
+				if(radioButton5.isSelected()){
+					radioButton5.setSelected(false);
+				}
+				if(radioButton6.isSelected()){
+					radioButton6.setSelected(false);
+				}
+				if(radioButton7.isSelected()){
+					radioButton7.setSelected(false);
+				}
+			}
+		});
+		
+		JLabel lblPersonas_1 = new JLabel("  (50 personas)");
+		panelC.add(lblPersonas_1);
 		panelC.add(radioButton3);
 		
-		JLabel lblSalaDeReuniones = new JLabel("4) Sala de reuniones 1: ");
+		lblPre3 = new JLabel("50 €");
+		panelC.add(lblPre3);
+		
+		JLabel lblSalaDeReuniones = new JLabel("4) Sala de reuniones 1:");
 		panelC.add(lblSalaDeReuniones);
 		
-		JRadioButton radioButton4 = new JRadioButton("");
+		radioButton4 = new JRadioButton("");
+		radioButton4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(radioButton1.isSelected()){
+					radioButton1.setSelected(false);
+				}
+				if(radioButton2.isSelected()){
+					radioButton2.setSelected(false);
+				}
+				if(radioButton3.isSelected()){
+					radioButton3.setSelected(false);
+				}
+				if(radioButton5.isSelected()){
+					radioButton5.setSelected(false);
+				}
+				if(radioButton6.isSelected()){
+					radioButton6.setSelected(false);
+				}
+				if(radioButton7.isSelected()){
+					radioButton7.setSelected(false);
+				}
+			}
+		});
+		
+		JLabel lblPersonas_2 = new JLabel("  (60 personas)");
+		panelC.add(lblPersonas_2);
 		panelC.add(radioButton4);
 		
-		JLabel lblSalaDe = new JLabel("5) Sala de reuniones 2: ");
+		lblPre4 = new JLabel("50 €/h");
+		panelC.add(lblPre4);
+		
+		JLabel lblSalaDe = new JLabel("5) Sala de reuniones 2:");
 		panelC.add(lblSalaDe);
 		
-		JRadioButton radioButton5 = new JRadioButton("");
+		radioButton5 = new JRadioButton("");
+		radioButton5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(radioButton1.isSelected()){
+					radioButton1.setSelected(false);
+				}
+				if(radioButton2.isSelected()){
+					radioButton2.setSelected(false);
+				}
+				if(radioButton3.isSelected()){
+					radioButton3.setSelected(false);
+				}
+				if(radioButton4.isSelected()){
+					radioButton4.setSelected(false);
+				}
+				if(radioButton6.isSelected()){
+					radioButton6.setSelected(false);
+				}
+				if(radioButton7.isSelected()){
+					radioButton7.setSelected(false);
+				}
+			}
+		});
+		
+		JLabel lblPersonas_3 = new JLabel("  (20 personas)");
+		panelC.add(lblPersonas_3);
 		panelC.add(radioButton5);
 		
-		JLabel lblSalnDe = new JLabel("6) Salón de música grande: ");
+		lblPre5 = new JLabel("20 €/h");
+		panelC.add(lblPre5);
+		
+		JLabel lblSalnDe = new JLabel("6) Salón de música: ");
 		panelC.add(lblSalnDe);
 		
-		JRadioButton radioButton6 = new JRadioButton("");
+		radioButton6 = new JRadioButton("");
+		radioButton6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(radioButton1.isSelected()){
+					radioButton1.setSelected(false);
+				}
+				if(radioButton2.isSelected()){
+					radioButton2.setSelected(false);
+				}
+				if(radioButton3.isSelected()){
+					radioButton3.setSelected(false);
+				}
+				if(radioButton4.isSelected()){
+					radioButton4.setSelected(false);
+				}
+				if(radioButton5.isSelected()){
+					radioButton5.setSelected(false);
+				}
+				if(radioButton7.isSelected()){
+					radioButton7.setSelected(false);
+				}
+			}
+		});
+		
+		JLabel lblgrande = new JLabel("  (grande)");
+		panelC.add(lblgrande);
 		panelC.add(radioButton6);
 		
-		JLabel lblSalnDe_1 = new JLabel("7) Salón de música pequeño: ");
+		lblPre6 = new JLabel("60 €/h");
+		panelC.add(lblPre6);
+		
+		JLabel lblSalnDe_1 = new JLabel("7) Salón de música: ");
 		panelC.add(lblSalnDe_1);
 		
-		JRadioButton radioButton7 = new JRadioButton("");
+		radioButton7 = new JRadioButton("");
+		radioButton7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(radioButton1.isSelected()){
+					radioButton1.setSelected(false);
+				}
+				if(radioButton2.isSelected()){
+					radioButton2.setSelected(false);
+				}
+				if(radioButton3.isSelected()){
+					radioButton3.setSelected(false);
+				}
+				if(radioButton4.isSelected()){
+					radioButton4.setSelected(false);
+				}
+				if(radioButton5.isSelected()){
+					radioButton5.setSelected(false);
+				}
+				if(radioButton6.isSelected()){
+					radioButton6.setSelected(false);
+				}
+			}
+		});
+		
+		JLabel lblpequeo = new JLabel("  (pequeño)");
+		panelC.add(lblpequeo);
 		panelC.add(radioButton7);
+		
+		lblPre7 = new JLabel("30 €/h");
+		panelC.add(lblPre7);
+	}
+	
+	public void siguienteVentana(String numInvitados, JFrame vs){
+		VentanaEscoger ves = new VentanaEscoger(numInvitados);
+		ves.setVisible(true);
+		vs.dispose();
 	}
 
 }

@@ -199,9 +199,7 @@ public class VentanaLogin extends JFrame {
 								vl.dispose();
 								u.esAdmin=true;
 						}else{
-							
-						
-						
+
 						JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario.getText(), "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 						
 						//Aquí pasamos a la siguiente ventana

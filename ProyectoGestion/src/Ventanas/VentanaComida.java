@@ -109,7 +109,10 @@ public class VentanaComida extends JFrame {
 		panelSur.add(btnCancelar);
 		
 		JLabel lblTotal = new JLabel("Total =");
+		lblTotal.setForeground(Color.BLUE);
+		lblTotal.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		panelSur.add(lblTotal);
+		
 		
 		txtImporteAPagar = new JTextField();
 		txtImporteAPagar.setEditable(false);
@@ -175,6 +178,7 @@ public class VentanaComida extends JFrame {
 		});
 		botMen1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(botMen1);
+		
 		
 		botMen2 = new JButton("Ver Menú 2");
 		botMen2.addMouseListener(new MouseAdapter() {
@@ -317,14 +321,7 @@ public class VentanaComida extends JFrame {
 		rdbtnVinos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				double totalVinos=12*VentanaComida.this.numIn;
-				if(rdbtnVinos.isSelected()){ //Precios: vinos = 12€
-					suma = suma + totalVinos;
-					txtImporteAPagar.setText(suma + " €");
-				}else{
-					txtImporteAPagar.setText(suma-(totalVinos) + " €");
-					suma=suma-totalVinos;	
-				}
+				precioVinos(); //Método que calcula el precio de los vinos
 			}
 		});
 		panelAdic.add(rdbtnVinos);
@@ -348,6 +345,19 @@ public class VentanaComida extends JFrame {
 		rdbtnCafsInfusiones.setVisible(false);
 		rdbtnVinos.setVisible(false);
 		
+	}
+	
+	
+	public double precioVinos(){
+		double totalVinos=12*VentanaComida.this.numIn;
+		if(rdbtnVinos.isSelected()){ //Precios: vinos = 12€
+			suma = suma + totalVinos;
+			txtImporteAPagar.setText(suma + " €");
+		}else{
+			txtImporteAPagar.setText(suma-(totalVinos) + " €");
+			suma=suma-totalVinos;	
+		}
+		return suma;
 	}
 	
 }

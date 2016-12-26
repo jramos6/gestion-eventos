@@ -33,9 +33,6 @@ public class VentanaBloqueo extends JFrame {
 	public VentanaBloqueo() {
 		addKeyListener(new KeyAdapter() {
 			
-			//TODO esto no funciona muy bien. No me recoge la tecla que estoy pulsando...
-			
-			
 			@Override
 			public void keyPressed(KeyEvent e) {
 						
