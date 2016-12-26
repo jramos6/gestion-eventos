@@ -44,9 +44,9 @@ public class VentanaCalendario extends JFrame {
 				
 				//TODO ESTO NO FUNCIONA: TENEMOS QUE CONSEGUIR QUE EL USUARIO SEA EL QUE HEMOS METIDO, Y NO UNO NUEVO
 				
-				Usuario u = new Usuario();
 				
-				if(u.esAdmin==true){
+				
+				if(VentanaLogin.u.esAdmin==true){
 					VentanaAdministrador va = new VentanaAdministrador();
 					va.setVisible(true);
 					vc.dispose();

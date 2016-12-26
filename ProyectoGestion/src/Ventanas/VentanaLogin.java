@@ -36,16 +36,17 @@ public class VentanaLogin extends JFrame {
 	private JPasswordField txtContra2;
 	private boolean activado=false;
 	private boolean estaRegistrandose=false;
-	public static BD b;
+	public static BD bd;
 	private String usuAdmin="admin123";
 	private String contraAdmin="123";
+	public static Usuario u;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaLogin() {
 		setResizable(false);
-		b = new BD();
+		bd = new BD();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -152,7 +153,7 @@ public class VentanaLogin extends JFrame {
 					}
 					
 					//3- Comprobamos que el usuario no existe
-					Usuario u = BD.obtenerUsuario(txtUsu);
+					Usuario u = bd.obtenerUsuario(txtUsu);
 					if(u!=null){
 						JOptionPane.showMessageDialog(null, "El nombre de usuario escogido ya existe. Por favor, introduzca otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
 						txtUsuario.setText("");
@@ -169,7 +170,7 @@ public class VentanaLogin extends JFrame {
 					//5- registramos el nuevo usuario en la base de datos:
 			 
 							//b.insertarNuevoUsuario(u);
-							b.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
+							bd.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
 					
 				}else{
 					//Usuario que existe en la base de datos
@@ -184,13 +185,13 @@ public class VentanaLogin extends JFrame {
 					
 					
 					//2- Comprobamos que el usuario existe en la base de datos
-					Usuario u = BD.obtenerUsuario(txtUsu);
+					u = bd.obtenerUsuario(txtUsu);
 					if(u==null){
 						JOptionPane.showMessageDialog(null, "El nombre de usuario escogido no existe. Por favor, regístrese", "Error", JOptionPane.ERROR_MESSAGE);
 						txtUsuario.setText("");
 						txtContrasenia.setText("");
 					}else{
-						//Cuando se registra satisfactoriamente TODO como hacer que ponga txtNombre, en vez de usuario
+						//Cuando se registra satisfactoriamente
 						
 						//Si el usuario se trata del administrador abrimos una ventana a la que solo pueden acceder los administradores
 						if(txtUsu.equals(usuAdmin) && txtContr1.equals(contraAdmin)){
@@ -199,14 +200,15 @@ public class VentanaLogin extends JFrame {
 								vl.dispose();
 								u.esAdmin=true;
 						}else{
-
-						JOptionPane.showMessageDialog(null, "Bienvenido " +txtUsuario.getText(), "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+						
+							String nombre = bd.nombreUsuario(txtUsu);
+							
+						JOptionPane.showMessageDialog(null, "Bienvenido " +nombre, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 						
 						//Aquí pasamos a la siguiente ventana
 
-						BD.obtenerUsuario(txtUsu);
 						
-						VentanaMenuUsuario v = new VentanaMenuUsuario(txtUsuario.getText());
+						VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
 						v.setVisible(true);
 						vl.dispose();
 						}

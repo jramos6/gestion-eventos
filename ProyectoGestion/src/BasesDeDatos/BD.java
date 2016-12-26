@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -80,11 +81,11 @@ public class BD {
 	 * @param usuario
 	 * @return
 	 */
-	public static Usuario obtenerUsuario(String usuario){
+	public Usuario obtenerUsuario(String usuario){
 		String query;
 		Usuario u=null;
 		
-		query="SELECT * FROM USUARIO WHERE USUARIO='"+usuario+"'"; 
+		query="SELECT * FROM USUARIO WHERE Usuario='"+usuario+"'"; 
 		try {
 			ResultSet rs = stm.executeQuery(query);
 			if(rs.next()) //Si la select ha devuelto filas
@@ -114,23 +115,168 @@ public class BD {
 	}
 	
 	/**
-	 * Método para mostrar los nombres de los usuarios desde la BD
+	 * Método para devolver el nombre del usuario
 	 * @param usuario
 	 * @return
 	 */
-	public String nombreUsuario(String usuario){ //TODO Esto es txapu
+	public String nombreUsuario(String usuario){ 
 		String query;
-		
-		query="SELECT Nombre FROM USUARIO='"+usuario+"'";
+		String nombre="";
+		query="SELECT Nombre FROM USUARIO WHERE Usuario='"+usuario+"'";
 		try {
-			ResultSet re=stm.executeQuery(query);
-			
+			ResultSet rs=stm.executeQuery(query);
+			if(rs.next()){
+				nombre = rs.getString("Nombre");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return query;
+		return nombre;
 	}
+	
+	/**
+	 * Método para obtener de la BD los campos de tipos de música --> VentanaMusica
+	 * @return tipos
+	 */
+	public String[] comboMusicaTipo(){
+		String query;
+		int cont=1;
+		String[] tipos=null;
+		try {
+		query="SELECT COUNT(DISTINCT(tipo)) FROM musica";
+		ResultSet rs;
+		rs=stm.executeQuery(query);
+		if(rs.next())
+			cont=rs.getInt(1);
+		rs.close();
+		tipos = new String[cont];
+		query="SELECT DISTINCT(tipo) FROM musica";
+		int i=0;
+			rs = stm.executeQuery(query);
+			while(rs.next()){
+				tipos[i]=rs.getString("tipo");
+				i++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return tipos;
+	}
+	
+	/**
+	 * Método para obtener de la BD los campos de duración de música --> VentanaMusica
+	 * @return duracion
+	 */
+	public String[] comboMusicaDur(){
+		String query;
+		int cont=1;
+		String[] duracion=null;
+		try {
+		query="SELECT COUNT(DISTINCT(duracion)) FROM musica";
+		ResultSet rs;
+		rs=stm.executeQuery(query);
+		if(rs.next())
+			cont=rs.getInt(1);
+		rs.close();
+		duracion = new String[cont];
+		query="SELECT DISTINCT(duracion) FROM musica";
+		int i=0;
+			rs = stm.executeQuery(query);
+			while(rs.next()){
+				duracion[i]=rs.getString("duracion");
+				i++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return duracion;
+	}
+	/**
+	 * Método para obtener el precio de la tupla seleccionada de música
+	 * @param tipo
+	 * @param duracion
+	 * @return
+	 */
+	public int precioMusica(String tipo, String duracion){
+		String query;
+		int precio=0;
+		query="SELECT precio FROM musica WHERE tipo='"+tipo+"' AND duracion='"+duracion+"'";
+		ResultSet rs;
+		try {
+			rs=stm.executeQuery(query);
+			if(rs.next()){
+				precio=rs.getInt("precio");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return precio;
+	}
+	
+	/**
+	 * Método para obtener de la BD los campos de tipo de baile --> VentanaMusica
+	 * @return duracion
+	 */
+	public String[] comboBaileTipo(){
+		String query;
+		int cont=1;
+		String[] tipo=null;
+		try {
+		query="SELECT COUNT(DISTINCT(tipo)) FROM baile";
+		ResultSet rs;
+		rs=stm.executeQuery(query);
+		if(rs.next())
+			cont=rs.getInt(1);
+		rs.close();
+		tipo = new String[cont];
+		query="SELECT DISTINCT(tipo) FROM baile";
+		int i=0;
+			rs = stm.executeQuery(query);
+			while(rs.next()){
+				tipo[i]=rs.getString("tipo");
+				i++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tipo;
+	}
+	
+	/**
+	 * Método para obtener de la BD los campos de duración de baile --> VentanaMusica
+	 * @return duracion
+	 */
+	public String[] comboBaileDur(){
+		String query;
+		int cont=1;
+		String[] duracion=null;
+		try {
+		query="SELECT COUNT(DISTINCT(duracion)) FROM baile";
+		ResultSet rs;
+		rs=stm.executeQuery(query);
+		if(rs.next())
+			cont=rs.getInt(1);
+		rs.close();
+		duracion = new String[cont];
+		query="SELECT DISTINCT(duracion) FROM baile";
+		int i=0;
+			rs = stm.executeQuery(query);
+			while(rs.next()){
+				duracion[i]=rs.getString("duracion");
+				i++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return duracion;
+	}
+	
 	/**
 	 * Método para introducir un nuevo evento en la base de datos
 	 * @param presupuesto

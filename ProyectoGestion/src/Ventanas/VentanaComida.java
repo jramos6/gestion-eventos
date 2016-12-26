@@ -38,11 +38,14 @@ public class VentanaComida extends JFrame {
 	private JButton botMen1, botMen2, botMen3;
 	private JTextField txtNumInvitados;
 	private String nomUsuario;
+	private boolean comboSeleccion;
+
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaComida(String numInvitados) {
+		comboSeleccion = false;
 		setResizable(false);
 		suma=0;
 		this.numIn = Integer.parseInt(numInvitados);
@@ -139,6 +142,26 @@ public class VentanaComida extends JFrame {
 		
 		comboBoxCatering = new JComboBox();
 		comboBoxCatering.setModel(new DefaultComboBoxModel(new String[] {"", "Comida autóctona", "Comida asiática", "Comida africana", "Comida vegana", "Comida baja en grasas"}));
+		comboBoxCatering.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String item = (String)comboBoxCatering.getSelectedItem();
+				if(!comboSeleccion){
+					if(!item.equals("")){
+						suma = suma +30;
+					}
+					comboSeleccion=true;
+				}else{
+					if(item.equals("")){
+						suma = suma -30;
+						comboSeleccion=false;
+					}
+				}
+				txtImporteAPagar.setText(String.valueOf(suma)+ " €");
+			}
+		});
 		panelCentro.add(comboBoxCatering);
 
 
@@ -346,7 +369,12 @@ public class VentanaComida extends JFrame {
 		rdbtnVinos.setVisible(false);
 		
 	}
-	
+	/**
+	 * Método utilizado en la clase TestImporteVinos para uno de los tests
+	 */
+	public void seleccionarRbVinos(){
+		rdbtnVinos.setSelected(true);
+	}
 	
 	public double precioVinos(){
 		double totalVinos=12*VentanaComida.this.numIn;

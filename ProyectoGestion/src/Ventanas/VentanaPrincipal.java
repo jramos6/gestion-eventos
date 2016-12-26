@@ -76,7 +76,7 @@ public class VentanaPrincipal extends JFrame {
 		btnSalir = new JButton("Salir");
 		btnSalir.addMouseListener(new MouseAdapter() {
 			
-			public void mouseClicked(MouseEvent e) { //Hacer la ventana de salida TODO
+			public void mouseClicked(MouseEvent e) { 
 	
 				MiThread mt = new MiThread();
 				mt.start();

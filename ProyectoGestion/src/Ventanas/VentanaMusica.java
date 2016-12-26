@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.spi.TimeZoneNameProvider;
 
 import javax.swing.SwingConstants;
@@ -143,7 +144,10 @@ public class VentanaMusica extends JFrame{
 		
 		comboBoxTipoMusica = new JComboBox();
 		comboBoxTipoMusica.setEnabled(false);
-		comboBoxTipoMusica.setModel(new DefaultComboBoxModel(new String[] {"", "Orquesta", "Banda", "Mariachis", "Txistularis"}));
+		String[] tipos = VentanaLogin.bd.comboMusicaTipo();
+		DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>(tipos);
+		comboBoxTipoMusica.setModel(dcbm);
+		//comboBoxTipoMusica.setModel(new DefaultComboBoxModel(new String[] {"", "Orquesta", "Banda", "Mariachis", "Txistularis"}));
 		panelCentroMusica.add(comboBoxTipoMusica);
 		
 		lblDuracin = new JLabel("Duración: ");
@@ -153,7 +157,10 @@ public class VentanaMusica extends JFrame{
 		
 		comboBoxDuracion = new JComboBox();
 		comboBoxDuracion.setEnabled(false);
-		comboBoxDuracion.setModel(new DefaultComboBoxModel(new String[] {"", "1 hora", "3 horas", "Mitad del evento", "Toda la mañana", "Toda la tarde", "Toda la noche", "Todo el evento"}));
+		String[] duracion = VentanaLogin.bd.comboMusicaDur();
+		DefaultComboBoxModel<String> dcbm2 = new DefaultComboBoxModel<String>(duracion);
+		comboBoxDuracion.setModel(dcbm2);
+		//comboBoxDuracion.setModel(new DefaultComboBoxModel(new String[] {"", "1 hora", "3 horas", "Mitad del evento", "Toda la mañana", "Toda la tarde", "Toda la noche", "Todo el evento"}));
 		panelCentroMusica.add(comboBoxDuracion);
 		
 		lblPrecio = new JLabel("Precio: ");
@@ -161,12 +168,15 @@ public class VentanaMusica extends JFrame{
 		lblPrecio.setHorizontalAlignment(SwingConstants.CENTER);
 		panelCentroMusica.add(lblPrecio);
 		
+		
 		textFieldPrecio = new JTextField();
 		textFieldPrecio.setEnabled(false);
 		textFieldPrecio.setEditable(false);
 		panelCentroMusica.add(textFieldPrecio);
 		textFieldPrecio.setColumns(10);
-		
+		//TODO queremos que el precio se actualice dependiendo de las selecciones del comboBox, pero no me funciona
+		int precioFinal=VentanaLogin.bd.precioMusica((String)comboBoxTipoMusica.getSelectedItem(), (String)comboBoxDuracion.getSelectedItem());		
+		textFieldPrecio.setText(""+precioFinal+"");
 		panelCentroBaile = new JPanel();
 		panelCentroBaile.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panelCentro.add(panelCentroBaile);
@@ -200,7 +210,10 @@ public class VentanaMusica extends JFrame{
 		
 		comboBoxTipoBaile = new JComboBox();
 		comboBoxTipoBaile.setEnabled(false);
-		comboBoxTipoBaile.setModel(new DefaultComboBoxModel(new String[] {"", "Lento", "Samba", "Ballet", "Salsa", "Bachata", "Tradicional", "Jotas Navarras"}));
+		String[] tipos2 = VentanaLogin.bd.comboBaileTipo();
+		DefaultComboBoxModel<String> dcbm3 = new DefaultComboBoxModel<String>(tipos2);
+		comboBoxTipoBaile.setModel(dcbm3);
+		//comboBoxTipoBaile.setModel(new DefaultComboBoxModel(new String[] {"", "Lento", "Samba", "Ballet", "Salsa", "Bachata", "Tradicional", "Jotas Navarras"}));
 		panelCentroBaile.add(comboBoxTipoBaile);
 		
 		lblDuracin_1 = new JLabel("Duración: ");
@@ -210,7 +223,10 @@ public class VentanaMusica extends JFrame{
 		
 		comboBoxDuracionBaile = new JComboBox();
 		comboBoxDuracionBaile.setEnabled(false);
-		comboBoxDuracionBaile.setModel(new DefaultComboBoxModel(new String[] {"", "1 hora", "3 horas", "Mitad del evento", "Toda la mañana", "Toda la tarde", "Toda la noche", "Todo el evento"}));
+		String[] duracion2 = VentanaLogin.bd.comboBaileDur();
+		DefaultComboBoxModel<String> dcbm4 = new DefaultComboBoxModel<String>(duracion2);
+		comboBoxDuracionBaile.setModel(dcbm4);
+		//comboBoxDuracionBaile.setModel(new DefaultComboBoxModel(new String[] {"", "1 hora", "3 horas", "Mitad del evento", "Toda la mañana", "Toda la tarde", "Toda la noche", "Todo el evento"}));
 		panelCentroBaile.add(comboBoxDuracionBaile);
 		
 		lblPrecio_1 = new JLabel("Precio: ");
