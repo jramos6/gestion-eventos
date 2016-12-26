@@ -47,15 +47,15 @@ public class VentanaCalendario extends JFrame {
 				Usuario u = new Usuario();
 				
 				if(u.esAdmin==true){
-				VentanaAdministrador va = new VentanaAdministrador();
-				va.setVisible(true);
-				vc.dispose();
+					VentanaAdministrador va = new VentanaAdministrador();
+					va.setVisible(true);
+					vc.dispose();
 				}	
 				//Si el usuario no es un administrador
 				else{
-				VentanaEventos ve = new VentanaEventos();
-				ve.setVisible(true);
-				vc.dispose();
+					VentanaEventos ve = new VentanaEventos();
+					ve.setVisible(true);
+					vc.dispose();
 				}
 				
 			}
