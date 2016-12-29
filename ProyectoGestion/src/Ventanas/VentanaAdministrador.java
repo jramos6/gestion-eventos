@@ -122,8 +122,16 @@ public class VentanaAdministrador extends JFrame {
 		});
 		panelDrch.add(btnCalendario);
 		
-		JButton btnltimosRegistros = new JButton("Últimos registros");
-		panelDrch.add(btnltimosRegistros);
+		JButton btnMusicaBaile = new JButton("Editar música-baile");
+		btnMusicaBaile.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaEditarMB vemb = new VentanaEditarMB();
+				vemb.setVisible(true);
+				va.dispose();
+			}
+		});
+		panelDrch.add(btnMusicaBaile);
 		
 		JButton btnVerEventos = new JButton("Ver eventos");
 		panelDrch.add(btnVerEventos);

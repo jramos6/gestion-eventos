@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -195,6 +196,37 @@ public class BD {
 		}
 		return duracion;
 	}
+	
+	/**
+	 * Método para obtener de la BD los campos de precio de música --> VentanaEditarMB
+	 * @return duracion
+	 */
+	public String[] comboMusicaPrecio(){
+		String query;
+		int cont=1;
+		String[] precio=null;
+		try {
+		query="SELECT COUNT(DISTINCT(precio)) FROM musica";
+		ResultSet rs;
+		rs=stm.executeQuery(query);
+		if(rs.next())
+			cont=rs.getInt(1);
+		rs.close();
+		precio = new String[cont];
+		query="SELECT DISTINCT(precio) FROM musica";
+		int i=0;
+			rs = stm.executeQuery(query);
+			while(rs.next()){
+				precio[i]=rs.getString("precio");
+				i++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return precio;
+	}
+	
 	/**
 	 * Método para obtener el precio de la tupla seleccionada de música
 	 * @param tipo
@@ -278,6 +310,36 @@ public class BD {
 	}
 	
 	/**
+	 * Método para obtener de la BD los campos de precio de baile --> VentanaEditarMB
+	 * @return duracion
+	 */
+	public String[] comboBailePrecio(){
+		String query;
+		int cont=1;
+		String[] precio=null;
+		try {
+		query="SELECT COUNT(DISTINCT(precio)) FROM baile";
+		ResultSet rs;
+		rs=stm.executeQuery(query);
+		if(rs.next())
+			cont=rs.getInt(1);
+		rs.close();
+		precio = new String[cont];
+		query="SELECT DISTINCT(precio) FROM baile";
+		int i=0;
+			rs = stm.executeQuery(query);
+			while(rs.next()){
+				precio[i]=rs.getString("precio");
+				i++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return precio;
+	}
+	
+	/**
 	 * Método para introducir un nuevo evento en la base de datos
 	 * @param presupuesto
 	 * @param invitados
@@ -290,6 +352,25 @@ public class BD {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	
+	public void insertarEnMusica(String tipo, String duracion, int precio){
+		String query = "INSERT INTO musica (tipo, duracion, precio) VALUES ('"+tipo+"','"+duracion+"',"+precio+")";
+		try {
+			stm.executeQuery(query);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Ha introducido con éxito la siguiente información:\n "+tipo+", "+duracion+", "+precio);
+		}
+	}
+	
+	public void insertarEnBaile(String tipo, String duracion, int precio){
+		String query = "INSERT INTO baile (tipo, duracion, precio) VALUES ('"+tipo+"','"+duracion+"',"+precio+")";
+		try {
+			stm.executeQuery(query);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Ha introducido con éxito la siguiente información:\n "+tipo+", "+duracion+", "+precio);
 		}
 	}
 	

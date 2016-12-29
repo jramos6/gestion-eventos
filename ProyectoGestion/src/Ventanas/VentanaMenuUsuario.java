@@ -105,7 +105,9 @@ public class VentanaMenuUsuario extends JFrame {
 		btnCalendario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Página en construcción, disculpe las molestias");
+				VentanaCalendario vc = new VentanaCalendario(nomUsuario);
+				vc.setVisible(true);
+				vmu.dispose();
 			}
 		});
 		panelCentro.add(btnCalendario);

@@ -42,9 +42,7 @@ public class VentanaCalendario extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//TODO ESTO NO FUNCIONA: TENEMOS QUE CONSEGUIR QUE EL USUARIO SEA EL QUE HEMOS METIDO, Y NO UNO NUEVO
-				
-				
+//TODO TENEMOS QUE COMPROBAR SI VIENE DEL MENU DE USUARIOS, PORQUE SI ES ASÍ TIENE QUE VOLVER A ESE MENÚ, NO A LA PÁGINA DE RESERVAS (parecido a lo del admin)
 				
 				if(VentanaLogin.u.esAdmin==true){
 					VentanaAdministrador va = new VentanaAdministrador();
