@@ -10,6 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -21,12 +22,12 @@ import java.awt.event.MouseEvent;
 
 public class VentanaEditarMB extends JFrame {
 
-	private JPanel contentPane, panelEtiquetas, panelTextos, panelCombos;
+	private JPanel contentPane, panelEtiquetas, panelTextos;
 	private JTextField txtNuevoTipo, txtNuevaDur, txtNuevoPrecio;
 	private JButton btnVolver, btnGuardarCambios, btnAniadir, btnEliminar;
 	private JRadioButton rdbtnMusica, rdbtnBaile;
-	private JComboBox comboBoxTipo,comboBoxDuracion, comboBoxPrecio;
-	private JLabel lblPrecio, lblDuracion, lblTipo, lblOpcionesActuales, lblNuevoPrecio,lblNuevaDuracion, lblNuevoTipo;
+	private JLabel lblNuevoPrecio,lblNuevaDuracion, lblNuevoTipo;
+	private JTextField txtOpcionesActuales;
 
 	/**
 	 * Create the frame.
@@ -49,25 +50,8 @@ public class VentanaEditarMB extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(rdbtnMusica.isSelected()){
-					if(rdbtnBaile.isSelected()){
-						comboBoxTipo.setSelectedIndex(0);
-						comboBoxDuracion.setSelectedIndex(0);
-						comboBoxPrecio.setSelectedIndex(0);
-					}
 					estanVisibles();
 					rdbtnBaile.setSelected(false);	
-					
-					String [] tipos = VentanaLogin.bd.comboMusicaTipo();
-					DefaultComboBoxModel<String> dcbm1 = new DefaultComboBoxModel<String>(tipos);
-					comboBoxTipo.setModel(dcbm1);
-					
-					String [] tipos1 = VentanaLogin.bd.comboMusicaDur();
-					DefaultComboBoxModel<String> dcbm2 = new DefaultComboBoxModel<String>(tipos1);
-					comboBoxDuracion.setModel(dcbm2);
-					
-					String [] tipos2 = VentanaLogin.bd.comboMusicaPrecio();
-					DefaultComboBoxModel<String> dcbm3 = new DefaultComboBoxModel<String>(tipos2);
-					comboBoxPrecio.setModel(dcbm3);
 				}
 				if(rdbtnBaile.isSelected()==false && rdbtnMusica.isSelected()==false){
 					estanInvisibles();
@@ -82,25 +66,8 @@ public class VentanaEditarMB extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(rdbtnBaile.isSelected()){
-					if(rdbtnMusica.isSelected()){
-						comboBoxTipo.setSelectedIndex(0);
-						comboBoxDuracion.setSelectedIndex(0);
-						comboBoxPrecio.setSelectedIndex(0);
-					}
 					estanVisibles();
 					rdbtnMusica.setSelected(false);
-	
-					String [] tipos = VentanaLogin.bd.comboBaileTipo();
-					DefaultComboBoxModel<String> dcbm1 = new DefaultComboBoxModel<String>(tipos);
-					comboBoxTipo.setModel(dcbm1);
-					
-					String [] tipos1 = VentanaLogin.bd.comboBaileDur();
-					DefaultComboBoxModel<String> dcbm2 = new DefaultComboBoxModel<String>(tipos1);
-					comboBoxDuracion.setModel(dcbm2);
-					
-					String [] tipos2 = VentanaLogin.bd.comboBailePrecio();
-					DefaultComboBoxModel<String> dcbm3 = new DefaultComboBoxModel<String>(tipos2);
-					comboBoxPrecio.setModel(dcbm3);
 				}
 				if(rdbtnBaile.isSelected()==false && rdbtnMusica.isSelected()==false){
 					estanInvisibles();
@@ -148,40 +115,16 @@ public class VentanaEditarMB extends JFrame {
 		
 		JPanel panelM = new JPanel();
 		panelCentro.add(panelM);
-		panelM.setLayout(new GridLayout(6, 1, 0, 0));
+		panelM.setLayout(new GridLayout(4, 1, 0, 0));
 		
-		lblOpcionesActuales = new JLabel("Opciones actuales:");
-		panelM.add(lblOpcionesActuales);
+		txtOpcionesActuales = new JTextField();
+		txtOpcionesActuales.setEditable(false);
+		panelM.add(txtOpcionesActuales);
+		txtOpcionesActuales.setColumns(10);
 		
-		JPanel panelRadioButtonsM = new JPanel();
-		panelM.add(panelRadioButtonsM);
-		panelRadioButtonsM.setLayout(new GridLayout(0, 3, 0, 0));
+		//TODO queremos que en txtOpcionesActuales se impriman las tuplas de tres de todas las opciones de musica y baile
+		//txtOpcionesActuales.setText(VentanaLogin.bd.obtenerInfoMusica());
 		
-		lblTipo = new JLabel("Tipo:");
-		lblTipo.setHorizontalAlignment(SwingConstants.CENTER);
-		panelRadioButtonsM.add(lblTipo);
-		
-		lblDuracion = new JLabel("Duración:");
-		lblDuracion.setHorizontalAlignment(SwingConstants.CENTER);
-		panelRadioButtonsM.add(lblDuracion);
-		
-		lblPrecio = new JLabel("Precio:");
-		lblPrecio.setHorizontalAlignment(SwingConstants.CENTER);
-		panelRadioButtonsM.add(lblPrecio);
-		
-		panelCombos = new JPanel();
-		panelM.add(panelCombos);
-		panelCombos.setLayout(new GridLayout(0, 3, 0, 0));
-		
-		comboBoxTipo = new JComboBox();
-		panelCombos.add(comboBoxTipo);
-		
-		
-		comboBoxDuracion = new JComboBox();
-		panelCombos.add(comboBoxDuracion);
-		
-		comboBoxPrecio = new JComboBox();
-		panelCombos.add(comboBoxPrecio);
 		
 		panelEtiquetas = new JPanel();
 		panelM.add(panelEtiquetas);
@@ -223,6 +166,11 @@ public class VentanaEditarMB extends JFrame {
 		btnAniadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				if(txtNuevaDur.equals("") || txtNuevoPrecio.equals("") || txtNuevoTipo.equals("")){
+					JOptionPane.showMessageDialog(null, "Introduzca todos los campos para añadir la información a la base de datos");
+				}
+				else{
 				if(rdbtnMusica.isSelected()){
 					int precio = Integer.parseInt(txtNuevoPrecio.getText());
 					VentanaLogin.bd.insertarEnMusica(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
@@ -232,12 +180,33 @@ public class VentanaEditarMB extends JFrame {
 					int precio = Integer.parseInt(txtNuevoPrecio.getText());
 					VentanaLogin.bd.insertarEnBaile(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
 					vaciarTextos();
+					}
 				}
 			}
 		});
 		panelMusicaBotones.add(btnAniadir);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txtNuevaDur.equals("") || txtNuevoPrecio.equals("") || txtNuevoTipo.equals("")){
+					JOptionPane.showMessageDialog(null, "Introduzca todos los campos para añadir la información a la base de datos");
+				}
+				else{
+				if(rdbtnMusica.isSelected()){ //TODO no se eliminan de la base de datos
+					int precio = Integer.parseInt(txtNuevoPrecio.getText());
+					VentanaLogin.bd.eliminarEnMusica(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
+					vaciarTextos();
+				}
+				if(rdbtnBaile.isSelected()){
+					int precio = Integer.parseInt(txtNuevoPrecio.getText());
+					VentanaLogin.bd.eliminarEnBaile(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
+					vaciarTextos();
+					}
+				}
+			}
+		});
 		panelMusicaBotones.add(btnEliminar);
 	
 		estanInvisibles();
@@ -246,13 +215,9 @@ public class VentanaEditarMB extends JFrame {
 	 * Método para poner en visible los campos de la ventana
 	 */
 	public void estanVisibles(){
-		lblOpcionesActuales.setVisible(true);
 		lblNuevoTipo.setVisible(true);
-		lblDuracion.setVisible(true);
 		lblNuevaDuracion.setVisible(true);
 		lblNuevoPrecio.setVisible(true);
-		lblPrecio.setVisible(true);
-		lblTipo.setVisible(true);
 		btnAniadir.setVisible(true);
 		btnEliminar.setVisible(true);
 		btnGuardarCambios.setVisible(true);
@@ -260,21 +225,16 @@ public class VentanaEditarMB extends JFrame {
 		txtNuevaDur.setVisible(true);
 		txtNuevoPrecio.setVisible(true);
 		txtNuevoTipo.setVisible(true);
-		comboBoxDuracion.setVisible(true);
-		comboBoxPrecio.setVisible(true);
-		comboBoxTipo.setVisible(true);
+		txtOpcionesActuales.setVisible(true);
 	}
 	/**
 	 * Método para poner en invisible los campos de la ventana
 	 */
 	public void estanInvisibles(){
-		lblOpcionesActuales.setVisible(false);
+		txtOpcionesActuales.setVisible(false);
 		lblNuevoTipo.setVisible(false);
-		lblDuracion.setVisible(false);
 		lblNuevaDuracion.setVisible(false);
 		lblNuevoPrecio.setVisible(false);
-		lblPrecio.setVisible(false);
-		lblTipo.setVisible(false);
 		btnAniadir.setVisible(false);
 		btnEliminar.setVisible(false);
 		btnGuardarCambios.setVisible(false);
@@ -282,9 +242,6 @@ public class VentanaEditarMB extends JFrame {
 		txtNuevaDur.setVisible(false);
 		txtNuevoPrecio.setVisible(false);
 		txtNuevoTipo.setVisible(false);
-		comboBoxDuracion.setVisible(false);
-		comboBoxPrecio.setVisible(false);
-		comboBoxTipo.setVisible(false);
 	}
 	/**
 	 * Método para vaciar los textos de txtFiles

@@ -355,7 +355,12 @@ public class BD {
 		}
 	}
 	
-	
+	/**
+	 * Método para introducir información en la BD de música
+	 * @param tipo
+	 * @param duracion
+	 * @param precio
+	 */
 	public void insertarEnMusica(String tipo, String duracion, int precio){
 		String query = "INSERT INTO musica (tipo, duracion, precio) VALUES ('"+tipo+"','"+duracion+"',"+precio+")";
 		try {
@@ -365,6 +370,12 @@ public class BD {
 		}
 	}
 	
+	/**
+	 * Método para introducir información en la BD de baile
+	 * @param tipo
+	 * @param duracion
+	 * @param precio
+	 */
 	public void insertarEnBaile(String tipo, String duracion, int precio){
 		String query = "INSERT INTO baile (tipo, duracion, precio) VALUES ('"+tipo+"','"+duracion+"',"+precio+")";
 		try {
@@ -374,6 +385,43 @@ public class BD {
 		}
 	}
 	
+	/**TODO esto no funciona--> por que?
+	 * 
+	 * Método para eliminar información en la BD de música
+	 * @param tipo
+	 * @param duracion
+	 * @param precio
+	 */
+	public void eliminarEnMusica(String tipo, String duracion, int precio){
+		String query = "DELETE FROM musica WHERE tipo='"+tipo+"', duracion='"+duracion+"', precio="+precio;
+		try {
+			stm.executeQuery(query);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Ha eliminado con éxito la siguiente información:\n "+tipo+", "+duracion+", "+precio);
+		}
+	}
+	
+	/**TODO esto no funciona--> por que?
+	 * 
+	 * Método para eliminar información en la BD de baile
+	 * @param tipo
+	 * @param duracion
+	 * @param precio
+	 */
+	public void eliminarEnBaile(String tipo, String duracion, int precio){
+		String query = "DELETE FROM baile WHERE tipo='"+tipo+"', duracion='"+duracion+"', precio="+precio;
+		try {
+			stm.executeQuery(query);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Ha eliminado con éxito la siguiente información:\n "+tipo+", "+duracion+", "+precio);
+		}
+	}
+	
+	/**
+	 * Método para obtener eventos
+	 * @param usuario
+	 * @return
+	 */
 	public static Evento obtenerEvento(String usuario){
 		String query;
 		Evento ev=null;
@@ -388,5 +436,10 @@ public class BD {
 			e.printStackTrace();
 		} 
 		return ev;
+	}
+	
+	public void obtenerInfoMusica(){
+	
+	
 	}
 }
