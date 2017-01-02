@@ -23,11 +23,10 @@ import java.awt.event.MouseEvent;
 public class VentanaEditarMB extends JFrame {
 
 	private JPanel contentPane, panelEtiquetas, panelTextos;
-	private JTextField txtNuevoTipo, txtNuevaDur, txtNuevoPrecio;
+	private JTextField txtNuevoTipo, txtNuevaDur, txtNuevoPrecio, txtOpcionesActuales;
 	private JButton btnVolver, btnGuardarCambios, btnAniadir, btnEliminar;
 	private JRadioButton rdbtnMusica, rdbtnBaile;
 	private JLabel lblNuevoPrecio,lblNuevaDuracion, lblNuevoTipo;
-	private JTextField txtOpcionesActuales;
 
 	/**
 	 * Create the frame.
@@ -238,7 +237,6 @@ public class VentanaEditarMB extends JFrame {
 		btnAniadir.setVisible(false);
 		btnEliminar.setVisible(false);
 		btnGuardarCambios.setVisible(false);
-		btnVolver.setVisible(false);
 		txtNuevaDur.setVisible(false);
 		txtNuevoPrecio.setVisible(false);
 		txtNuevoTipo.setVisible(false);

@@ -26,13 +26,11 @@ public class VentanaEventos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNumInvitados;
-	private String numInvitados;
-
 
 	/**
 	 * Create the frame.
 	 */
-	public VentanaEventos() {
+	public VentanaEventos(String nombre, boolean estaEnElMenuUsuario) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -57,10 +55,11 @@ public class VentanaEventos extends JFrame {
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Conectamos con la ventanaPrincipal
+				//Conectamos con la VentanaMenuUsuario
+
+				VentanaMenuUsuario vmu = new VentanaMenuUsuario(nombre);
+				vmu.setVisible(true);
 				ve.dispose();
-				VentanaPrincipal v = new VentanaPrincipal();
-				v.setVisible(true);
 			}
 		});
 		panelSur.add(btnVolver);
@@ -85,8 +84,7 @@ public class VentanaEventos extends JFrame {
 					}else{
 							
 					//Conectamos con la ventana de calendario:
-					
-					VentanaCalendario vc = new VentanaCalendario(txtNumInvitados.getText());	
+					VentanaCalendario vc = new VentanaCalendario(txtNumInvitados.getText(), nombre, true);	
 						vc.setVisible(true);
 						ve.dispose();
 						

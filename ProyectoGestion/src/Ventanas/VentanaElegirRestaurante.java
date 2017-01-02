@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 public class VentanaElegirRestaurante extends JFrame {
 
 	private JPanel contentPane;
-	private String nomUsuario;
 
 	/**
 	 * Launch the application.
@@ -66,14 +65,6 @@ public class VentanaElegirRestaurante extends JFrame {
 		
 		final JFrame ver=this;
 		JButton btnAtras = new JButton("Atras ");
-		btnAtras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VentanaComida vc= new VentanaComida(nomUsuario);
-				vc.setVisible(true);
-				ver.dispose();
-
-			}
-		});
 		btnAtras.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
 		panel_1.add(btnAtras);
 		

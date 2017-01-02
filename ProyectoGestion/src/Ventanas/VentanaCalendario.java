@@ -18,11 +18,11 @@ import java.awt.event.ActionEvent;
 public class VentanaCalendario extends JFrame {
 
 	private JPanel contentPane;
-
+	
 	/**
 	 * Create the frame.
 	 */
-	public VentanaCalendario(String numInvitados) {
+	public VentanaCalendario(String numInvitados, String nombre, boolean estaEnElMenuUsuario) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -42,7 +42,7 @@ public class VentanaCalendario extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-//TODO TENEMOS QUE COMPROBAR SI VIENE DEL MENU DE USUARIOS, PORQUE SI ES ASÍ TIENE QUE VOLVER A ESE MENÚ, NO A LA PÁGINA DE RESERVAS (parecido a lo del admin)
+				//TODO TENEMOS QUE COMPROBAR SI VIENE DEL MENU DE USUARIOS, PORQUE SI ES ASÍ TIENE QUE VOLVER A ESE MENÚ, NO A LA PÁGINA DE RESERVAS (parecido a lo del admin)
 				
 				if(VentanaLogin.u.esAdmin==true){
 					VentanaAdministrador va = new VentanaAdministrador();
@@ -51,25 +51,24 @@ public class VentanaCalendario extends JFrame {
 				}	
 				//Si el usuario no es un administrador
 				else{
-					VentanaEventos ve = new VentanaEventos();
-					ve.setVisible(true);
-					vc.dispose();
+					
+					if(estaEnElMenuUsuario==true){
+						VentanaEventos ve = new VentanaEventos(nombre,true);
+						ve.setVisible(true);
+						vc.dispose();
+					}else{
+						VentanaMenuUsuario vmu = new VentanaMenuUsuario(nombre);
+						vmu.setVisible(true);
+						vc.dispose();
+					}
+					
+					
 				}
 				
 			}
 			
 		});
 		panelSur.add(btnVolver);
-		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VentanaEspacio vs = new VentanaEspacio(numInvitados);
-				vs.setVisible(true);
-				vc.dispose();
-			}
-		});
-		panelSur.add(btnAceptar);
 		
 		JPanel panelEste = new JPanel();
 		contentPane.add(panelEste, BorderLayout.EAST);
@@ -81,7 +80,25 @@ public class VentanaCalendario extends JFrame {
 		contentPane.add(panelCentro, BorderLayout.CENTER);
 		
 		//Se abre un calendario en la ventana
-		panelCentro.add(new PanelCal(),BorderLayout.CENTER);
+		PanelCal pc = new PanelCal();
+		panelCentro.add(pc,BorderLayout.CENTER);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaEspacio vs = new VentanaEspacio(numInvitados, nombre,pc.anio,pc.mes,pc.dia);
+				vs.setVisible(true);
+				vc.dispose();
+			}
+		});
+		panelSur.add(btnAceptar);
+		
+		if(estaEnElMenuUsuario==false){
+			btnAceptar.setVisible(false);
+		}
+		
+
 	}
 
 }

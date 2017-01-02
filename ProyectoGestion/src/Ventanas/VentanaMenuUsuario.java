@@ -25,13 +25,15 @@ import java.awt.event.MouseEvent;
 public class VentanaMenuUsuario extends JFrame {
 
 	private JPanel contentPane;
-	private String nomUsuario;
+	private String nombre;
+	private String numInvitados;
+	
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMenuUsuario(String nomUsuario) {
+	public VentanaMenuUsuario(String nombre) {
 		setResizable(false);
-		this.nomUsuario=nomUsuario;
+		this.nombre=nombre;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -45,7 +47,7 @@ public class VentanaMenuUsuario extends JFrame {
 		
 		
 		
-		JLabel lblHola = new JLabel("Hola, "+nomUsuario);
+		JLabel lblHola = new JLabel("Hola, "+nombre);
 		lblHola.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelNorte.add(lblHola);
 		
@@ -81,8 +83,7 @@ public class VentanaMenuUsuario extends JFrame {
 		btnNuevaReserva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				VentanaEventos ve = new VentanaEventos();
+				VentanaEventos ve = new VentanaEventos(nombre,true);
 				ve.setVisible(true);
 				vmu.dispose();
 				}
@@ -105,7 +106,7 @@ public class VentanaMenuUsuario extends JFrame {
 		btnCalendario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaCalendario vc = new VentanaCalendario(nomUsuario);
+				VentanaCalendario vc = new VentanaCalendario(numInvitados, nombre, false);
 				vc.setVisible(true);
 				vmu.dispose();
 			}

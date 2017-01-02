@@ -24,12 +24,12 @@ public class VentanaEscoger extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNumInvitados;
-
-
+	
+	
 	/**
 	 * Create the frame.
 	 */
-	public VentanaEscoger(String numInvitados) {
+	public VentanaEscoger(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal, boolean comida, boolean musica) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -66,7 +66,7 @@ public class VentanaEscoger extends JFrame {
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEspacio vp = new VentanaEspacio(numInvitados);
+				VentanaEspacio vp = new VentanaEspacio(numInvitados, nombre, anio, mes, dia);
 				vp.setVisible(true);
 				vs.dispose();
 			}
@@ -92,9 +92,10 @@ public class VentanaEscoger extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				VentanaComida vc = new VentanaComida(numInvitados);
+				VentanaComida vc = new VentanaComida(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica);
 				vc.setVisible(true);
 				ve.dispose();
+				btnComida.setEnabled(false);
 			}
 		});
 		panelCentro.add(btnComida);
@@ -106,9 +107,10 @@ public class VentanaEscoger extends JFrame {
 		btnMsica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaMusica vm = new VentanaMusica(numInvitados);
+				VentanaMusica vm = new VentanaMusica(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica);
 				vm.setVisible(true);
 				ve.dispose();
+				btnMsica.setEnabled(false);
 				
 			}
 		});
@@ -118,10 +120,30 @@ public class VentanaEscoger extends JFrame {
 		btnPagar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Página en construcción, disculpe las molestias");
+				VentanaEscogerPago vep = new VentanaEscogerPago(numInvitados, nombre, anio, mes, dia, precioFinal);
+				vep.setVisible(true);
+				ve.dispose();
 			}
 		});
 		panelCentro.add(btnPagar);
+		
+		/**
+		 * Serie de if-s que comprueban si el usuario ha estado antes en las ventanas comida y musica y desabilita los botones si es cierto
+		 */
+		
+		if(comida==false && musica==false){
+			btnComida.setVisible(true);
+			btnMsica.setVisible(true);
+		}else if(comida==true && musica==false){
+			btnComida.setVisible(false);
+			btnMsica.setVisible(true);
+		}else if(comida==false && musica==true){
+			btnComida.setVisible(true);
+			btnMsica.setVisible(false);
+		}else if(comida==true && musica==true){
+			btnComida.setVisible(false);
+			btnMsica.setVisible(false);
+		}
 	}
 	
 	public JTextField getTxtNumInvitados() {
@@ -131,4 +153,5 @@ public class VentanaEscoger extends JFrame {
 	public void setTxtNumInvitados(JTextField txtNumInvitados) {
 		this.txtNumInvitados = txtNumInvitados;
 	}
+	
 }

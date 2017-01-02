@@ -20,18 +20,12 @@ import javax.swing.JDesktopPane;
 
 public class VentanaPrincipal extends JFrame {
 
-	private JPanel contentPane;
-	JPanel panelNorte;
-	JPanel panelSur;
+	private JPanel contentPane, panelNorte, panelSur, panelEste, panelCentro;
 	static JPanel panelOeste;
-	JPanel panelEste;
-	JPanel panelCentro;
-	JLabel labelCentro;
+	JLabel labelCentro, labelEste;
 	static JLabel labelOeste;
-	JLabel labelEste;
 	private JLabel lblGestinDeEventos;
-	private JButton btnSalir;
-	private JButton btnEntrar;
+	private JButton btnSalir, btnEntrar;
 
 
 	/**

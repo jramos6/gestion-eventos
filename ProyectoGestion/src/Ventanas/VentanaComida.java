@@ -36,15 +36,13 @@ public class VentanaComida extends JFrame {
 	private JRadioButton radioButton1, radioButton2, radioButton3, rdbtnVinos, rdbtnCafsInfusiones;
 	private JComboBox comboBoxCatering; 
 	private JButton botMen1, botMen2, botMen3;
-	private JTextField txtNumInvitados;
-	private String nomUsuario;
 	private boolean comboSeleccion;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public VentanaComida(String numInvitados) {
+	public VentanaComida(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal, boolean comida, boolean musica) {
 		comboSeleccion = false;
 		setResizable(false);
 		suma=0;
@@ -92,7 +90,7 @@ public class VentanaComida extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos a la página de datos generales de evento
 				
-				VentanaEscoger ve = new VentanaEscoger(numInvitados);
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, (long) (precioFinal+suma),true,musica);
 				ve.setVisible(true);
 				vc.dispose();
 				
@@ -103,7 +101,7 @@ public class VentanaComida extends JFrame {
 		btnCancelar_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(numInvitados);
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica);
 				ve.setVisible(true);
 				vc.dispose();
 			}

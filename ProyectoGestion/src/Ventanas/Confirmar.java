@@ -18,21 +18,16 @@ public class Confirmar extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private String nomRdbtn;
-	private JLabel lblFormaPago;
-	private JLabel lblTarjeta;
-	private JLabel lblCuenta;
-	private JTextField textFieldTarjeta;
-	private JTextField textField_Banc1;
-	private JTextField textField_Banc2;
-	private JTextField textField_Banc3;
-	private JTextField textField_Banc4;
-
+	private JLabel lblFormaPago, lblTarjeta, lblCuenta;
+	private JTextField textFieldTarjeta,textField_Banc1, textField_Banc2, textField_Banc3, textField_Banc4;
+	private int anio, mes, dia;
+	private long precioFinal;
+	
 
 	/**
 	 * Create the dialog.
 	 */
-	public Confirmar(String nomRdbtn) {
-		this.nomRdbtn=nomRdbtn;
+	public Confirmar(String numInvitados, String nombre) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 450, 1);
@@ -63,7 +58,7 @@ public class Confirmar extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						VentanaEscogerPago vep= new VentanaEscogerPago();
+						VentanaEscogerPago vep= new VentanaEscogerPago(nombre, numInvitados, anio, mes, dia, precioFinal);
 						vep.setVisible(true);
 						vc.dispose();
 					}

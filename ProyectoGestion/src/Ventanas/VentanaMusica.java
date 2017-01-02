@@ -31,19 +31,21 @@ import java.awt.event.ActionEvent;
 public class VentanaMusica extends JFrame{
 
 	private JPanel contentPane, panelCentroBaile ;
-	private JTextField textFieldPrecio;
-	private JTextField textFieldPrecioBaile;
+	private JTextField textFieldPrecio, textFieldPrecioBaile;
 	private JLabel lblTipo, lblDuracin, lblPrecio, lblBaile, lblTipo_1, lblDuracin_1, lblPrecio_1, lblMusica;
 	private JComboBox comboBoxDuracion,comboBoxTipoMusica, comboBoxTipoBaile, comboBoxDuracionBaile;
 	private JRadioButton radioButtonBaile, radioButtonMusica ;
 	private JTextField txtNumInvitados;
 	private JButton btnMenPrincipal;
+	private String nomUsuario;
+	private int anio, mes, dia;
+	private long precioFinal;
 
     
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMusica(String numInvitados) {
+	public VentanaMusica(String numInvitados, String nombre, int anio, int mes, int dia,long precioFinal, boolean comida, boolean musica) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -67,7 +69,7 @@ public class VentanaMusica extends JFrame{
 		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(numInvitados);
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nomUsuario, anio, mes, dia, precioFinal,comida, musica);
 				ve.setVisible(true);
 				vm.dispose();
 			}
@@ -92,7 +94,9 @@ public class VentanaMusica extends JFrame{
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(numInvitados);
+				
+				
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal,comida, true);
 				ve.setVisible(true);
 				vm.dispose();
 			}
@@ -175,8 +179,8 @@ public class VentanaMusica extends JFrame{
 		panelCentroMusica.add(textFieldPrecio);
 		textFieldPrecio.setColumns(10);
 		//TODO queremos que el precio se actualice dependiendo de las selecciones del comboBox, pero no me funciona
-		int precioFinal=VentanaLogin.bd.precioMusica((String)comboBoxTipoMusica.getSelectedItem(), (String)comboBoxDuracion.getSelectedItem());		
-		textFieldPrecio.setText(""+precioFinal+"");
+		int precioFin=VentanaLogin.bd.precioMusica((String)comboBoxTipoMusica.getSelectedItem(), (String)comboBoxDuracion.getSelectedItem());		
+		textFieldPrecio.setText(""+precioFin+"");
 		panelCentroBaile = new JPanel();
 		panelCentroBaile.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panelCentro.add(panelCentroBaile);

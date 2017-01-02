@@ -26,7 +26,7 @@ public class VentanaMisReservas extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtReservas;
 	private String nomUsuario;
-	private String usuario;
+	
 
 	/**
 	 * Launch the application.

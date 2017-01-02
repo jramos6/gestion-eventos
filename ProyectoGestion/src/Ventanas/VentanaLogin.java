@@ -26,18 +26,14 @@ import java.awt.event.KeyEvent;
 public class VentanaLogin extends JFrame {
 
 	private JPanel contentPane, pnlNorte, panelSur;
-	private JTextField txtUsuario;
+	private JTextField txtUsuario, txtNombre, txtDNI, txtEdad;
 	private JPasswordField txtContrasenia;
-	private JTextField txtNombre;
-	private JTextField txtDNI;
-	private JTextField txtEdad;
-	private JLabel lblUsuario, lblContra, lblNombre, lblEdad, lblDNI;
-	private JLabel lblRepitaContrasea;
+	private JLabel lblUsuario, lblContra, lblNombre, lblEdad, lblDNI, lblRepitaContrasea;
 	private JPasswordField txtContra2;
 	private boolean activado=false;
-	private boolean estaRegistrandose=false;
-	public static BD bd;
-	private String usuAdmin="admin123";
+	private boolean estaRegistrandose;
+	public static BD bd; //Aquí tenemos la Base De Datos
+	private String usuAdmin="admin123"; //Datos de acceso de administrador
 	private String contraAdmin="123";
 	public static Usuario u;
 
@@ -80,6 +76,7 @@ public class VentanaLogin extends JFrame {
 		});
 		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelSur.add(btnVolver);
+		btnVolver.setToolTipText("Para volver a la pantalla de inicio pulse Volver.");
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addMouseListener(new MouseAdapter() {
@@ -99,6 +96,7 @@ public class VentanaLogin extends JFrame {
 		});
 		btnRegistrarse.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelSur.add(btnRegistrarse);
+		btnRegistrarse.setToolTipText("Si no tiene un usuario o contraseña presione Registrarse.");
 		
 		JButton btnAcceder = new JButton("Acceder");
 		btnAcceder.addMouseListener(new MouseAdapter() {
@@ -207,7 +205,6 @@ public class VentanaLogin extends JFrame {
 						
 						//Aquí pasamos a la siguiente ventana
 
-						
 						VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
 						v.setVisible(true);
 						vl.dispose();
@@ -220,6 +217,7 @@ public class VentanaLogin extends JFrame {
 		});
 		btnAcceder.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelSur.add(btnAcceder);
+		btnAcceder.setToolTipText("Una vez introducidos el nombre de usuario y la contraseña pulse para entrar al programa.");
 		
 		JPanel panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
@@ -239,19 +237,6 @@ public class VentanaLogin extends JFrame {
 		lblContra.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		lblContra.setBounds(185, 164, 84, 16);
 		panelCentro.add(lblContra);
-		
-		JButton button = new JButton("?");
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Para continuar introduzca el usuario y la contraseña. Si no está registrado regístrese.", "Información", JOptionPane.INFORMATION_MESSAGE);
-			}
-
-		});
-		button.setForeground(new Color(255, 0, 0));
-		button.setBackground(new Color(255, 255, 255));
-		button.setBounds(553, 268, 31, 29);
-		panelCentro.add(button);
 		
 		txtContrasenia = new JPasswordField();
 		txtContrasenia.setBounds(281, 159, 130, 26);
@@ -314,6 +299,12 @@ public class VentanaLogin extends JFrame {
 		txtContra2.setBounds(281, 205, 130, 26);
 		panelCentro.add(txtContra2);
 		
+		JLabel label = new JLabel("?");
+		label.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBounds(512, 260, 61, 26);
+		panelCentro.add(label);
+		label.setToolTipText("Introduzca su usuario y contraseña. Si no está registrado, pulse el botón de registrarse");
 		
 	}
 	
@@ -378,5 +369,4 @@ public class VentanaLogin extends JFrame {
 		txtContra2.setText("");
 		txtContrasenia.setText("");
 	}
-
 }

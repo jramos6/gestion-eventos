@@ -26,8 +26,8 @@ import java.awt.event.MouseEvent;
 public class VentanaAdministrador extends JFrame {
 
 	private JPanel contentPane;
-	private String numInvitados;
-
+	private String numInvitados, nomUsuario;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -114,7 +114,7 @@ public class VentanaAdministrador extends JFrame {
 		btnCalendario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaCalendario vc = new VentanaCalendario(numInvitados);
+				VentanaCalendario vc = new VentanaCalendario(numInvitados, nomUsuario, false);
 				vc.setVisible(true);
 				va.dispose();
 				
