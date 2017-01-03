@@ -95,7 +95,7 @@ public class VentanaMenuUsuario extends JFrame {
 		btnMisReservas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaMisReservas vmr = new VentanaMisReservas();
+				VentanaMisReservas vmr = new VentanaMisReservas(nombre);
 				vmr.setVisible(true);
 				vmu.dispose();
 			}

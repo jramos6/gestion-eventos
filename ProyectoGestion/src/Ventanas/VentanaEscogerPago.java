@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -17,6 +19,8 @@ import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaEscogerPago extends JFrame {
 
@@ -44,19 +48,43 @@ public class VentanaEscogerPago extends JFrame {
 		panelS = new JPanel();
 		contentPane.add(panelS, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Atrás");
+		JButton btnNewButton = new JButton("Cancelar reserva");
 		panelS.add(btnNewButton);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal,false,false);
-				ve.setVisible(true);
+				VentanaMenuUsuario vmu = new VentanaMenuUsuario(nombre);
+				vmu.setVisible(true);
 				vep.dispose();
 				
 			}
 		});
 		btnNewButton.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
 		JButton btnAtras = new JButton("Confirmar");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String seleccion=null;
+				
+				if(rdbtnMetalico.isSelected()==false && rdbtnTarjeta.isSelected()==false && rdbtnTransferenciaBancaria.isSelected()==false){
+					JOptionPane.showMessageDialog(null, "Elija la forma de pago");
+				}
+				else {
+				if(rdbtnMetalico.isSelected()){
+					seleccion="Metálico";
+				}else if(rdbtnTarjeta.isSelected()){
+					seleccion="Tarjeta de credito";
+				}else if(rdbtnTransferenciaBancaria.isSelected()){
+					seleccion="Transferencia bancaria";
+				}
+				
+				Confirmar c = new Confirmar(numInvitados, nombre, precioFinal, anio, mes, dia, seleccion);
+				c.setVisible(true);
+				vep.dispose();
+				
+				}
+			}
+		});
 		panelS.add(btnAtras);
 		btnAtras.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
 		

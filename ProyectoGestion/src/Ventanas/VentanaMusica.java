@@ -39,13 +39,14 @@ public class VentanaMusica extends JFrame{
 	private JButton btnMenPrincipal;
 	private String nomUsuario;
 	private int anio, mes, dia;
-	private long precioFinal;
+	private long precioF, precioMusica, precioBaile;
+	
 
     
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMusica(String numInvitados, String nombre, int anio, int mes, int dia,long precioFinal, boolean comida, boolean musica) {
+	public VentanaMusica(String numInvitados, String nombre, int anio, int mes, int dia,long precioFinal, boolean comida, boolean musica, String espacio) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -69,7 +70,7 @@ public class VentanaMusica extends JFrame{
 		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(numInvitados, nomUsuario, anio, mes, dia, precioFinal,comida, musica);
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nomUsuario, anio, mes, dia, precioFinal,comida, musica, espacio);
 				ve.setVisible(true);
 				vm.dispose();
 			}
@@ -94,9 +95,10 @@ public class VentanaMusica extends JFrame{
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+					
+				precioF=precioFinal+precioMusica+precioBaile;
 				
-				
-				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal,comida, true);
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioF,comida, true, espacio);
 				ve.setVisible(true);
 				vm.dispose();
 			}
@@ -147,6 +149,19 @@ public class VentanaMusica extends JFrame{
 		panelCentroMusica.add(lblTipo);
 		
 		comboBoxTipoMusica = new JComboBox();
+		comboBoxTipoMusica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { 
+				if(!comboBoxTipoMusica.getSelectedItem().equals("")){
+					comboBoxDuracion.setEnabled(true);
+					comboBoxDuracion.setToolTipText("");
+				}
+				if(!comboBoxDuracion.equals("")){
+					int precioFin=VentanaLogin.bd.precioMusica((String)comboBoxTipoMusica.getSelectedItem(), (String)comboBoxDuracion.getSelectedItem());		
+					textFieldPrecio.setText(""+precioFin+"");
+				}
+				
+			}
+		});
 		comboBoxTipoMusica.setEnabled(false);
 		String[] tipos = VentanaLogin.bd.comboMusicaTipo();
 		DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>(tipos);
@@ -160,12 +175,24 @@ public class VentanaMusica extends JFrame{
 		panelCentroMusica.add(lblDuracin);
 		
 		comboBoxDuracion = new JComboBox();
+		comboBoxDuracion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int precioFin=VentanaLogin.bd.precioMusica((String)comboBoxTipoMusica.getSelectedItem(), (String)comboBoxDuracion.getSelectedItem());		
+				textFieldPrecio.setText(""+precioFin+"");
+				precioMusica=precioFin;
+				
+			}
+		});
 		comboBoxDuracion.setEnabled(false);
 		String[] duracion = VentanaLogin.bd.comboMusicaDur();
 		DefaultComboBoxModel<String> dcbm2 = new DefaultComboBoxModel<String>(duracion);
 		comboBoxDuracion.setModel(dcbm2);
 		//comboBoxDuracion.setModel(new DefaultComboBoxModel(new String[] {"", "1 hora", "3 horas", "Mitad del evento", "Toda la mañana", "Toda la tarde", "Toda la noche", "Todo el evento"}));
 		panelCentroMusica.add(comboBoxDuracion);
+		
+		if(comboBoxTipoMusica.getSelectedItem().equals("")){
+			comboBoxDuracion.setToolTipText("Introduzca primero la opción de tipo");
+		}
 		
 		lblPrecio = new JLabel("Precio: ");
 		lblPrecio.setEnabled(false);
@@ -178,9 +205,7 @@ public class VentanaMusica extends JFrame{
 		textFieldPrecio.setEditable(false);
 		panelCentroMusica.add(textFieldPrecio);
 		textFieldPrecio.setColumns(10);
-		//TODO queremos que el precio se actualice dependiendo de las selecciones del comboBox, pero no me funciona
-		int precioFin=VentanaLogin.bd.precioMusica((String)comboBoxTipoMusica.getSelectedItem(), (String)comboBoxDuracion.getSelectedItem());		
-		textFieldPrecio.setText(""+precioFin+"");
+		
 		panelCentroBaile = new JPanel();
 		panelCentroBaile.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panelCentro.add(panelCentroBaile);
@@ -213,6 +238,18 @@ public class VentanaMusica extends JFrame{
 		panelCentroBaile.add(lblTipo_1);
 		
 		comboBoxTipoBaile = new JComboBox();
+		comboBoxTipoBaile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!comboBoxTipoBaile.getSelectedItem().equals("")){
+					comboBoxDuracionBaile.setEnabled(true);
+					comboBoxDuracionBaile.setToolTipText("");
+				}
+				if(!comboBoxDuracionBaile.equals("")){
+					int precioFin=VentanaLogin.bd.precioMusica((String)comboBoxTipoBaile.getSelectedItem(), (String)comboBoxDuracionBaile.getSelectedItem());		
+					textFieldPrecioBaile.setText(""+precioFin+"");
+				}
+			}
+		});
 		comboBoxTipoBaile.setEnabled(false);
 		String[] tipos2 = VentanaLogin.bd.comboBaileTipo();
 		DefaultComboBoxModel<String> dcbm3 = new DefaultComboBoxModel<String>(tipos2);
@@ -226,12 +263,23 @@ public class VentanaMusica extends JFrame{
 		panelCentroBaile.add(lblDuracin_1);
 		
 		comboBoxDuracionBaile = new JComboBox();
+		comboBoxDuracionBaile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int precioFin=VentanaLogin.bd.precioBaile((String)comboBoxTipoBaile.getSelectedItem(), (String)comboBoxDuracionBaile.getSelectedItem());		
+				textFieldPrecioBaile.setText(""+precioFin+"");
+				precioBaile=precioFin;
+			}
+		});
 		comboBoxDuracionBaile.setEnabled(false);
 		String[] duracion2 = VentanaLogin.bd.comboBaileDur();
 		DefaultComboBoxModel<String> dcbm4 = new DefaultComboBoxModel<String>(duracion2);
 		comboBoxDuracionBaile.setModel(dcbm4);
 		//comboBoxDuracionBaile.setModel(new DefaultComboBoxModel(new String[] {"", "1 hora", "3 horas", "Mitad del evento", "Toda la mañana", "Toda la tarde", "Toda la noche", "Todo el evento"}));
 		panelCentroBaile.add(comboBoxDuracionBaile);
+		
+		if(comboBoxTipoBaile.getSelectedItem().equals("")){
+			comboBoxDuracionBaile.setToolTipText("Introduzca primero la opción de tipo");
+		}
 		
 		lblPrecio_1 = new JLabel("Precio: ");
 		lblPrecio_1.setEnabled(false);
@@ -243,7 +291,7 @@ public class VentanaMusica extends JFrame{
 		textFieldPrecioBaile.setEditable(false);
 		panelCentroBaile.add(textFieldPrecioBaile);
 		textFieldPrecioBaile.setColumns(10);
-		
+
 		ponerInvisibleCamposMusica();
 		ponerInvisibleCamposBaile();
 	}
@@ -255,7 +303,7 @@ public class VentanaMusica extends JFrame{
 		lblTipo.setEnabled(true);
 		comboBoxTipoMusica.setEnabled(true);
 		lblDuracin.setEnabled(true);
-		comboBoxDuracion.setEnabled(true);
+		//comboBoxDuracion.setEnabled(true);
 		lblPrecio.setEnabled(true);
 		textFieldPrecio.setEnabled(true);
 	}
@@ -303,7 +351,7 @@ public class VentanaMusica extends JFrame{
 			lblTipo_1.setEnabled(true);
 			comboBoxTipoBaile.setEnabled(true);
 			lblDuracin_1.setEnabled(true);
-			comboBoxDuracionBaile.setEnabled(true);
+			//comboBoxDuracionBaile.setEnabled(true);
 			lblPrecio_1.setEnabled(true);
 			textFieldPrecioBaile.setEnabled(true);
 		
@@ -347,6 +395,5 @@ public class VentanaMusica extends JFrame{
 			textFieldPrecioBaile.setVisible(false);
 		
 	}
-
 
 }

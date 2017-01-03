@@ -115,6 +115,8 @@ public class BD {
 		}
 	}
 	
+
+	
 	/**
 	 * Método para devolver el nombre del usuario
 	 * @param usuario
@@ -134,6 +136,24 @@ public class BD {
 		}
 		
 		return nombre;
+	}
+	
+	
+	public String mostrarEventos(String usuario){
+		String query;
+		String eventoCompleto="";
+		query="SELECT * FROM Eventos WHERE usuario='"+usuario+"'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			if(rs.next()){
+				eventoCompleto=rs.getString("usuario")+", "+rs.getLong("precio")+", "+rs.getInt("invitados")+", "+rs.getInt("codigo")+", "+rs.getString("actividad")+", "+rs.getInt("fecha")+", "+rs.getInt("cod_musica")+", "+rs.getInt("cod_baile")+", "+rs.getString("espacio");
+				rs.close();
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return eventoCompleto;
 	}
 	
 	/**
@@ -250,6 +270,28 @@ public class BD {
 	}
 	
 	/**
+	 * Método para obtener el precio de la tupla seleccionada de baile
+	 * @param tipo
+	 * @param duracion
+	 * @return
+	 */
+	public int precioBaile(String tipo, String duracion){
+		String query;
+		int precio=0;
+		query="SELECT precio FROM baile WHERE tipo='"+tipo+"' AND duracion='"+duracion+"'";
+		ResultSet rs;
+		try {
+			rs=stm.executeQuery(query);
+			if(rs.next()){
+				precio=rs.getInt("precio");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return precio;
+	}
+	
+	/**
 	 * Método para obtener de la BD los campos de tipo de baile --> VentanaMusica
 	 * @return duracion
 	 */
@@ -340,14 +382,14 @@ public class BD {
 	}
 	
 	/**
-	 * Método para introducir un nuevo evento en la base de datos
+	 * Método para introducir un nuevo evento en la base de datos TODO hay que mirar lo de los códigos (cod_musica, cod_baile, codigo)...
 	 * @param presupuesto
 	 * @param invitados
 	 * @param codigo
 	 * @param actividad
 	 */
-	public void insertarNuevoEventos(int presupuesto, int invitados, int codigo, String actividad){
-		String query = "INSERT INTO Eventos (presupuesto, invitados, codigo, actividad) VALUES ("+presupuesto+","+invitados+","+codigo+",'"+actividad+"')";
+	public void insertarNuevoEvento(String usuario, long precio, int invitados, String actividad, int fecha, int cod_musica, int cod_baile, String espacio){
+		String query = "INSERT INTO Eventos (usuario, precio, invitados, actividad, fecha, cod_musica, cod_baile, espacio) VALUES ('"+usuario+"',"+precio+","+invitados+",'"+actividad+"',"+fecha+","+cod_musica+","+cod_baile+",'"+espacio+"')";
 		try {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
@@ -385,15 +427,14 @@ public class BD {
 		}
 	}
 	
-	/**TODO esto no funciona--> por que?
-	 * 
+	/**
 	 * Método para eliminar información en la BD de música
 	 * @param tipo
 	 * @param duracion
 	 * @param precio
 	 */
 	public void eliminarEnMusica(String tipo, String duracion, int precio){
-		String query = "DELETE FROM musica WHERE tipo='"+tipo+"', duracion='"+duracion+"', precio="+precio;
+		String query = "DELETE FROM musica WHERE tipo='"+tipo+"' AND duracion='"+duracion+"' AND precio="+precio;
 		try {
 			stm.executeQuery(query);
 		} catch (SQLException e) {
@@ -401,7 +442,7 @@ public class BD {
 		}
 	}
 	
-	/**TODO esto no funciona--> por que?
+	/**
 	 * 
 	 * Método para eliminar información en la BD de baile
 	 * @param tipo
@@ -409,7 +450,7 @@ public class BD {
 	 * @param precio
 	 */
 	public void eliminarEnBaile(String tipo, String duracion, int precio){
-		String query = "DELETE FROM baile WHERE tipo='"+tipo+"', duracion='"+duracion+"', precio="+precio;
+		String query = "DELETE FROM baile WHERE tipo='"+tipo+"' AND duracion='"+duracion+"' AND precio="+precio;
 		try {
 			stm.executeQuery(query);
 		} catch (SQLException e) {

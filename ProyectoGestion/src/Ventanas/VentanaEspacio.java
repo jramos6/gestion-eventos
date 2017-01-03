@@ -25,7 +25,7 @@ import java.awt.event.MouseEvent;
 public class VentanaEspacio extends JFrame {
 
 	private JPanel contentPane;
-	private String nombre;
+	private String espacio;
 	private JRadioButton radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7;
 	private JLabel lblPre1,lblPre2,lblPre3,lblPre4,lblPre5,lblPre6,lblPre7;
 	private long precioFinal;
@@ -77,31 +77,31 @@ public class VentanaEspacio extends JFrame {
 				if(radioButton1.isSelected()){
 					es.comedorGrande=true;
 					precioFinal=precioFinal+200;
-					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal);
+					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal, "Comedor Grande");
 				}else if(radioButton2.isSelected()){
 					es.comedorMediano=true;
 					precioFinal=precioFinal+150;
-					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal);
+					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal, "Comedor Mediano");
 				}else if(radioButton3.isSelected()){
 					es.comedorPequenio=true;
 					precioFinal=precioFinal+50;
-					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal);
+					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal, "Comedor Pequeño");
 				}else if(radioButton4.isSelected()){
 					es.reunionGrande=true;
 					precioFinal=precioFinal+50;
-					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal);
+					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal, "Sala de reuniones grande");
 				}else if(radioButton5.isSelected()){
 					es.reunionPequenio=true;
 					precioFinal=precioFinal+20;
-					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal);
+					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal, "Sala de reuniones pequeña");
 				}else if(radioButton6.isSelected()){
 					es.musicaGrande=true;
 					precioFinal=precioFinal+60;
-					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal);
+					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal, "Sala de música grande");
 				}else if(radioButton7.isSelected()){
 					es.musicaPequenio=true;
 					precioFinal=precioFinal+30;
-					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal);
+					siguienteVentana(numInvitados, vs, nombre, anio, mes, dia, precioFinal, "Sala de música pequeña");
 				}else{
 					JOptionPane.showMessageDialog(null, "Elija un espacio");
 				}
@@ -372,8 +372,8 @@ public class VentanaEspacio extends JFrame {
 		panelC.add(lblPre7);
 	}
 	
-	public void siguienteVentana(String numInvitados, JFrame vs, String nombre, int anio, int mes, int dia, long precioFinal){
-		VentanaEscoger ves = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal, false, false);
+	public void siguienteVentana(String numInvitados, JFrame vs, String nombre, int anio, int mes, int dia, long precioFinal, String espacio){
+		VentanaEscoger ves = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal, false, false, espacio);
 		ves.setVisible(true);
 		vs.dispose();
 	}

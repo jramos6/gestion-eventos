@@ -29,25 +29,9 @@ public class VentanaMisReservas extends JFrame {
 	
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaMisReservas frame = new VentanaMisReservas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public VentanaMisReservas() {
+	public VentanaMisReservas(String nombre) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -91,11 +75,11 @@ public class VentanaMisReservas extends JFrame {
 		panelCentro.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		txtReservas = new JTextField();
+		txtReservas.setFont(new Font("Consolas", Font.PLAIN, 13));
 		txtReservas.setEditable(false);
 		panelCentro.add(txtReservas);
-		txtReservas.setColumns(10);
-		
-	
+		txtReservas.setColumns(100);
+		txtReservas.setText(VentanaLogin.bd.mostrarEventos(nombre)); //TODO necesito que saque todas mis reservas, no solo la primera
 	}
 
 }

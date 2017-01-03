@@ -23,7 +23,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class VentanaLogin extends JFrame {
+public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuarios... :(
 
 	private JPanel contentPane, pnlNorte, panelSur;
 	private JTextField txtUsuario, txtNombre, txtDNI, txtEdad;
@@ -135,17 +135,17 @@ public class VentanaLogin extends JFrame {
 					 * Edad: 0-140
 					 */
 					
-					if(txtDni.length()!=9){ //DNI de tamaño 9
-						JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 12345678A");
+					else if(txtDni.length()!=9){ //DNI de tamaño 9
+						JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A");
 						txtEdad.setText("");
 					}
 					
-					if(txtEd.startsWith("-")){ //Descartamos los numeros negativos
+					else if(txtEd.startsWith("-")){ //Descartamos los numeros negativos
 						JOptionPane.showMessageDialog(null, "Edad incorrecta. No se puede tener una edad negativa");
 						txtEdad.setText("");
 					}
 					
-					if(txtEd.length()==1 || txtEd.startsWith("1") && !(txtEd.endsWith("8") || txtEd.endsWith("9"))){ //Descartamos a niñ@s menores de 18 años
+					else if(txtEd.length()==1 || txtEd.startsWith("1") && !(txtEd.endsWith("8") || txtEd.endsWith("9"))){ //Descartamos a niñ@s menores de 18 años
 						JOptionPane.showMessageDialog(null, "Para usar este programa hay que tener al menos 18 años");
 						txtEdad.setText("");
 					}
@@ -160,7 +160,7 @@ public class VentanaLogin extends JFrame {
 					
 					//4- Comprobamos que las contraseñas coinciden entre sí
 					
-					if(!txtContr1.equals(txtContr2)){
+					else if(!txtContr1.equals(txtContr2)){
 						JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
 						vaciarCamposContrasenia(); //Vaciamos sólo los campos de contraseñas
 					}
@@ -271,6 +271,7 @@ public class VentanaLogin extends JFrame {
 		txtDNI.setBounds(281, 57, 130, 26);
 		panelCentro.add(txtDNI);
 		txtDNI.setColumns(10);
+		txtDNI.setToolTipText("Introduzca el DNI con el siguiente formato: 00000000A");
 		
 		lblEdad = new JLabel("Edad: ");
 		lblEdad.setEnabled(false);

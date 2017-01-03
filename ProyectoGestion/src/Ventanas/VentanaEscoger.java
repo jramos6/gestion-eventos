@@ -29,7 +29,7 @@ public class VentanaEscoger extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaEscoger(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal, boolean comida, boolean musica) {
+	public VentanaEscoger(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal, boolean comida, boolean musica, String espacio) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -92,7 +92,7 @@ public class VentanaEscoger extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				VentanaComida vc = new VentanaComida(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica);
+				VentanaComida vc = new VentanaComida(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica, espacio);
 				vc.setVisible(true);
 				ve.dispose();
 				btnComida.setEnabled(false);
@@ -107,7 +107,7 @@ public class VentanaEscoger extends JFrame {
 		btnMsica.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaMusica vm = new VentanaMusica(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica);
+				VentanaMusica vm = new VentanaMusica(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica, espacio);
 				vm.setVisible(true);
 				ve.dispose();
 				btnMsica.setEnabled(false);
@@ -120,6 +120,16 @@ public class VentanaEscoger extends JFrame {
 		btnPagar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				//Metemos toda la información en la base de datos, creando un nuevo evento
+				
+				int invitadosNumero = Integer.parseInt(numInvitados); //Convertimos en int el string de numero de invitados
+				
+				int fechaTotal = (anio*10000)+(mes*100)+(dia); //Juntamos la fecha en un formato numérico
+				
+				//Insertamos la información
+				VentanaLogin.bd.insertarNuevoEvento(nombre, precioFinal, invitadosNumero, "prueba", fechaTotal, 0, 0, espacio);
+				
 				VentanaEscogerPago vep = new VentanaEscogerPago(numInvitados, nombre, anio, mes, dia, precioFinal);
 				vep.setVisible(true);
 				ve.dispose();
