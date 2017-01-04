@@ -13,7 +13,7 @@ public class TestImporteVinos extends TestCase{
 	public TestImporteVinos() {
 		// TODO Auto-generated constructor stub
 		super();
-		vc = new VentanaComida("1", "", 0, 0, 0, 0, false, false,"");
+		vc = new VentanaComida("1", "", 0, 0, 0, 0, false, false,"","",0,0);
 	
 	}
 	/**

@@ -9,21 +9,28 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class VentanaEditarMB extends JFrame {
 
 	private JPanel contentPane, panelEtiquetas, panelTextos;
-	private JTextField txtNuevoTipo, txtNuevaDur, txtNuevoPrecio, txtOpcionesActuales;
+	private JTextField txtNuevoTipo, txtNuevaDur, txtNuevoPrecio;
+	JTextArea txtOpcionesActuales;
 	private JButton btnVolver, btnGuardarCambios, btnAniadir, btnEliminar;
 	private JRadioButton rdbtnMusica, rdbtnBaile;
 	private JLabel lblNuevoPrecio,lblNuevaDuracion, lblNuevoTipo;
@@ -55,6 +62,11 @@ public class VentanaEditarMB extends JFrame {
 				if(rdbtnBaile.isSelected()==false && rdbtnMusica.isSelected()==false){
 					estanInvisibles();
 				}
+				ArrayList<String>a=VentanaLogin.bd.mostrarTodasLasMusicas(); //TODO esto sale txapu, y le falta el scroll, que no se ponerle solo al txt :D
+				txtOpcionesActuales.setText(String.format("%1s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
+				for(int i=0;i<a.size();i++){
+					txtOpcionesActuales.append(a.get(i));
+				}
 			}
 		});
 		rdbtnMusica.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,6 +82,11 @@ public class VentanaEditarMB extends JFrame {
 				}
 				if(rdbtnBaile.isSelected()==false && rdbtnMusica.isSelected()==false){
 					estanInvisibles();
+				}
+				ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes(); //TODO esto sale txapu, y le falta el scroll, que no se ponerle solo al txt :D
+				txtOpcionesActuales.setText(String.format("%1s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
+				for(int i=0;i<a.size();i++){
+					txtOpcionesActuales.append(a.get(i));
 				}
 			}
 		});
@@ -116,13 +133,16 @@ public class VentanaEditarMB extends JFrame {
 		panelCentro.add(panelM);
 		panelM.setLayout(new GridLayout(4, 1, 0, 0));
 		
-		txtOpcionesActuales = new JTextField();
+		txtOpcionesActuales = new JTextArea();
 		txtOpcionesActuales.setEditable(false);
 		panelM.add(txtOpcionesActuales);
 		txtOpcionesActuales.setColumns(10);
 		
-		//TODO queremos que en txtOpcionesActuales se impriman las tuplas de tres de todas las opciones de musica y baile
-		//txtOpcionesActuales.setText(VentanaLogin.bd.obtenerInfoMusica());
+		//Anyadimos scroll a la ventana para que se vean todos los campos
+		//JScrollPane scroll = new JScrollPane(txtOpcionesActuales);    
+        //scroll.setBounds(new Rectangle(30,30,100,200));                                                    
+        
+		
 		
 		
 		panelEtiquetas = new JPanel();

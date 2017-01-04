@@ -138,7 +138,110 @@ public class BD {
 		return nombre;
 	}
 	
+	/**TODO quiero que no salga la primera tupla, que es la que no tiene nada
+	 * Método que muestra por pantalla todos la musica
+	 * @param usuario
+	 * @return
+	 */
+	public ArrayList<String> mostrarTodasLasMusicas(){
+		String query;
+		ArrayList<String> a= new ArrayList<String>();
+		String musicaCompleto="";
+		query="SELECT * FROM musica ";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				musicaCompleto=String.format("%1s%30s%30d%30d\n",rs.getString("tipo"),rs.getString("duracion"),rs.getInt("precio"),rs.getInt("cod_musica"));
+				a.add(musicaCompleto);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
 	
+	/**TODO quiero que no salga la primera tupla, que es la que no tiene nada
+	 * Método que muestra por pantalla todos la musica
+	 * @param usuario
+	 * @return
+	 */
+	public ArrayList<String> mostrarTodosLosBailes(){
+		String query;
+		ArrayList<String> a= new ArrayList<String>();
+		String baileCompleto="";
+		query="SELECT * FROM baile ";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				baileCompleto=String.format("%1s%30s%30d%30d\n",rs.getString("tipo"),rs.getString("duracion"),rs.getInt("precio"),rs.getInt("cod_baile"));
+				a.add(baileCompleto);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	/**TODO Lo que se quiere hacer es en la ventana calendario viniendo de admin poder ver qué eventos hay en los días que clickas
+	 * Método para mostrar solo el usuario, espacio y actividad en una fecha concreta. 
+	 * @param fecha
+	 * @return
+	 */
+	public ArrayList<String> mostarEventoShort(int fecha){
+		String query;
+		ArrayList<String> a = new ArrayList<String>();
+		query="SELECT (usuario, espacio, actividad) FROM Eventos WHERE fecha="+fecha;
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				for(int i=0; i<a.size();i++){
+					a.set(i, query);
+					System.out.println(a.get(i));
+				}
+			}
+		} catch (SQLException e) {
+			//  Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	/**
+	 * Método que muestra por pantalla todos los eventos de todos los usuario (VentanaMisReservas)
+	 * @param usuario
+	 * @return
+	 */
+	public ArrayList<String> mostrarTodosLosEventos(){
+		String query;
+		ArrayList<String> a= new ArrayList<String>();
+		String eventoCompleto="";
+		query="SELECT * FROM Eventos";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%30s%20d%20s%20s%20s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"),rs.getInt("num_menu"),rs.getString("catering"),rs.getString("cafes_infusiones"),rs.getString("vinos"));
+				a.add(eventoCompleto);//sdddsdddsdsss
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return a;
+	}
+	
+	/**
+	 * Método que muestra por pantalla todos los eventos de un usuario (VentanaMisReservas)
+	 * @param usuario
+	 * @return
+	 */
 	public ArrayList<String> mostrarEventos(String usuario){
 		String query;
 		ArrayList<String> a= new ArrayList<String>();
@@ -147,7 +250,7 @@ public class BD {
 		try {
 			ResultSet rs = stm.executeQuery(query);
 			while(rs.next()){
-				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%20s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"));
+				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%30s%20d%20s%20s%20s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"),rs.getInt("num_menu"),rs.getString("catering"),rs.getString("cafes_infusiones"),rs.getString("vinos"));
 				a.add(eventoCompleto);
 			}
 			rs.close();
@@ -156,6 +259,48 @@ public class BD {
 			e.printStackTrace();
 		}
 		return a;
+	}
+	
+	/**
+	 * Método que devuelve el código de la música escogida por el usuario
+	 * @param tipo
+	 * @param duracion
+	 * @param precio
+	 * @return
+	 */
+	public int codigoMusica(String tipo, String duracion, int precio){
+		String query;
+		int cod_musica=0;
+		query="SELECT cod_musica FROM musica where tipo='"+tipo+"' AND duracion='"+duracion+"' AND precio="+precio;
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			cod_musica = rs.getInt("cod_musica");
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cod_musica;
+	}
+	
+	/**
+	 * Método que devuelve el código del baile escogido por el usuario
+	 * @param tipo
+	 * @param duracion
+	 * @param precio
+	 * @return
+	 */
+	public int codigoBaile(String tipo, String duracion, int precio){
+		String query;
+		int cod_baile=0;
+		query="SELECT cod_baile FROM baile where tipo='"+tipo+"' AND duracion='"+duracion+"' AND precio="+precio;
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			cod_baile=rs.getInt("cod_baile");
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cod_baile;
 	}
 	
 	/**
@@ -384,14 +529,14 @@ public class BD {
 	}
 	
 	/**
-	 * Método para introducir un nuevo evento en la base de datos TODO hay que mirar lo de los códigos (cod_musica, cod_baile, codigo)...
+	 * Método para introducir un nuevo evento en la base de datos 
 	 * @param presupuesto
 	 * @param invitados
 	 * @param codigo
 	 * @param actividad
 	 */
-	public void insertarNuevoEvento(String usuario, long precio, int invitados, String actividad, int fecha, int cod_musica, int cod_baile, String espacio){
-		String query = "INSERT INTO Eventos (usuario, precio, invitados, actividad, fecha, cod_musica, cod_baile, espacio) VALUES ('"+usuario+"',"+precio+","+invitados+",'"+actividad+"',"+fecha+","+cod_musica+","+cod_baile+",'"+espacio+"')";
+	public void insertarNuevoEvento(String usuario, long precio, int invitados, String actividad, int fecha, int cod_musica, int cod_baile, String espacio, int num_menu, String catering, String cafes_infusiones, String vinos){
+		String query = "INSERT INTO Eventos (usuario, precio, invitados, actividad, fecha, cod_musica, cod_baile, espacio, num_menu, catering, cafes_infusiones, vinos) VALUES ('"+usuario+"',"+precio+","+invitados+",'"+actividad+"',"+fecha+","+cod_musica+","+cod_baile+",'"+espacio+"',"+num_menu+", '"+catering+"','"+cafes_infusiones+"','"+vinos+"')";
 		try {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {

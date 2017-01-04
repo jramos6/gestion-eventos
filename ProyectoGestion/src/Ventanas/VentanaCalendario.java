@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -13,7 +14,10 @@ import Data.Usuario;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class VentanaCalendario extends JFrame {
 
@@ -22,7 +26,7 @@ public class VentanaCalendario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaCalendario(String numInvitados, String nombre, boolean estaEnElMenuUsuario) {
+	public VentanaCalendario(String numInvitados, String nombre, boolean estaEnElMenuUsuario, String actividad) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -87,9 +91,27 @@ public class VentanaCalendario extends JFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				VentanaEspacio vs = new VentanaEspacio(numInvitados, nombre,pc.anio,pc.mes,pc.dia);
-				vs.setVisible(true);
-				vc.dispose();
+				java.util.Date fecha = new Date();
+				
+				int anioActual = fecha.getYear()+2000-100;
+				int mesActual = fecha.getMonth()+1;
+				int diaActual = fecha.getDay()+1;
+				int fechaActual = anioActual*10000+mesActual*100+diaActual;
+				int fechaCompleta = (pc.anio*10000)+(pc.mes*100)+(pc.dia);
+				
+				if(fechaCompleta==0){
+					JOptionPane.showMessageDialog(null, "Elija una opción, por favor", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				//Comprobamos que la fecha sea mayor a la actual
+				else if(fechaCompleta<fechaActual){			
+					JOptionPane.showMessageDialog(null,"Introduzca una fecha que no haya pasado", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}else{
+					VentanaEspacio vs = new VentanaEspacio(numInvitados, nombre,pc.anio,pc.mes,pc.dia, actividad);
+					vs.setVisible(true);
+					vc.dispose();
+				}
+				
 			}
 		});
 		panelSur.add(btnAceptar);

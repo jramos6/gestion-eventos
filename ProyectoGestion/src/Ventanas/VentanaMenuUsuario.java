@@ -27,6 +27,7 @@ public class VentanaMenuUsuario extends JFrame {
 	private JPanel contentPane;
 	private String nombre;
 	private String numInvitados;
+	private String actividad;
 	
 	/**
 	 * Create the frame.
@@ -106,7 +107,7 @@ public class VentanaMenuUsuario extends JFrame {
 		btnCalendario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaCalendario vc = new VentanaCalendario(numInvitados, nombre, false);
+				VentanaCalendario vc = new VentanaCalendario(numInvitados, nombre, false, actividad);
 				vc.setVisible(true);
 				vmu.dispose();
 			}

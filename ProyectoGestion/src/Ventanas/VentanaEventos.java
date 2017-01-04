@@ -21,11 +21,13 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class VentanaEventos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNumInvitados;
+	private String actividad;
 
 	/**
 	 * Create the frame.
@@ -84,7 +86,11 @@ public class VentanaEventos extends JFrame {
 					}else{
 							
 					//Conectamos con la ventana de calendario:
-					VentanaCalendario vc = new VentanaCalendario(txtNumInvitados.getText(), nombre, true);	
+						//cogemos el elemento seleccionado	
+						actividad = (String) comboTipoEventos.getSelectedItem();
+						
+					
+					VentanaCalendario vc = new VentanaCalendario(txtNumInvitados.getText(), nombre, true, actividad);	
 						vc.setVisible(true);
 						ve.dispose();
 						
@@ -111,14 +117,9 @@ public class VentanaEventos extends JFrame {
 		panelCentro.add(lblTipoEvento);
 		
 		comboTipoEventos.setModel(new DefaultComboBoxModel(new String[] {"", "Cultural", "Laboral", "Social"}));
-		/*comboTipoEventos.addItemListener(new ItemListener() {
+		
+		
 			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Imprime por pantalla la selección del comboBox
-				System.out.println(comboTipoEventos.getSelectedItem());
-			}
-		});*/
 		panelCentro.add(comboTipoEventos);
 		
 		JLabel lblNmeroDeInvitados = new JLabel("Número de invitados:");
@@ -132,13 +133,8 @@ public class VentanaEventos extends JFrame {
 		getTxtNumInvitados().setBounds(72, 35, 130, 26);
 		panel.add(getTxtNumInvitados());
 		getTxtNumInvitados().setColumns(10);
+	
 		
-		JLabel lblPresupuestoInicial = new JLabel("Presupuesto inicial:");
-		panelCentro.add(lblPresupuestoInicial);
-		
-		JComboBox comboPresupInic = new JComboBox();
-		comboPresupInic.setModel(new DefaultComboBoxModel(new String[] {"", "10€ - 100€", "100€ - 500€", "500€ - 1.500€", "1.500€ -10.000€", "Más de 10.000€ "}));
-		panelCentro.add(comboPresupInic);
 	}
 
 

@@ -40,13 +40,14 @@ public class VentanaMusica extends JFrame{
 	private String nomUsuario;
 	private int anio, mes, dia;
 	private long precioF, precioMusica, precioBaile;
+	private int cod_m, cod_b;
 	
 
     
 	/**
 	 * Create the frame.
 	 */
-	public VentanaMusica(String numInvitados, String nombre, int anio, int mes, int dia,long precioFinal, boolean comida, boolean musica, String espacio) {
+	public VentanaMusica(String numInvitados, String nombre, int anio, int mes, int dia,long precioFinal, boolean comida, boolean musica, String espacio, String actividad, int cod_musica, int cod_baile, int num_menu, String catering, String cafes_infusiones, String vinos) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -70,7 +71,7 @@ public class VentanaMusica extends JFrame{
 		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(numInvitados, nomUsuario, anio, mes, dia, precioFinal,comida, musica, espacio);
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nomUsuario, anio, mes, dia, precioFinal,comida, musica, espacio, actividad, cod_musica, cod_baile, num_menu, catering, cafes_infusiones, vinos);
 				ve.setVisible(true);
 				vm.dispose();
 			}
@@ -95,12 +96,37 @@ public class VentanaMusica extends JFrame{
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					
-				precioF=precioFinal+precioMusica+precioBaile;
 				
-				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioF,comida, true, espacio);
-				ve.setVisible(true);
-				vm.dispose();
+				//Obtenemos el codigo de la musica:
+				if(radioButtonMusica.isSelected()){
+				String tipo1 = (String)comboBoxTipoMusica.getSelectedItem();
+				String duracion1 = (String)comboBoxDuracion.getSelectedItem();
+				int precioM =(int)precioMusica;
+
+				cod_m = VentanaLogin.bd.codigoMusica(tipo1, duracion1, precioM);
+				
+				}
+				//Obtenemos el codigo del baile
+				if(radioButtonBaile.isSelected()){
+				String tipo2 = (String)comboBoxTipoBaile.getSelectedItem();
+				String duracion2 = (String)comboBoxDuracionBaile.getSelectedItem();
+				int precioB = (int)precioBaile;
+				
+				cod_b = VentanaLogin.bd.codigoBaile(tipo2, duracion2, precioB);
+				
+				}
+				
+				
+				
+				
+				
+					precioF=precioFinal+precioMusica+precioBaile;
+					
+					VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioF,comida, true, espacio, actividad, cod_m, cod_b, num_menu, catering, cafes_infusiones, vinos);
+					ve.setVisible(true);
+					vm.dispose();
+				
+			
 			}
 		});
 		panelSur.add(btnAceptar);

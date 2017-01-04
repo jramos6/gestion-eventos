@@ -27,6 +27,7 @@ public class VentanaAdministrador extends JFrame {
 
 	private JPanel contentPane;
 	private String numInvitados, nomUsuario;
+	private String actividad;
 	
 	/**
 	 * Create the frame.
@@ -81,7 +82,15 @@ public class VentanaAdministrador extends JFrame {
 		JButton btnModificarUsuarios = new JButton("Modificar usuarios");
 		panelIzd.add(btnModificarUsuarios);
 		
-		JButton btnEstadsticas = new JButton("Estadísticas");
+		JButton btnEstadsticas = new JButton("Mostrar todas las reservas");
+		btnEstadsticas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaMisReservas vmr = new VentanaMisReservas(nomUsuario);
+				vmr.setVisible(true);
+				va.dispose();
+			}
+		});
 		panelIzd.add(btnEstadsticas);
 		
 		JPanel panelBloqueo = new JPanel();
@@ -114,7 +123,7 @@ public class VentanaAdministrador extends JFrame {
 		btnCalendario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaCalendario vc = new VentanaCalendario(numInvitados, nomUsuario, false);
+				VentanaCalendario vc = new VentanaCalendario(numInvitados, nomUsuario, false, actividad);
 				vc.setVisible(true);
 				va.dispose();
 				

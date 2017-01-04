@@ -32,17 +32,17 @@ public class VentanaComida extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtImporteAPagar;
 	private double suma;
-	private int numIn;
+	private int numIn, num_menu;
 	private JRadioButton radioButton1, radioButton2, radioButton3, rdbtnVinos, rdbtnCafsInfusiones;
 	private JComboBox comboBoxCatering; 
 	private JButton botMen1, botMen2, botMen3;
 	private boolean comboSeleccion;
-
+	private String catering="", cafes_infusiones="", vinos="";
 
 	/**
 	 * Create the frame.
 	 */
-	public VentanaComida(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal, boolean comida, boolean musica, String espacio) {
+	public VentanaComida(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal, boolean comida, boolean musica, String espacio, String actividad, int cod_musica, int cod_baile) {
 		comboSeleccion = false;
 		setResizable(false);
 		suma=0;
@@ -90,7 +90,10 @@ public class VentanaComida extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos a la página de datos generales de evento
 				
-				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, (long) (precioFinal+suma),true,musica, espacio);
+				//Obtenemos el catering del comboBox
+				catering = (String) comboBoxCatering.getSelectedItem();
+				
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, (long) (precioFinal+suma),true,musica, espacio, actividad, cod_musica, cod_baile, num_menu, catering, cafes_infusiones, vinos);
 				ve.setVisible(true);
 				vc.dispose();
 				
@@ -101,7 +104,7 @@ public class VentanaComida extends JFrame {
 		btnCancelar_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica, espacio);
+				VentanaEscoger ve = new VentanaEscoger(numInvitados, nombre, anio, mes, dia, precioFinal, comida, musica, espacio, actividad, cod_musica, cod_baile, num_menu, catering, cafes_infusiones, vinos);
 				ve.setVisible(true);
 				vc.dispose();
 			}
@@ -232,15 +235,18 @@ public class VentanaComida extends JFrame {
 				if(radioButton2.isSelected()){
 					radioButton2.setSelected(false);
 					suma=suma-35*VentanaComida.this.numIn;
+					num_menu=0; //Ponemos el menú a 0, porque puede que no quiera nada de menú. Sólo si le da al apropiado se sumará en el menú el número
 				}
 				if(radioButton3.isSelected()){
 					radioButton3.setSelected(false);
 					suma=suma-60*VentanaComida.this.numIn;
+					num_menu=0;
 				}
 				
 				if(radioButton1.isSelected()){ 
 					suma = suma + 50*VentanaComida.this.numIn;
 					txtImporteAPagar.setText(suma + " €");
+					num_menu=1;
 				}else{
 					txtImporteAPagar.setText(suma-(totalMenu1) + " €");
 					suma=suma-totalMenu1;	
@@ -257,16 +263,19 @@ public class VentanaComida extends JFrame {
 				if(radioButton1.isSelected()){
 					radioButton1.setSelected(false);
 					suma=suma-50*VentanaComida.this.numIn;
+					num_menu=0;
 				}
 				if(radioButton3.isSelected()){
 					radioButton3.setSelected(false);
 					suma=suma-60*VentanaComida.this.numIn;
+					num_menu=0;
 				}
 				
 				double totalMenu2=35*VentanaComida.this.numIn;
 				if(radioButton2.isSelected()){ 
 					suma = suma + 35*VentanaComida.this.numIn;
 					txtImporteAPagar.setText(suma + " €");
+					num_menu=2;
 				}else{
 					txtImporteAPagar.setText(suma-(totalMenu2) + " €");
 					suma=suma-totalMenu2;	
@@ -284,16 +293,19 @@ public class VentanaComida extends JFrame {
 				if(radioButton1.isSelected()){
 					radioButton1.setSelected(false);
 					suma=suma-50*VentanaComida.this.numIn;
+					num_menu=0;
 				}
 				if(radioButton2.isSelected()){
 					radioButton2.setSelected(false);
 					suma=suma-35*VentanaComida.this.numIn;
+					num_menu=0;
 				}
 				
 				double totalMenu3=60*VentanaComida.this.numIn;
 				if(radioButton3.isSelected()){ 
 					suma = suma + 60*VentanaComida.this.numIn;
 					txtImporteAPagar.setText(suma + " €");
+					num_menu=3;
 				}else{
 					txtImporteAPagar.setText(suma-(totalMenu3) + " €");
 					suma=suma-totalMenu3;	
@@ -330,9 +342,11 @@ public class VentanaComida extends JFrame {
 				if(rdbtnCafsInfusiones.isSelected()){ //Precios: cafes más infusiones = 4€
 					suma = suma + totalCafes;
 					txtImporteAPagar.setText(suma + " €");
+					cafes_infusiones="Si";
 				}else{
 					txtImporteAPagar.setText(suma-(totalCafes) + " €");
 					suma=suma-totalCafes;	
+					cafes_infusiones="No";
 				}
 			}
 		});
@@ -379,9 +393,11 @@ public class VentanaComida extends JFrame {
 		if(rdbtnVinos.isSelected()){ //Precios: vinos = 12€
 			suma = suma + totalVinos;
 			txtImporteAPagar.setText(suma + " €");
+			vinos="Si";
 		}else{
 			txtImporteAPagar.setText(suma-(totalVinos) + " €");
-			suma=suma-totalVinos;	
+			suma=suma-totalVinos;
+			vinos="No";
 		}
 		return suma;
 	}
