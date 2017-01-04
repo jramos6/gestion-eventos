@@ -193,7 +193,7 @@ public class VentanaEditarMB extends JFrame {
 					JOptionPane.showMessageDialog(null, "Introduzca todos los campos para añadir la información a la base de datos");
 				}
 				else{
-				if(rdbtnMusica.isSelected()){ //TODO no se eliminan de la base de datos
+				if(rdbtnMusica.isSelected()){
 					int precio = Integer.parseInt(txtNuevoPrecio.getText());
 					VentanaLogin.bd.eliminarEnMusica(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
 					vaciarTextos();

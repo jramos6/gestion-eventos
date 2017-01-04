@@ -139,21 +139,23 @@ public class BD {
 	}
 	
 	
-	public String mostrarEventos(String usuario){
+	public ArrayList<String> mostrarEventos(String usuario){
 		String query;
+		ArrayList<String> a= new ArrayList<String>();
 		String eventoCompleto="";
 		query="SELECT * FROM Eventos WHERE usuario='"+usuario+"'";
 		try {
 			ResultSet rs = stm.executeQuery(query);
-			if(rs.next()){
-				eventoCompleto=rs.getString("usuario")+", "+rs.getLong("precio")+", "+rs.getInt("invitados")+", "+rs.getInt("codigo")+", "+rs.getString("actividad")+", "+rs.getInt("fecha")+", "+rs.getInt("cod_musica")+", "+rs.getInt("cod_baile")+", "+rs.getString("espacio");
-				rs.close();
+			while(rs.next()){
+				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%20s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"));
+				a.add(eventoCompleto);
 			}
+			rs.close();
 		} catch (SQLException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
-		return eventoCompleto;
+		return a;
 	}
 	
 	/**

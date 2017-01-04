@@ -169,6 +169,14 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 			 
 							//b.insertarNuevoUsuario(u);
 							bd.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
+							JOptionPane.showMessageDialog(null, "Bienvenido al programa "+txtNom);
+							
+							String nombre = bd.nombreUsuario(txtUsu);
+							
+							VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
+							v.setVisible(true);
+							vl.dispose();
+							
 					
 				}else{
 					//Usuario que existe en la base de datos

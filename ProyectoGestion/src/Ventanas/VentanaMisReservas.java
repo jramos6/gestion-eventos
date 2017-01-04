@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import BasesDeDatos.BD;
@@ -16,15 +18,20 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.Locale;
 
 public class VentanaMisReservas extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtReservas;
+	private JTextArea txtReservas;
 	private String nomUsuario;
 	
 
@@ -74,12 +81,25 @@ public class VentanaMisReservas extends JFrame {
 		contentPane.add(panelCentro, BorderLayout.CENTER);
 		panelCentro.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		txtReservas = new JTextField();
+		txtReservas = new JTextArea();
 		txtReservas.setFont(new Font("Consolas", Font.PLAIN, 13));
 		txtReservas.setEditable(false);
 		panelCentro.add(txtReservas);
 		txtReservas.setColumns(100);
-		txtReservas.setText(VentanaLogin.bd.mostrarEventos(nombre)); //TODO necesito que saque todas mis reservas, no solo la primera
+		
+		//Anyadimos scroll a la ventana para que se vean todos los campos
+		JScrollPane scroll = new JScrollPane(txtReservas);    
+        scroll.setBounds(new Rectangle(30,30,100,200));                                                    
+        vmr.add(scroll);                   
+        vmr.show(true);  
+		
+		//Mostramos todas las reservas del usuario, sacando la informacion almacenada en la base de datos
+		ArrayList<String> a = VentanaLogin.bd.mostrarEventos(nombre);
+		txtReservas.setText(String.format("%10s%10s%15s%10s%15s%15s%15s%15s%20s\n","USUARIO","PRECIO","INVITADOS","CODIGO","ACTIVIDAD","FECHA","COD_MUSICA","COD_BAILE","ESPACIO"));
+		for(int i=0;i<a.size();i++){
+			txtReservas.append(a.get(i));
+		}
+		
 	}
 
 }
