@@ -150,8 +150,9 @@ public class BD {
 		query="SELECT * FROM musica ";
 		try {
 			ResultSet rs = stm.executeQuery(query);
+			rs.next();
 			while(rs.next()){
-				musicaCompleto=String.format("%1s%30s%30d%30d\n",rs.getString("tipo"),rs.getString("duracion"),rs.getInt("precio"),rs.getInt("cod_musica"));
+				musicaCompleto=String.format("%30s%30s%30d%30d\n",rs.getString("tipo"),rs.getString("duracion"),rs.getInt("precio"),rs.getInt("cod_musica"));
 				a.add(musicaCompleto);
 			}
 			rs.close();
@@ -163,7 +164,7 @@ public class BD {
 		return a;
 	}
 	
-	/**TODO quiero que no salga la primera tupla, que es la que no tiene nada
+	/**
 	 * Método que muestra por pantalla todos la musica
 	 * @param usuario
 	 * @return
@@ -175,8 +176,9 @@ public class BD {
 		query="SELECT * FROM baile ";
 		try {
 			ResultSet rs = stm.executeQuery(query);
+			rs.next(); //Para que no salga la primera tupla //
 			while(rs.next()){
-				baileCompleto=String.format("%1s%30s%30d%30d\n",rs.getString("tipo"),rs.getString("duracion"),rs.getInt("precio"),rs.getInt("cod_baile"));
+				baileCompleto=String.format(String.format("%s%100d%100s%100s\n",rs.getString("tipo"),rs.getInt("cod_baile"),rs.getInt("precio"),rs.getString("duracion")));
 				a.add(baileCompleto);
 			}
 			rs.close();
@@ -226,7 +228,7 @@ public class BD {
 		try {
 			ResultSet rs = stm.executeQuery(query);
 			while(rs.next()){
-				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%30s%20d%20s%20s%20s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"),rs.getInt("num_menu"),rs.getString("catering"),rs.getString("cafes_infusiones"),rs.getString("vinos"));
+				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%30s%20d%20s%20s%10s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"),rs.getInt("num_menu"),rs.getString("catering"),rs.getString("cafes_infusiones"),rs.getString("vinos"));
 				a.add(eventoCompleto);//sdddsdddsdsss
 			}
 			rs.close();
@@ -250,7 +252,7 @@ public class BD {
 		try {
 			ResultSet rs = stm.executeQuery(query);
 			while(rs.next()){
-				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%30s%20d%20s%20s%20s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"),rs.getInt("num_menu"),rs.getString("catering"),rs.getString("cafes_infusiones"),rs.getString("vinos"));
+				eventoCompleto=String.format("%10s%10d%15d%10d%15s%15d%15d%15d%30s%20d%20s%20s%10s\n",rs.getString("usuario"),rs.getLong("precio"),rs.getInt("invitados"),rs.getInt("codigo"),rs.getString("actividad"),rs.getInt("fecha"),rs.getInt("cod_musica"),rs.getInt("cod_baile"),rs.getString("espacio"),rs.getInt("num_menu"),rs.getString("catering"),rs.getString("cafes_infusiones"),rs.getString("vinos"));
 				a.add(eventoCompleto);
 			}
 			rs.close();

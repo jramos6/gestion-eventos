@@ -22,6 +22,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuarios... :(
 
@@ -40,7 +42,7 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 	/**
 	 * Create the frame.
 	 */
-	public VentanaLogin() {
+	public VentanaLogin() {	
 		setResizable(false);
 		bd = new BD();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,130 +100,21 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 		panelSur.add(btnRegistrarse);
 		btnRegistrarse.setToolTipText("Si no tiene un usuario o contraseña presione Registrarse.");
 		
-		JButton btnAcceder = new JButton("Acceder");
+		JButton btnAcceder = new JButton("Acceder");	
+		btnAcceder.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+					registroAcceso();
+				}
+			}
+		});
+
 		btnAcceder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				//Una vez clickado el botón acceder:
-				// 1. Comprobamos que los datos estén bien
-				// 2. Pasamos a la siguiente ventana  
-			
-				//Comprobamos que ningún campo está vacío:
-				
-				String txtNom = txtNombre.getText();
-				String txtDni = txtDNI.getText();
-				String txtContr1 = txtContrasenia.getText();
-				String txtContr2 = txtContra2.getText();
-				String txtEd = txtEdad.getText();
-				String txtUsu = txtUsuario.getText();
-				
-				//Si activado esta en true significa que es un nuevo registro
-				
-				if(activado==true){
-					//Nuevo registro para la base de datos
-					
-					//1- Comprobamos que todos los campos estan escritos
-					
-					if(txtDni.equals("")||txtNom.equals("")||txtUsu.equals("")||txtContr1.equals("")||txtContr2.equals("")||txtEd.equals("") ){
-						JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
-						//Si ha escrito algo en uno de los campos los borramos
-						vaciarCampos();
-					}
-					
-					//2-Comprobamos que los campos tienen un tipo de datos correcto
-					
-					/* DNI: length = 9
-					 * Edad: 0-140
-					 */
-					
-					else if(txtDni.length()!=9){ //DNI de tamaño 9
-						JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A");
-						txtEdad.setText("");
-					}
-					
-					else if(txtEd.startsWith("-")){ //Descartamos los numeros negativos
-						JOptionPane.showMessageDialog(null, "Edad incorrecta. No se puede tener una edad negativa");
-						txtEdad.setText("");
-					}
-					
-					else if(txtEd.length()==1 || txtEd.startsWith("1") && !(txtEd.endsWith("8") || txtEd.endsWith("9"))){ //Descartamos a niñ@s menores de 18 años
-						JOptionPane.showMessageDialog(null, "Para usar este programa hay que tener al menos 18 años");
-						txtEdad.setText("");
-					}
-					
-					//3- Comprobamos que el usuario no existe
-					Usuario u = bd.obtenerUsuario(txtUsu);
-					if(u!=null){
-						JOptionPane.showMessageDialog(null, "El nombre de usuario escogido ya existe. Por favor, introduzca otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
-						txtUsuario.setText("");
-					}
-					
-					
-					//4- Comprobamos que las contraseñas coinciden entre sí
-					
-					else if(!txtContr1.equals(txtContr2)){
-						JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
-						vaciarCamposContrasenia(); //Vaciamos sólo los campos de contraseñas
-					}
-					
-					//5- registramos el nuevo usuario en la base de datos:
-			 
-							//b.insertarNuevoUsuario(u);
-							bd.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
-							JOptionPane.showMessageDialog(null, "Bienvenido al programa "+txtNom);
-							
-							String nombre = bd.nombreUsuario(txtUsu);
-							
-							VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
-							v.setVisible(true);
-							vl.dispose();
-							
-					
-				}else{
-					//Usuario que existe en la base de datos
-					
-					//1- Comprobamos que los campos de usuario y contraseña estan escritos
-					
-					if(txtUsu.equals("")|| txtContr1.equals("")){
-						JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
-						//Si ha escrito algo en un campo lo borramos
-						vaciarCampos();
-					}
-					
-					
-					//2- Comprobamos que el usuario existe en la base de datos
-					u = bd.obtenerUsuario(txtUsu);
-					if(u==null){
-						JOptionPane.showMessageDialog(null, "El nombre de usuario escogido no existe. Por favor, regístrese", "Error", JOptionPane.ERROR_MESSAGE);
-						txtUsuario.setText("");
-						txtContrasenia.setText("");
-					}else{
-						//Cuando se registra satisfactoriamente
-						
-						//Si el usuario se trata del administrador abrimos una ventana a la que solo pueden acceder los administradores
-						if(txtUsu.equals(usuAdmin) && txtContr1.equals(contraAdmin)){
-								VentanaAdministrador va= new VentanaAdministrador();
-								va.setVisible(true);
-								vl.dispose();
-								u.esAdmin=true;
-						}else{
-						
-							String nombre = bd.nombreUsuario(txtUsu);
-							
-						JOptionPane.showMessageDialog(null, "Bienvenido " +nombre, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-						
-						//Aquí pasamos a la siguiente ventana
-
-						VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
-						v.setVisible(true);
-						vl.dispose();
-						}
-					}
-				}
-	
-				
-			}
+				registroAcceso();
+			}	
 		});
 		btnAcceder.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelSur.add(btnAcceder);
@@ -247,6 +140,14 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 		panelCentro.add(lblContra);
 		
 		txtContrasenia = new JPasswordField();
+		txtContrasenia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+					registroAcceso();
+				}
+			}
+		});
 		txtContrasenia.setBounds(281, 159, 130, 26);
 		panelCentro.add(txtContrasenia);
 		
@@ -377,5 +278,130 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 	private void vaciarCamposContrasenia(){
 		txtContra2.setText("");
 		txtContrasenia.setText("");
+	}
+	
+	private void registroAcceso(){
+		
+		VentanaLogin vl =this;
+		
+		//Una vez clickado el botón acceder:
+		// 1. Comprobamos que los datos estén bien
+		// 2. Pasamos a la siguiente ventana  
+	
+		//Comprobamos que ningún campo está vacío:
+		
+		String txtNom = txtNombre.getText();
+		String txtDni = txtDNI.getText();
+		String txtContr1 = txtContrasenia.getText();
+		String txtContr2 = txtContra2.getText();
+		String txtEd = txtEdad.getText();
+		String txtUsu = txtUsuario.getText();
+		
+		//Si activado esta en true significa que es un nuevo registro
+		
+		if(activado==true){
+			//Nuevo registro para la base de datos
+			
+			//1- Comprobamos que todos los campos estan escritos
+			
+			if(txtDni.equals("")||txtNom.equals("")||txtUsu.equals("")||txtContr1.equals("")||txtContr2.equals("")||txtEd.equals("") ){
+				JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+				//Si ha escrito algo en uno de los campos los borramos
+				vaciarCampos();
+			}
+			
+			//2-Comprobamos que los campos tienen un tipo de datos correcto
+			
+			/* DNI: length = 9
+			 * Edad: 0-140
+			 */
+			
+			else if(txtDni.length()!=9){ //DNI de tamaño 9
+				JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A");
+				txtEdad.setText("");
+			}
+			
+			else if(txtEd.startsWith("-")){ //Descartamos los numeros negativos
+				JOptionPane.showMessageDialog(null, "Edad incorrecta. No se puede tener una edad negativa");
+				txtEdad.setText("");
+			}
+			
+			else if(txtEd.length()==1 || txtEd.startsWith("1") && !(txtEd.endsWith("8") || txtEd.endsWith("9"))){ //Descartamos a niñ@s menores de 18 años
+				JOptionPane.showMessageDialog(null, "Para usar este programa hay que tener al menos 18 años");
+				txtEdad.setText("");
+			}
+			
+			//3- Comprobamos que el usuario no existe
+			Usuario u = bd.obtenerUsuario(txtUsu);
+			if(u!=null){
+				JOptionPane.showMessageDialog(null, "El nombre de usuario escogido ya existe. Por favor, introduzca otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
+				txtUsuario.setText("");
+			}
+			
+			
+			//4- Comprobamos que las contraseñas coinciden entre sí
+			
+			else if(!txtContr1.equals(txtContr2)){
+				JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+				vaciarCamposContrasenia(); //Vaciamos sólo los campos de contraseñas
+			}
+			
+			//5- registramos el nuevo usuario en la base de datos:
+	 
+					//b.insertarNuevoUsuario(u);
+					bd.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
+					JOptionPane.showMessageDialog(null, "Bienvenido al programa "+txtNom);
+					
+					String nombre = bd.nombreUsuario(txtUsu);
+					
+					VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
+					v.setVisible(true);
+					vl.dispose();
+					
+			
+		}else{
+			//Usuario que existe en la base de datos
+			
+			//1- Comprobamos que los campos de usuario y contraseña estan escritos
+			
+			if(txtUsu.equals("")|| txtContr1.equals("")){
+				JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+				//Si ha escrito algo en un campo lo borramos
+				vaciarCampos();
+			}
+			
+			
+			//2- Comprobamos que el usuario existe en la base de datos
+			u = bd.obtenerUsuario(txtUsu);
+			if(u==null){
+				JOptionPane.showMessageDialog(null, "El nombre de usuario escogido no existe. Por favor, regístrese", "Error", JOptionPane.ERROR_MESSAGE);
+				txtUsuario.setText("");
+				txtContrasenia.setText("");
+			}else{
+				//Cuando se registra satisfactoriamente
+				
+				//Si el usuario se trata del administrador abrimos una ventana a la que solo pueden acceder los administradores
+				if(txtUsu.equals(usuAdmin) && txtContr1.equals(contraAdmin)){
+						VentanaAdministrador va= new VentanaAdministrador();
+						va.setVisible(true);
+						vl.dispose();
+						u.esAdmin=true;
+				}else{
+				
+					String nombre = bd.nombreUsuario(txtUsu);
+					
+				JOptionPane.showMessageDialog(null, "Bienvenido " +nombre, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+				
+				//Aquí pasamos a la siguiente ventana
+
+				VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
+				v.setVisible(true);
+				vl.dispose();
+				}
+			}
+		}
+
+		
+	
 	}
 }

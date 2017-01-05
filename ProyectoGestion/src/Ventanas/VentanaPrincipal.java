@@ -17,6 +17,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JSplitPane;
 import javax.swing.JDesktopPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -80,6 +82,18 @@ public class VentanaPrincipal extends JFrame {
 		panelSur.add(btnSalir);
 		JFrame vp=this;
 		btnEntrar = new JButton("Entrar");
+		btnEntrar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+					//Conectamos con la ventana login
+					
+					VentanaLogin v = new VentanaLogin();
+					v.setVisible(true);
+					vp.dispose();
+				}
+			}
+		});
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

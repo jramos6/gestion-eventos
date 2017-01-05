@@ -104,14 +104,14 @@ public class VentanaMisReservas extends JFrame {
         //Si el usuario es el administrador tenemos que mostrar la información de todos las reservas de los usuarios
 		if(VentanaLogin.u.esAdmin==true){
 			ArrayList<String> a = VentanaLogin.bd.mostrarTodosLosEventos();
-			txtReservas.setText(String.format("%10s%10s%15s%10s%15s%15s%15s%15s%30s%20s%20s%20s%20s\n","USUARIO","PRECIO","INVITADOS","CODIGO","ACTIVIDAD","FECHA","COD_MUSICA","COD_BAILE","ESPACIO","NUM_MENU","CATERING","CAFES_INFUSIONES","VINOS"));
+			txtReservas.setText(String.format("%10s%10s%15s%10s%15s%15s%15s%15s%30s%20s%20s%20s%10s\n","USUARIO","PRECIO","INVITADOS","CODIGO","ACTIVIDAD","FECHA","COD_MUSICA","COD_BAILE","ESPACIO","NUM_MENU","CATERING","CAFES_INFUSIONES","VINOS"));
 			for(int i=0;i<a.size();i++){ 
 				txtReservas.append(a.get(i));
 			}
 		}else{
 			//Mostramos todas las reservas del usuario (único), sacando la informacion almacenada en la base de datos
 			ArrayList<String> a = VentanaLogin.bd.mostrarEventos(nombre);
-			txtReservas.setText(String.format("%10s%10s%15s%10s%15s%15s%15s%15s%30s%20s%20s%20s%20s\n","USUARIO","PRECIO","INVITADOS","CODIGO","ACTIVIDAD","FECHA","COD_MUSICA","COD_BAILE","ESPACIO","NUM_MENU","CATERING","CAFES_INFUSIONES","VINOS"));
+			txtReservas.setText(String.format("%10s%10s%15s%10s%15s%15s%15s%15s%30s%20s%20s%20s%10s\n","USUARIO","PRECIO","INVITADOS","CODIGO","ACTIVIDAD","FECHA","COD_MUSICA","COD_BAILE","ESPACIO","NUM_MENU","CATERING","CAFES_INFUSIONES","VINOS"));
 			for(int i=0;i<a.size();i++){
 				txtReservas.append(a.get(i));
 			}
