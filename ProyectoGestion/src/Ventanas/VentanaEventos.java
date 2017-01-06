@@ -83,6 +83,7 @@ public class VentanaEventos extends JFrame {
 						JOptionPane.showMessageDialog(null, "Error, número de invitados demasiado pequeño. Vuelva a introducir número de invitados");
 						getTxtNumInvitados().setText("");	
 						
+						
 					}else{
 							
 					//Conectamos con la ventana de calendario:
@@ -98,6 +99,7 @@ public class VentanaEventos extends JFrame {
 				}
 				catch(NumberFormatException e1){
 					JOptionPane.showMessageDialog(null, "Introduzca un número válido, por favor");
+					getTxtNumInvitados().setText("");
 				}
 			}
 		});

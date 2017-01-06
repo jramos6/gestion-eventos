@@ -318,7 +318,7 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 			
 			else if(txtDni.length()!=9){ //DNI de tamaño 9
 				JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A");
-				txtEdad.setText("");
+				txtDNI.setText("");
 			}
 			
 			else if(txtEd.startsWith("-")){ //Descartamos los numeros negativos
@@ -386,7 +386,9 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 						va.setVisible(true);
 						vl.dispose();
 						u.esAdmin=true;
-				}else{
+				}
+				
+				else if(txtContr1.equals(bd.contraseniaUsuario(txtUsu))){
 				
 					String nombre = bd.nombreUsuario(txtUsu);
 					
@@ -397,6 +399,8 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 				VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
 				v.setVisible(true);
 				vl.dispose();
+				}else{
+					JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}

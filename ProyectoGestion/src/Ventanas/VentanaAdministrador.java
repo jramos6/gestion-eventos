@@ -80,6 +80,15 @@ public class VentanaAdministrador extends JFrame {
 		panelIzd.add(btnActualizarEspacios);
 		
 		JButton btnModificarUsuarios = new JButton("Modificar usuarios");
+		btnModificarUsuarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaMisClientes vmc = new VentanaMisClientes();
+				vmc.setVisible(true);
+				va.dispose();
+				
+			}
+		});
 		panelIzd.add(btnModificarUsuarios);
 		
 		JButton btnEstadsticas = new JButton("Mostrar todas las reservas");

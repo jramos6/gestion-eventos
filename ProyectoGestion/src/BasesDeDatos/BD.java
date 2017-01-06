@@ -138,7 +138,7 @@ public class BD {
 		return nombre;
 	}
 	
-	/**TODO quiero que no salga la primera tupla, que es la que no tiene nada
+	/**
 	 * Método que muestra por pantalla todos la musica
 	 * @param usuario
 	 * @return
@@ -150,7 +150,7 @@ public class BD {
 		query="SELECT * FROM musica ";
 		try {
 			ResultSet rs = stm.executeQuery(query);
-			rs.next();
+			rs.next(); //Con esto omitimos la primera tupla, que no tiene información
 			while(rs.next()){
 				musicaCompleto=String.format("%30s%30s%30d%30d\n",rs.getString("tipo"),rs.getString("duracion"),rs.getInt("precio"),rs.getInt("cod_musica"));
 				a.add(musicaCompleto);
@@ -161,6 +161,29 @@ public class BD {
 			e.printStackTrace();
 		}
 		
+		return a;
+	}
+	
+	/**
+	 * Método para mostrar por pantalla todos los usuarios de la base de datos, con toda su información
+	 * @return
+	 */
+	public ArrayList<String> mostrarClientes(){
+		String query;
+		ArrayList<String> a = new ArrayList<String>();
+		String clienteCompleto="";
+		query="SELECT * FROM USUARIO";
+		try {
+			ResultSet rs =stm.executeQuery(query);
+			while(rs.next()){
+				clienteCompleto=String.format("%20s%20s%20s%15d\n", rs.getString("Nombre"), rs.getString("DNI"), rs.getString("Usuario"),rs.getInt("Edad"));
+				a.add(clienteCompleto);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
 		return a;
 	}
 	
@@ -178,7 +201,7 @@ public class BD {
 			ResultSet rs = stm.executeQuery(query);
 			rs.next(); //Para que no salga la primera tupla //
 			while(rs.next()){
-				baileCompleto=String.format(String.format("%s%100d%100s%100s\n",rs.getString("tipo"),rs.getInt("cod_baile"),rs.getInt("precio"),rs.getString("duracion")));
+				baileCompleto=String.format(String.format("%30s%30s%30d%30d\n",rs.getString("tipo"),rs.getString("duracion"),rs.getInt("precio"),rs.getInt("cod_baile")));
 				a.add(baileCompleto);
 			}
 			rs.close();
@@ -418,6 +441,22 @@ public class BD {
 		return precio;
 	}
 	
+	public String contraseniaUsuario(String usuario){
+		String query;
+		String contra="";
+		query="SELECT Contrasenia FROM USUARIO WHERE Usuario='"+usuario+"'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			if(rs.next()){
+				contra=rs.getString("Contrasenia");
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return contra;
+	}
+	
 	/**
 	 * Método para obtener el precio de la tupla seleccionada de baile
 	 * @param tipo
@@ -606,6 +645,31 @@ public class BD {
 			JOptionPane.showMessageDialog(null, "Ha eliminado con éxito la siguiente información:\n "+tipo+", "+duracion+", "+precio);
 		}
 	}
+	
+	/**
+	 * Método para eliminar usuario de la base de datos (ventana Administrador)
+	 * @param dni
+	 */
+	public void eliminarCliente(String usuario){
+		String query = "DELETE FROM USUARIO WHERE usuario='"+usuario+"'";
+		try {
+			stm.executeQuery(query);
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Ha eliminado con éxito el usuario "+usuario);
+		}
+	}
+	
+	public void eliminarEvento(String usuario){
+		String query = "DELETE FROM Eventos WHERE usuario='"+usuario+"'";
+		try {
+			stm.executeQuery(query);
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			
+		}
+	}
+	
 	
 	/**
 	 * Método para obtener eventos

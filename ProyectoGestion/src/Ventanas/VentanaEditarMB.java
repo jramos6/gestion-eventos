@@ -86,7 +86,7 @@ public class VentanaEditarMB extends JFrame {
 				}
 				
 				ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes(); //TODO
-				txtOpcionesActuales.setText(String.format("%s%100s%100s%100s\n","TIPO","CODIGO","PRECIO","DURACION"));
+				txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
 				for(int i=0;i<a.size();i++){
 					txtOpcionesActuales.append(a.get(i));
 				}
