@@ -287,6 +287,277 @@ public class BD {
 	}
 	
 	/**
+	 * Método para obtener todas las reservas (reducido)
+	 * @param 
+	 * @return
+	 */
+	public ArrayList<String> sacarReservasTodos(){
+		String query;
+		ArrayList<String> a = new ArrayList<String>();
+		String reservasTodo=""; 
+		query="SELECT * FROM Eventos";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				reservasTodo=String.format("%20s%20d%20d\n", rs.getString("usuario"),rs.getInt("codigo"),rs.getInt("fecha"));
+				a.add(reservasTodo);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	/**TODO AUNQUE TENEMOS 3 RESERVAS MARCA QUE SOLO HAY DOS...
+	 * Contamos el número total de reservas 
+	 * @param 
+	 * @return
+	 */
+	public int contarReservasTodo(){
+		String query;
+		int cont=1;
+		query="SELECT COUNT(*) FROM Eventos";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				cont++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cont;
+	}
+	
+	/**
+	 * Método para obtener las reservas con un año específico
+	 * @param anyo
+	 * @return
+	 */
+	public ArrayList<String> sacarReservasAnyo(String anyo){
+		String query;
+		ArrayList<String> a = new ArrayList<String>();
+		String reservasAnyo=""; 
+		query="SELECT * FROM Eventos WHERE fecha LIKE'"+anyo+"%'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				reservasAnyo=String.format("%20s%20d%20d\n", rs.getString("usuario"),rs.getInt("codigo"),rs.getInt("fecha"));
+				a.add(reservasAnyo);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	/**
+	 * Contamos el número total de reservas con el parametro anyo al principio y lo devolvemos
+	 * @param anyo
+	 * @return
+	 */
+	public int contarReservasAnyo(String anyo){
+		String query;
+		int cont=1;
+		query="SELECT COUNT(*) FROM Eventos WHERE fecha LIKE'"+anyo+"%'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				cont++;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cont;
+	}
+	
+	/**TODO NO SALE EL NUMERO DE RESERVAS QUE DEBERÍA SALIR, Y NO SE POR QUÉ
+	 * Método para obtener las reservas con un mes específico
+	 * @param anyo
+	 * @return
+	 */
+	public ArrayList<String> sacarReservasMes(String mes){
+		String query;
+		ArrayList<String> a = new ArrayList<String>();
+		String reservasMes=""; 
+		query="SELECT * FROM Eventos WHERE fecha LIKE'"+mes+"%'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				reservasMes=String.format("%20s%20d%20d\n", rs.getString("usuario"),rs.getInt("codigo"),rs.getInt("fecha"));
+				a.add(reservasMes);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	/**
+	 * Contamos el número total de reservas con el parámetro mes en el medio y lo devolvemos
+	 * @param anyo
+	 * @return
+	 */
+	public int contarReservasMes(String mes){
+		String query;
+		int cont=0;
+		query="SELECT COUNT(*) FROM Eventos WHERE fecha LIKE'"+mes+"%'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				cont++;
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cont;
+	}
+	
+	/**
+	 * Método para obtener las reservas de hoy
+	 * @param anyo
+	 * @return
+	 */
+	public ArrayList<String> sacarReservasHoy(String hoy){
+		String query;
+		ArrayList<String> a = new ArrayList<String>();
+		String reservasHoy=""; 
+		query="SELECT * FROM Eventos WHERE fecha LIKE'%"+hoy+"'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				reservasHoy=String.format("%20s%20d%20d\n", rs.getString("usuario"),rs.getInt("codigo"),rs.getInt("fecha"));
+				a.add(reservasHoy);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	/**
+	 * Contamos el número total de reservas con el parámetro hoy al final y lo devolvemos
+	 * @param anyo
+	 * @return
+	 */
+	public int contarReservasHoy(String hoy){
+		String query;
+		int cont=1;
+		query="SELECT COUNT(*) FROM Eventos WHERE fecha LIKE'"+hoy+"'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				cont++;
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cont;
+	}
+	
+	
+	/**
+	 * Método que devuelve la suma de precios total
+	 * @return
+	 */
+	public int gananciasTotal(){
+		int ganancias=0;
+		String query;
+		query="SELECT precio FROM Eventos";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				ganancias=ganancias+rs.getInt("precio");
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ganancias;
+	}
+	
+	/**
+	 * Método que devuelve la suma de precios del año
+	 * @return
+	 */
+	public int gananciasAnyo(String anyo){
+		int ganancias=0;
+		String query;
+		query="SELECT precio FROM Eventos WHERE fecha LIKE'"+anyo+"%'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				ganancias=ganancias+rs.getInt("precio");
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ganancias;
+	}
+	
+	/**
+	 * Método que devuelve la suma de precios del mes
+	 * @return
+	 */
+	public int gananciasMes(String mes){
+		int ganancias=0;
+		String query;
+		query="SELECT precio FROM Eventos WHERE fecha LIKE'"+mes+"%'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				ganancias=ganancias+rs.getInt("precio");
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ganancias;
+	}
+	
+	/**
+	 * Método que devuelve la suma de precios de hoy
+	 * @return
+	 */
+	public int gananciasHoy(String hoy){
+		int ganancias=0;
+		String query;
+		query="SELECT precio FROM Eventos WHERE fecha LIKE'"+hoy+"'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			while(rs.next()){
+				ganancias=ganancias+rs.getInt("precio");
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ganancias;
+	}
+	
+	/**
 	 * Método que devuelve el código de la música escogida por el usuario
 	 * @param tipo
 	 * @param duracion
@@ -569,6 +840,7 @@ public class BD {
 		return precio;
 	}
 	
+
 	/**
 	 * Método para introducir un nuevo evento en la base de datos 
 	 * @param presupuesto

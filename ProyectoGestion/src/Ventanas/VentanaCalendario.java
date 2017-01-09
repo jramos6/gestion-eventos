@@ -95,12 +95,14 @@ public class VentanaCalendario extends JFrame {
 				
 				int anioActual = fecha.getYear()+2000-100;
 				int mesActual = fecha.getMonth()+1;
-				int diaActual = fecha.getDay()+1;
+				int diaActual = fecha.getDate();
 				int fechaActual = anioActual*10000+mesActual*100+diaActual;
+				
 				int fechaCompleta = (pc.anio*10000)+(pc.mes*100)+(pc.dia);
 				
+				//Comprobamos que la fecha no sea la de hoy, ya que no es posible organizar eventos en el mismo día
 				if(fechaCompleta==0){
-					JOptionPane.showMessageDialog(null, "Elija una opción, por favor", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"No se pueden organizar eventos en el mismo día", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				
 				//Comprobamos que la fecha sea mayor a la actual

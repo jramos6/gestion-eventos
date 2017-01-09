@@ -151,7 +151,15 @@ public class VentanaAdministrador extends JFrame {
 		});
 		panelDrch.add(btnMusicaBaile);
 		
-		JButton btnVerEventos = new JButton("Ver eventos");
-		panelDrch.add(btnVerEventos);
+		JButton btnEstadisticas = new JButton("Estadísticas");
+		btnEstadisticas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaEstadisticas ves = new VentanaEstadisticas();
+				ves.setVisible(true);
+				va.dispose();
+			}
+		});
+		panelDrch.add(btnEstadisticas);
 	}
 }
