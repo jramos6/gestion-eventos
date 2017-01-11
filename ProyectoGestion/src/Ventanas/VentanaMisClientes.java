@@ -47,6 +47,8 @@ public class VentanaMisClientes extends JFrame {
 	private JPasswordField txtContra;
 	private JTextField txtEdad;
 	private JLabel lblNombre,lblDni, lblUsuario, lblContrasenia, lblEdad;
+	private JLabel lblInfo;
+	private boolean esNuevo=false;
 
 	/**
 	 * Create the frame.
@@ -95,15 +97,18 @@ public class VentanaMisClientes extends JFrame {
 					txtUsuModif.setToolTipText("Introduzca el DNI del usuario que desee eliminar");
 				}else if(comboBox.getSelectedItem()=="Editar"){
 					btnCambios.setText("Editar");
-					panelEste.setVisible(false);
+					panelEste.setVisible(true);
 					txtUsuModif.setEditable(true);
 					btnCambios.setEnabled(true);
+					lblInfo.setText("Introduzca los datos a modificar");
 					txtUsuModif.setToolTipText("");
+					txtUsuModif.setEditable(false);
 				}else if(comboBox.getSelectedItem()=="Añadir"){
 					panelEste.setVisible(true);
 					btnCambios.setText("Añadir");
+					txtUsuModif.setText("");
 					txtUsuModif.setEditable(false);
-					txtUsuModif.setToolTipText("Introduzca los datos en la columna de la derecha");
+					lblInfo.setText("Introduzca todos los datos aquí");
 					btnCambios.setEnabled(true);
 				}else{
 					btnCambios.setText("--");
@@ -139,6 +144,10 @@ public class VentanaMisClientes extends JFrame {
 				}if(btnCambios.getText()=="Añadir"){
 					//Insertamos el nuevo usuario en la base de datos
 					insertarEnBD();
+				
+				}if(btnCambios.getText()=="Editar"){
+					//Actualizamos el usuario en la base de datos
+					insertarEnBD();
 				}
 				
 			}
@@ -152,8 +161,13 @@ public class VentanaMisClientes extends JFrame {
 		
 		panelEste = new JPanel();
 		contentPane.add(panelEste, BorderLayout.EAST);
-		panelEste.setLayout(new GridLayout(10, 1, 0, 0));
+		panelEste.setLayout(new GridLayout(11, 1, 0, 0));
 		panelEste.setVisible(false);
+		
+		lblInfo = new JLabel("New label");
+		lblInfo.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		panelEste.add(lblInfo);
 		
 		lblNombre = new JLabel("Nombre:");
 		panelEste.add(lblNombre);
@@ -217,7 +231,7 @@ public class VentanaMisClientes extends JFrame {
 	}
 		
 	public void insertarEnBD(){
-		
+		boolean haEntrado = false;
 		String nom = txtNombre.getText();
 		String dniA = txtDNI1.getText();
 		String usu = txtUsuario.getText();
@@ -228,36 +242,44 @@ public class VentanaMisClientes extends JFrame {
 		if(nom.equals("") || dniA.equals("") || usu.equals("") || con.equals("")|| eda.equals("")){
 			JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
 			vaciarCampos();
+			haEntrado=true;
 		}
 		//Comprobaciones de edad y DNI
 		else if(dniA.length()!=9){ //DNI de tamaño 9
-			JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A");
+			JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A", "Error", JOptionPane.ERROR_MESSAGE);
 			txtDNI1.setText("");
+			haEntrado=true;
 		}
 		
 		else if(eda.startsWith("-")){ //Descartamos los numeros negativos
-			JOptionPane.showMessageDialog(null, "Edad incorrecta. No se puede tener una edad negativa");
+			JOptionPane.showMessageDialog(null, "Edad incorrecta. No se puede tener una edad negativa", "Error", JOptionPane.ERROR_MESSAGE);
 			txtEdad.setText("");
+			haEntrado=true;
 		}
 		
 		else if(eda.length()==1 || eda.startsWith("1") && !(eda.endsWith("8") || eda.endsWith("9"))){ //Descartamos a niñ@s menores de 18 años
-			JOptionPane.showMessageDialog(null, "Para usar este programa hay que tener al menos 18 años");
+			JOptionPane.showMessageDialog(null, "Para usar este programa hay que tener al menos 18 años", "Error", JOptionPane.ERROR_MESSAGE);
 			txtEdad.setText("");
+			haEntrado=true;
 		}
 		
 		//3- Comprobamos que el usuario no existe
 		Usuario u = VentanaLogin.bd.obtenerUsuario(usu);
-		if(u!=null){
+		if(u!=null && esNuevo==true){
 			JOptionPane.showMessageDialog(null, "El nombre de usuario escogido ya existe. Por favor, introduzca otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
 			txtUsuario.setText("");
-		}
+			haEntrado=true;
+		}else if(haEntrado==false && esNuevo==true){
 		//4- registramos el nuevo usuario en la base de datos:
-		 
-		//b.insertarNuevoUsuario(u);
-		VentanaLogin.bd.insertarNuevoUsuario(txtNombre.getText(),txtDNI1.getText(),txtUsuario.getText(),txtContra.getText(),Integer.parseInt(txtEdad.getText()));
-		JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
-		vaciarCampos();
-		
+			VentanaLogin.bd.insertarNuevoUsuario(txtNombre.getText(),txtDNI1.getText(),txtUsuario.getText(),txtContra.getText(),Integer.parseInt(txtEdad.getText()));
+			JOptionPane.showMessageDialog(null, "Usuario registrado satisfactoriamente","Correcto", JOptionPane.INFORMATION_MESSAGE);
+			vaciarCampos();
+			
+		}else if(haEntrado==false && esNuevo==false){	
+			int ed = Integer.parseInt(eda);
+			VentanaLogin.bd.actualizarCliente(nom, dniA, usu, con, ed);
+			JOptionPane.showMessageDialog(null, "Usuario actualizado satisfactoriamente","Correcto", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	private void vaciarCampos(){

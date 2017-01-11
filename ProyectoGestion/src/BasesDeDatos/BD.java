@@ -12,6 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Data.Evento;
+import Data.Restaurante;
 import Data.Usuario;
 
 public class BD {
@@ -79,8 +80,8 @@ public class BD {
 	
 	/**
 	 * Método para obtener un usuario completo desde la BD
-	 * @param usuario
-	 * @return
+	 * @param usuario: String que contiene el nombre de usuario del cliente
+	 * @return u: devuelve el usuario obtenido
 	 */
 	public Usuario obtenerUsuario(String usuario){
 		String query;
@@ -100,11 +101,11 @@ public class BD {
 	
 	/**
 	 * Método para insertar nuevo usuario en la base de datos
-	 * @param Nombre
-	 * @param DNI
-	 * @param Usuario
-	 * @param Contrasenia
-	 * @param Edad
+	 * @param Nombre: String que contiene el nuevo nombre del usuario
+	 * @param DNI: string de 9 caracteres 
+	 * @param Usuario: String que contiene el nombre de usuario del cliente
+	 * @param Contrasenia: String con la contraseña del usuario
+	 * @param Edad: int con la edad del usuario, mayor que 18
 	 */
 	public void insertarNuevoUsuario(String Nombre, String DNI, String Usuario, String Contrasenia,int Edad){
 		String query = "INSERT INTO USUARIO (Nombre, DNI, Usuario, Contrasenia, Edad) VALUES ('"+Nombre+"','"+DNI+"','"+Usuario+"','"+Contrasenia+"',"+Edad+")";
@@ -119,8 +120,8 @@ public class BD {
 	
 	/**
 	 * Método para devolver el nombre del usuario
-	 * @param usuario
-	 * @return
+	 * @param usuario: String que contiene el nombre de usuario del cliente
+	 * @return nombre: String de todos los nombres de usuarios
 	 */
 	public String nombreUsuario(String usuario){ 
 		String query;
@@ -140,8 +141,7 @@ public class BD {
 	
 	/**
 	 * Método que muestra por pantalla todos la musica
-	 * @param usuario
-	 * @return
+	 * @return a: arrayList de toda la musica
 	 */
 	public ArrayList<String> mostrarTodasLasMusicas(){
 		String query;
@@ -166,7 +166,7 @@ public class BD {
 	
 	/**
 	 * Método para mostrar por pantalla todos los usuarios de la base de datos, con toda su información
-	 * @return
+	 * @return a: arrayList de todos los usuarios
 	 */
 	public ArrayList<String> mostrarClientes(){
 		String query;
@@ -189,8 +189,7 @@ public class BD {
 	
 	/**
 	 * Método que muestra por pantalla todos la musica
-	 * @param usuario
-	 * @return
+	 * @return a: arrayList de todos los bailes
 	 */
 	public ArrayList<String> mostrarTodosLosBailes(){
 		String query;
@@ -240,8 +239,7 @@ public class BD {
 	
 	/**
 	 * Método que muestra por pantalla todos los eventos de todos los usuario (VentanaMisReservas)
-	 * @param usuario
-	 * @return
+	 * @return a: arrayList de todos los eventos
 	 */
 	public ArrayList<String> mostrarTodosLosEventos(){
 		String query;
@@ -264,8 +262,8 @@ public class BD {
 	
 	/**
 	 * Método que muestra por pantalla todos los eventos de un usuario (VentanaMisReservas)
-	 * @param usuario
-	 * @return
+	 * @param usuario: String que contiene el nombre de usuario del cliente
+	 * @return a: arrayList de todos los eventos del usuario
 	 */
 	public ArrayList<String> mostrarEventos(String usuario){
 		String query;
@@ -287,9 +285,8 @@ public class BD {
 	}
 	
 	/**
-	 * Método para obtener todas las reservas (reducido)
-	 * @param 
-	 * @return
+	 * Método para obtener todas las reservas (reducido) 
+	 * @return a: arrayList de todas las reservas
 	 */
 	public ArrayList<String> sacarReservasTodos(){
 		String query;
@@ -311,20 +308,17 @@ public class BD {
 		return a;
 	}
 	
-	/**TODO AUNQUE TENEMOS 3 RESERVAS MARCA QUE SOLO HAY DOS...
-	 * Contamos el número total de reservas 
-	 * @param 
-	 * @return
+	/**
+	 * Contamos el número total de reservas  
+	 * @return cont: int que devuelve el número total de reservas
 	 */
 	public int contarReservasTodo(){
 		String query;
-		int cont=1;
-		query="SELECT COUNT(*) FROM Eventos";
+		int cont=0;
+		query="SELECT COUNT(codigo) FROM Eventos";
 		try {
 			ResultSet rs = stm.executeQuery(query);
-			while(rs.next()){
-				cont++;
-			}
+			cont=rs.getInt(1);
 			rs.close();
 		} catch (SQLException e) {
 			// Auto-generated catch block
@@ -335,8 +329,8 @@ public class BD {
 	
 	/**
 	 * Método para obtener las reservas con un año específico
-	 * @param anyo
-	 * @return
+	 * @param anyo: recibe el año en formato de string 
+	 * @return a: arrayList de todas las reservas de ese año
 	 */
 	public ArrayList<String> sacarReservasAnyo(String anyo){
 		String query;
@@ -360,18 +354,16 @@ public class BD {
 	
 	/**
 	 * Contamos el número total de reservas con el parametro anyo al principio y lo devolvemos
-	 * @param anyo
-	 * @return
+	 * @param anyo: recibe el año en formato de string
+	 * @return cont: int que devuelve el número total de reservas del año
 	 */
 	public int contarReservasAnyo(String anyo){
 		String query;
 		int cont=1;
-		query="SELECT COUNT(*) FROM Eventos WHERE fecha LIKE'"+anyo+"%'";
+		query="SELECT COUNT(codigo) FROM Eventos WHERE fecha LIKE'"+anyo+"%'";
 		try {
 			ResultSet rs = stm.executeQuery(query);
-			while(rs.next()){
-				cont++;
-			}
+			cont=rs.getInt(1);
 			rs.close();
 		} catch (SQLException e) {
 			// Auto-generated catch block
@@ -380,10 +372,10 @@ public class BD {
 		return cont;
 	}
 	
-	/**TODO NO SALE EL NUMERO DE RESERVAS QUE DEBERÍA SALIR, Y NO SE POR QUÉ
+	/**
 	 * Método para obtener las reservas con un mes específico
-	 * @param anyo
-	 * @return
+	 * @param mes: recibe en formato string el mes que desea
+	 * @return a: arrayList de todas las reservas del mes
 	 */
 	public ArrayList<String> sacarReservasMes(String mes){
 		String query;
@@ -407,18 +399,17 @@ public class BD {
 	
 	/**
 	 * Contamos el número total de reservas con el parámetro mes en el medio y lo devolvemos
-	 * @param anyo
-	 * @return
+	 * @param mes: recibe en formato string el mes que desea
+	 * @return cont: int que devuelve el número total de reservas del mes
 	 */
 	public int contarReservasMes(String mes){
 		String query;
 		int cont=0;
-		query="SELECT COUNT(*) FROM Eventos WHERE fecha LIKE'"+mes+"%'";
+		query="SELECT COUNT(codigo) FROM Eventos WHERE fecha LIKE'"+mes+"%'";
 		try {
 			ResultSet rs = stm.executeQuery(query);
-			while(rs.next()){
-				cont++;
-			}
+			cont=rs.getInt(1);
+			rs.close();
 		} catch (SQLException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
@@ -428,8 +419,8 @@ public class BD {
 	
 	/**
 	 * Método para obtener las reservas de hoy
-	 * @param anyo
-	 * @return
+	 * @param hoy: recibe en formato string el dia de hoy
+	 * @return a: arrayList de todas las reservas de hoy
 	 */
 	public ArrayList<String> sacarReservasHoy(String hoy){
 		String query;
@@ -453,18 +444,17 @@ public class BD {
 	
 	/**
 	 * Contamos el número total de reservas con el parámetro hoy al final y lo devolvemos
-	 * @param anyo
-	 * @return
+	 * @param hoy: recibe en formato string el dia de hoy
+	 * @return cont: int que devuelve el número total de reservas de hoy
 	 */
 	public int contarReservasHoy(String hoy){
 		String query;
 		int cont=1;
-		query="SELECT COUNT(*) FROM Eventos WHERE fecha LIKE'"+hoy+"'";
+		query="SELECT COUNT(codigo) FROM Eventos WHERE fecha LIKE'"+hoy+"'";
 		try {
 			ResultSet rs = stm.executeQuery(query);
-			while(rs.next()){
-				cont++;
-			}
+			cont=rs.getInt(1);
+			rs.close();
 		} catch (SQLException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
@@ -475,7 +465,7 @@ public class BD {
 	
 	/**
 	 * Método que devuelve la suma de precios total
-	 * @return
+	 * @return ganancias: int con el valor total de ganancias (suma de precio)
 	 */
 	public int gananciasTotal(){
 		int ganancias=0;
@@ -496,7 +486,8 @@ public class BD {
 	
 	/**
 	 * Método que devuelve la suma de precios del año
-	 * @return
+	 * @param anyo: recibe el año en formato de string
+	 * @return ganancias: int con el valor de ganancias del año (suma de precio)
 	 */
 	public int gananciasAnyo(String anyo){
 		int ganancias=0;
@@ -517,7 +508,8 @@ public class BD {
 	
 	/**
 	 * Método que devuelve la suma de precios del mes
-	 * @return
+	 * @param mes: recibe el mes en formato de string
+	 * @return ganancias: int con el valor de ganancias del mes (suma de precio)
 	 */
 	public int gananciasMes(String mes){
 		int ganancias=0;
@@ -538,7 +530,8 @@ public class BD {
 	
 	/**
 	 * Método que devuelve la suma de precios de hoy
-	 * @return
+	 * @param hoy: recibe el dia de hoy en formato de string
+	 * @return ganancias: int con el valor de ganancias del dia de hoy (suma de precio)
 	 */
 	public int gananciasHoy(String hoy){
 		int ganancias=0;
@@ -559,10 +552,10 @@ public class BD {
 	
 	/**
 	 * Método que devuelve el código de la música escogida por el usuario
-	 * @param tipo
-	 * @param duracion
-	 * @param precio
-	 * @return
+	 * @param tipo: String con el tipo de música
+	 * @param duracion: String con la duración de la música
+	 * @param precio: int con el valor de la música
+	 * @return cod_musica: int con el código obtenido de la base de datos
 	 */
 	public int codigoMusica(String tipo, String duracion, int precio){
 		String query;
@@ -580,10 +573,10 @@ public class BD {
 	
 	/**
 	 * Método que devuelve el código del baile escogido por el usuario
-	 * @param tipo
-	 * @param duracion
-	 * @param precio
-	 * @return
+	 * @param tipo: String con el tipo de baile
+	 * @param duracion: String con la duración del baile
+	 * @param precio: int con el valor del baile
+	 * @return cod_baile: int con el código obtenido de la base de datos
 	 */
 	public int codigoBaile(String tipo, String duracion, int precio){
 		String query;
@@ -601,7 +594,7 @@ public class BD {
 	
 	/**
 	 * Método para obtener de la BD los campos de tipos de música --> VentanaMusica
-	 * @return tipos
+	 * @return tipos: obtiene en un String[] todos los tipos de música almacenados en la base de datos
 	 */
 	public String[] comboMusicaTipo(){
 		String query;
@@ -632,7 +625,7 @@ public class BD {
 	
 	/**
 	 * Método para obtener de la BD los campos de duración de música --> VentanaMusica
-	 * @return duracion
+	 * @return duracion: : obtiene en un String[] todos las duraciones de música almacenados en la base de datos
 	 */
 	public String[] comboMusicaDur(){
 		String query;
@@ -662,7 +655,7 @@ public class BD {
 	
 	/**
 	 * Método para obtener de la BD los campos de precio de música --> VentanaEditarMB
-	 * @return duracion
+	 * @return precio: obtiene en un String[] todos los precios de música almacenados en la base de datos
 	 */
 	public String[] comboMusicaPrecio(){
 		String query;
@@ -692,9 +685,9 @@ public class BD {
 	
 	/**
 	 * Método para obtener el precio de la tupla seleccionada de música
-	 * @param tipo
-	 * @param duracion
-	 * @return
+	 * @param tipo: String con el tipo de musica
+	 * @param duracion: String con la duración de la música
+	 * @return precio: int con el precio de la tupla seleccionada
 	 */
 	public int precioMusica(String tipo, String duracion){
 		String query;
@@ -711,7 +704,11 @@ public class BD {
 		}
 		return precio;
 	}
-	
+	/**
+	 * Método que devuelve la contraseña del usuario, para el proceso de acceso
+	 * @param usuario: dependiendo del usuario se obtendrá una contraseña u otra
+	 * @return contra: String de la contraseña del usuario
+	 */
 	public String contraseniaUsuario(String usuario){
 		String query;
 		String contra="";
@@ -730,9 +727,9 @@ public class BD {
 	
 	/**
 	 * Método para obtener el precio de la tupla seleccionada de baile
-	 * @param tipo
-	 * @param duracion
-	 * @return
+	 * @param tipo: String con el tipo de baile
+	 * @param duracion: String con la duración del baile
+	 * @return precio: int con el precio de la tupla seleccionada
 	 */
 	public int precioBaile(String tipo, String duracion){
 		String query;
@@ -752,7 +749,7 @@ public class BD {
 	
 	/**
 	 * Método para obtener de la BD los campos de tipo de baile --> VentanaMusica
-	 * @return duracion
+	 * @return tipo: devuelve como String[] todos los campos de tipo de la base de datos
 	 */
 	public String[] comboBaileTipo(){
 		String query;
@@ -782,7 +779,7 @@ public class BD {
 	
 	/**
 	 * Método para obtener de la BD los campos de duración de baile --> VentanaMusica
-	 * @return duracion
+	 * @return duracion: devuelve como String[] todos los campos de duracion de la base de datos
 	 */
 	public String[] comboBaileDur(){
 		String query;
@@ -812,7 +809,7 @@ public class BD {
 	
 	/**
 	 * Método para obtener de la BD los campos de precio de baile --> VentanaEditarMB
-	 * @return duracion
+	 * @return precio: devuelve como String[] todos los campos de precio de la base de datos
 	 */
 	public String[] comboBailePrecio(){
 		String query;
@@ -840,13 +837,22 @@ public class BD {
 		return precio;
 	}
 	
-
+ 
+	
 	/**
 	 * Método para introducir un nuevo evento en la base de datos 
-	 * @param presupuesto
-	 * @param invitados
-	 * @param codigo
-	 * @param actividad
+	 * @param usuario: String que contiene el nombre de usuario del cliente 
+	 * @param precio: int que contiene el precio total a pagar por el usuario
+	 * @param invitados: numero entero positivo de invitados a la fiesta
+	 * @param actividad: string con la información de la actividad
+	 * @param fecha: dia en formato int del evento
+	 * @param cod_musica: código de la música solicitada para el evento, int
+	 * @param cod_baile: código del baile solicitado para el evento, int
+	 * @param espacio: string que recoge el nombre del espacio solicitado
+	 * @param num_menu: int con el número que se va a servir en el evento
+	 * @param catering: tipo del catering escogido, String
+	 * @param cafes_infusiones: Si/No, dependiendo de la selección (String)
+	 * @param vinos: Si/No, dependiendo de la selección (String)
 	 */
 	public void insertarNuevoEvento(String usuario, long precio, int invitados, String actividad, int fecha, int cod_musica, int cod_baile, String espacio, int num_menu, String catering, String cafes_infusiones, String vinos){
 		String query = "INSERT INTO Eventos (usuario, precio, invitados, actividad, fecha, cod_musica, cod_baile, espacio, num_menu, catering, cafes_infusiones, vinos) VALUES ('"+usuario+"',"+precio+","+invitados+",'"+actividad+"',"+fecha+","+cod_musica+","+cod_baile+",'"+espacio+"',"+num_menu+", '"+catering+"','"+cafes_infusiones+"','"+vinos+"')";
@@ -859,9 +865,9 @@ public class BD {
 	
 	/**
 	 * Método para introducir información en la BD de música
-	 * @param tipo
-	 * @param duracion
-	 * @param precio
+	* @param tipo: String con el tipo de música
+	 * @param duracion: String con la duración de la música
+	 * @param precio: int con el valor de la música
 	 */
 	public void insertarEnMusica(String tipo, String duracion, int precio){
 		String query = "INSERT INTO musica (tipo, duracion, precio) VALUES ('"+tipo+"','"+duracion+"',"+precio+")";
@@ -874,9 +880,9 @@ public class BD {
 	
 	/**
 	 * Método para introducir información en la BD de baile
-	 * @param tipo
-	 * @param duracion
-	 * @param precio
+	 * @param tipo: String con el tipo de baile
+	 * @param duracion: String con la duración del baile
+	 * @param precio: int con el valor del baile
 	 */
 	public void insertarEnBaile(String tipo, String duracion, int precio){
 		String query = "INSERT INTO baile (tipo, duracion, precio) VALUES ('"+tipo+"','"+duracion+"',"+precio+")";
@@ -889,9 +895,9 @@ public class BD {
 	
 	/**
 	 * Método para eliminar información en la BD de música
-	 * @param tipo
-	 * @param duracion
-	 * @param precio
+	 * @param tipo: String con el tipo de música
+	 * @param duracion: String con la duración de la música
+	 * @param precio: int con el valor de la música
 	 */
 	public void eliminarEnMusica(String tipo, String duracion, int precio){
 		String query = "DELETE FROM musica WHERE tipo='"+tipo+"' AND duracion='"+duracion+"' AND precio="+precio;
@@ -905,9 +911,9 @@ public class BD {
 	/**
 	 * 
 	 * Método para eliminar información en la BD de baile
-	 * @param tipo
-	 * @param duracion
-	 * @param precio
+	 * @param tipo: String con el tipo de baile
+	 * @param duracion: String con la duración del baile
+	 * @param precio: int con el valor del baile
 	 */
 	public void eliminarEnBaile(String tipo, String duracion, int precio){
 		String query = "DELETE FROM baile WHERE tipo='"+tipo+"' AND duracion='"+duracion+"' AND precio="+precio;
@@ -920,7 +926,7 @@ public class BD {
 	
 	/**
 	 * Método para eliminar usuario de la base de datos (ventana Administrador)
-	 * @param dni
+	 * @param dni: string de 9 caracteres 
 	 */
 	public void eliminarCliente(String usuario){
 		String query = "DELETE FROM USUARIO WHERE usuario='"+usuario+"'";
@@ -932,6 +938,10 @@ public class BD {
 		}
 	}
 	
+	/**
+	 * Método para eliminar evento de la base de datos
+	 * @param usuario:  String que contiene el nombre de usuario del cliente
+	 */
 	public void eliminarEvento(String usuario){
 		String query = "DELETE FROM Eventos WHERE usuario='"+usuario+"'";
 		try {
@@ -941,12 +951,11 @@ public class BD {
 			
 		}
 	}
-	
-	
+
 	/**
 	 * Método para obtener eventos
-	 * @param usuario
-	 * @return
+	 * @param usuario: String que contiene el nombre de usuario del cliente
+	 * @return ev: todos los eventos del usuario
 	 */
 	public static Evento obtenerEvento(String usuario){
 		String query;
@@ -964,8 +973,54 @@ public class BD {
 		return ev;
 	}
 	
-	public void obtenerInfoMusica(){
+	/**
+	 * Método para consultar todos los restaurantes --> (Ventana ElegirRestaurante)
+	 * @param dni
+	 */
 	
-	
+	public ArrayList<Restaurante> consultaLista() {
+
+		String query = "SELECT * FROM Restaurante ";
+
+		ArrayList<Restaurante> a = new ArrayList<Restaurante>();
+
+		try {
+
+			ResultSet rs = stm.executeQuery(query);
+
+			while (rs.next()) {
+				Restaurante r = new Restaurante(rs.getString("titulo"), rs.getString("desc"), rs.getString("imagen"));
+				a.add(r);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+		return a;
+
 	}
+	
+	/** TODO no funciona, porque no se actualizan los clientes de la BD
+	 * Método para actualizar clientes de la base de datos
+	 * @param nombre: string que guarda el nombre del usuario
+	 * @param dni: string de 9 caracteres
+	 * @param usu: Nombre de usuario del usuario, string
+	 * @param contra: contraseña del usuario, string
+	 * @param edad: : int con la edad del usuario, mayor que 18
+	 */
+	public void actualizarCliente(String nombre, String dni, String usu, String contra, int edad){
+		
+		String query;
+		query="UPDATE USUARIO SET Nombre='"+nombre+"', DNI='"+dni+"', Usuario='"+usu+"', Contrasenia='"+contra+"', Edad="+edad+" WHERE Usuario='"+usu+"'";
+		try {
+			stm.executeUpdate(query);
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
