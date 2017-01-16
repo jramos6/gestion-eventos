@@ -51,7 +51,7 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public VentanaPrincipal() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,6 +70,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnSalir.addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent e) { 
@@ -82,6 +83,7 @@ public class VentanaPrincipal extends JFrame {
 		panelSur.add(btnSalir);
 		JFrame vp=this;
 		btnEntrar = new JButton("Entrar");
+		btnEntrar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnEntrar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

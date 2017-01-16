@@ -75,6 +75,7 @@ public class VentanaMisClientes extends JFrame {
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		VentanaMisClientes vmr = this;
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
@@ -87,6 +88,7 @@ public class VentanaMisClientes extends JFrame {
 		panelSur.add(btnVolver);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getSelectedItem()=="Eliminar"){
@@ -116,14 +118,17 @@ public class VentanaMisClientes extends JFrame {
 		panelSur.add(comboBox);
 		
 		JLabel lblCdigo = new JLabel("Usuario: ");
+		lblCdigo.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelSur.add(lblCdigo);
 		
 		txtUsuModif = new JTextField();
+		txtUsuModif.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		txtUsuModif.setEditable(false);
 		panelSur.add(txtUsuModif);
 		txtUsuModif.setColumns(10);
 		
 		btnCambios = new JButton("--");
+		btnCambios.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnCambios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

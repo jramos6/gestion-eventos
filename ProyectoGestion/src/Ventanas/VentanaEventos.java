@@ -54,6 +54,7 @@ public class VentanaEventos extends JFrame {
 		
 		JFrame ve=this;
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -69,6 +70,7 @@ public class VentanaEventos extends JFrame {
 		JComboBox comboTipoEventos = new JComboBox();
 		
 		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		
 		btnSiguiente.addMouseListener(new MouseAdapter() {
 			@Override

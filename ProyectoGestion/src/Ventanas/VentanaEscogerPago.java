@@ -59,7 +59,7 @@ public class VentanaEscogerPago extends JFrame {
 				
 			}
 		});
-		btnNewButton.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
+		btnNewButton.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		JButton btnAtras = new JButton("Confirmar");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,7 +86,7 @@ public class VentanaEscogerPago extends JFrame {
 			}
 		});
 		panelS.add(btnAtras);
-		btnAtras.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
+		btnAtras.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		
 		panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);

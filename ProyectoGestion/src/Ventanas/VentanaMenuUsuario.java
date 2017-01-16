@@ -58,6 +58,7 @@ public class VentanaMenuUsuario extends JFrame {
 		
 		JFrame vmu=this;
 		JButton btnCerrarSesin = new JButton("Cerrar sesión");
+		btnCerrarSesin.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnCerrarSesin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

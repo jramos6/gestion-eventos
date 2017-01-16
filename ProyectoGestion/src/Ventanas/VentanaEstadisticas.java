@@ -66,6 +66,7 @@ public class VentanaEstadisticas extends JFrame {
 		
 		VentanaEstadisticas ve = this;
 		btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

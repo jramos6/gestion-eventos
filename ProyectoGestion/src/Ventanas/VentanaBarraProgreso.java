@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Window;
 
 import javax.swing.SwingConstants;
+import java.awt.Font;
 
 /**
  * Fragmento de código cogido de:
@@ -31,6 +32,7 @@ public class VentanaBarraProgreso extends JFrame {
 		getContentPane().add(pb);
 
 		JLabel lblProcesando = new JLabel("Procesando");
+		lblProcesando.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		lblProcesando.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblProcesando, BorderLayout.NORTH);
 		pack();

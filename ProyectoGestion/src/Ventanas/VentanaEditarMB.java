@@ -100,6 +100,7 @@ public class VentanaEditarMB extends JFrame {
 		
 		VentanaEditarMB vemb = this;
 		btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -111,6 +112,7 @@ public class VentanaEditarMB extends JFrame {
 		panelSur.add(btnVolver);
 		
 		btnGuardarCambios = new JButton("Guardar cambios");
+		btnGuardarCambios.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnGuardarCambios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

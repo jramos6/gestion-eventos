@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class VentanaAdministrador extends JFrame {
 
@@ -34,7 +35,6 @@ public class VentanaAdministrador extends JFrame {
 	 */
 	public VentanaAdministrador() {
 		setResizable(false);
-		setTitle("Ventana Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -77,9 +77,11 @@ public class VentanaAdministrador extends JFrame {
 		panelIzd.setLayout(new GridLayout(4, 1, 0, 0));
 		
 		JButton btnActualizarEspacios = new JButton("Actualizar espacios");
+		btnActualizarEspacios.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelIzd.add(btnActualizarEspacios);
 		
 		JButton btnModificarUsuarios = new JButton("Modificar usuarios");
+		btnModificarUsuarios.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnModificarUsuarios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -92,6 +94,7 @@ public class VentanaAdministrador extends JFrame {
 		panelIzd.add(btnModificarUsuarios);
 		
 		JButton btnEstadsticas = new JButton("Mostrar todas las reservas");
+		btnEstadsticas.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnEstadsticas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -108,6 +111,7 @@ public class VentanaAdministrador extends JFrame {
 		
 		
 		JButton btnBloquearAplicacin = new JButton("BLOQUEAR");
+		btnBloquearAplicacin.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnBloquearAplicacin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -129,6 +133,7 @@ public class VentanaAdministrador extends JFrame {
 		panelDrch.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JButton btnCalendario = new JButton("Calendario");
+		btnCalendario.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnCalendario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -141,6 +146,7 @@ public class VentanaAdministrador extends JFrame {
 		panelDrch.add(btnCalendario);
 		
 		JButton btnMusicaBaile = new JButton("Editar música-baile");
+		btnMusicaBaile.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnMusicaBaile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -152,6 +158,7 @@ public class VentanaAdministrador extends JFrame {
 		panelDrch.add(btnMusicaBaile);
 		
 		JButton btnEstadisticas = new JButton("Estadísticas");
+		btnEstadisticas.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnEstadisticas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

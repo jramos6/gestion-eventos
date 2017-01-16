@@ -58,7 +58,7 @@ public class VentanaElegirRestaurante extends JFrame {
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		final JFrame ver=this;
-		JButton btnAtras = new JButton("Atras ");
+		JButton btnAtras = new JButton("Atrás");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -67,7 +67,7 @@ public class VentanaElegirRestaurante extends JFrame {
 
 			}
 		});
-		btnAtras.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
+		btnAtras.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panel_1.add(btnAtras);
 		
 		JPanel panel_2 = new JPanel();

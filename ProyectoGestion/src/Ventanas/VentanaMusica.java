@@ -69,6 +69,7 @@ public class VentanaMusica extends JFrame{
 		
 		VentanaMusica vm=this;
 		JButton btnVolver = new JButton("Cancelar");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaEscoger ve = new VentanaEscoger(numInvitados, nomUsuario, anio, mes, dia, precioFinal,comida, musica, espacio, actividad, cod_musica, cod_baile, num_menu, catering, cafes_infusiones, vinos);
@@ -78,6 +79,7 @@ public class VentanaMusica extends JFrame{
 		});
 		
 		btnMenPrincipal = new JButton("Menú principal");
+		btnMenPrincipal.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnMenPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -93,6 +95,7 @@ public class VentanaMusica extends JFrame{
 		panelSur.add(btnVolver);
 		
 		JButton btnAceptar = new JButton("Confirmar");
+		btnAceptar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

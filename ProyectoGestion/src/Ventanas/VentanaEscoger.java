@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class VentanaEscoger extends JFrame {
 
@@ -50,6 +51,7 @@ public class VentanaEscoger extends JFrame {
 		
 		VentanaEscoger vs = this;
 		JButton btnCerrarSesin = new JButton("Cerrar Sesión");
+		btnCerrarSesin.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnCerrarSesin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -63,6 +65,7 @@ public class VentanaEscoger extends JFrame {
 		panelSur.add(btnCerrarSesin);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookshelf Symbol 7", Font.PLAIN, 13));
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -117,6 +120,7 @@ public class VentanaEscoger extends JFrame {
 		panelCentro.add(btnMsica);
 		
 		JButton btnPagar = new JButton("Pagar");
+		btnPagar.setForeground(Color.BLUE);
 		btnPagar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

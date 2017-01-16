@@ -55,6 +55,7 @@ public class VentanaEspacio extends JFrame {
 		
 		VentanaEspacio vs = this;
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -66,6 +67,7 @@ public class VentanaEspacio extends JFrame {
 		panelS.add(btnVolver);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

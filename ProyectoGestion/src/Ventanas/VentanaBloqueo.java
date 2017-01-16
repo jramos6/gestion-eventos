@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Window.Type;
+import java.awt.Font;
 
 public class VentanaBloqueo extends JFrame {
 
@@ -55,6 +56,7 @@ public class VentanaBloqueo extends JFrame {
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		lblContrasenia = new JLabel("Contraseña: ");
+		lblContrasenia.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		lblContrasenia.setEnabled(false);
 		panelSur.add(lblContrasenia);
 		
@@ -67,6 +69,7 @@ public class VentanaBloqueo extends JFrame {
 		
 		VentanaBloqueo vb = this;
 		btnDesbloquear = new JButton("Desbloquear");
+		btnDesbloquear.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnDesbloquear.setEnabled(false);
 		btnDesbloquear.addMouseListener(new MouseAdapter() {
 			@Override

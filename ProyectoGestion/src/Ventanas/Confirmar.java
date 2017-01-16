@@ -55,6 +55,7 @@ public class Confirmar extends JDialog {
 		
 		Confirmar c = this;
 		JButton okButton = new JButton("Aceptar");
+		okButton.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		okButton.setEnabled(false);
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -151,6 +152,7 @@ public class Confirmar extends JDialog {
 			});
 			
 		JButton cancelButton = new JButton("Cancelar");
+		cancelButton.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaEscogerPago vep= new VentanaEscogerPago(numInvitados, nombre, anio, mes, dia, precioFinal);

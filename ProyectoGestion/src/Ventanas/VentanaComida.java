@@ -68,7 +68,7 @@ public class VentanaComida extends JFrame {
 		
 		JFrame vc = this;
 		JButton btnRestaurante = new JButton("Restaurantes");
-		btnRestaurante.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnRestaurante.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnRestaurante.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -84,7 +84,7 @@ public class VentanaComida extends JFrame {
 		
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnConfirmar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnConfirmar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -101,6 +101,7 @@ public class VentanaComida extends JFrame {
 		});
 		
 		JButton btnCancelar_1 = new JButton("Cancelar");
+		btnCancelar_1.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnCancelar_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

@@ -19,6 +19,7 @@ import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 public class VentanaCalendario extends JFrame {
 
@@ -44,6 +45,7 @@ public class VentanaCalendario extends JFrame {
 		
 		VentanaCalendario vc = this;
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -90,6 +92,7 @@ public class VentanaCalendario extends JFrame {
 		panelCentro.add(pc,BorderLayout.CENTER);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

@@ -40,7 +40,8 @@ public class VentanaRestaurante extends JFrame {
 		
 		final JFrame vr=this;
 		
-		JButton btnAtrs = new JButton("Atras");
+		JButton btnAtrs = new JButton("Atrás");
+		btnAtrs.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnAtrs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaElegirRestaurante elr= new VentanaElegirRestaurante(vr);
@@ -52,6 +53,7 @@ public class VentanaRestaurante extends JFrame {
 		contentPane.add(btnAtrs);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);

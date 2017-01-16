@@ -60,6 +60,7 @@ public class VentanaMisReservas extends JFrame {
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		VentanaMisReservas vmr = this;
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
@@ -81,14 +82,17 @@ public class VentanaMisReservas extends JFrame {
 		panelSur.add(btnVolver);
 		
 		JLabel lblIntroduzcaElCdigo = new JLabel("Introduzca el código:");
+		lblIntroduzcaElCdigo.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		panelSur.add(lblIntroduzcaElCdigo);
 		
 		txtCodigo = new JTextField();
+		txtCodigo.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		txtCodigo.setToolTipText("Código de la reserva a eliminar");
 		panelSur.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
