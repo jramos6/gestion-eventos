@@ -43,7 +43,7 @@ public class VentanaRestaurante extends JFrame {
 		JButton btnAtrs = new JButton("Atras");
 		btnAtrs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaElegirRestaurante elr= new VentanaElegirRestaurante();
+				VentanaElegirRestaurante elr= new VentanaElegirRestaurante(vr);
 				elr.setVisible(true);
 				vr.dispose();
 			}

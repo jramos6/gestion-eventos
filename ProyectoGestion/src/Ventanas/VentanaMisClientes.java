@@ -94,19 +94,12 @@ public class VentanaMisClientes extends JFrame {
 					txtUsuModif.setEditable(true);
 					panelEste.setVisible(false);
 					btnCambios.setEnabled(true);
-					txtUsuModif.setToolTipText("Introduzca el DNI del usuario que desee eliminar");
-				}else if(comboBox.getSelectedItem()=="Editar"){
-					btnCambios.setText("Editar");
-					panelEste.setVisible(true);
-					txtUsuModif.setEditable(true);
-					btnCambios.setEnabled(true);
-					lblInfo.setText("Introduzca los datos a modificar");
-					txtUsuModif.setToolTipText("");
-					txtUsuModif.setEditable(false);
+					txtUsuModif.setToolTipText("Introduzca el nombre del usuario que desee eliminar");
 				}else if(comboBox.getSelectedItem()=="Añadir"){
 					panelEste.setVisible(true);
 					btnCambios.setText("Añadir");
 					txtUsuModif.setText("");
+					txtUsuModif.setToolTipText("Introduzca los datos en la parte de la derecha");
 					txtUsuModif.setEditable(false);
 					lblInfo.setText("Introduzca todos los datos aquí");
 					btnCambios.setEnabled(true);
@@ -119,7 +112,7 @@ public class VentanaMisClientes extends JFrame {
 				}
 			}
 		});
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Editar", "Eliminar", "Añadir"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Eliminar", "Añadir"}));
 		panelSur.add(comboBox);
 		
 		JLabel lblCdigo = new JLabel("Usuario: ");
@@ -141,15 +134,27 @@ public class VentanaMisClientes extends JFrame {
 					VentanaLogin.bd.eliminarEvento(txtUsuModif.getText()); //Tenemos que borrar tambien los eventos del usuario
 					txtUsuModif.setText("");
 					
+					//Volvemos a sacar en pantalla todos los usuarios, sin el que acabamos de quitar
+					ArrayList<String> a = VentanaLogin.bd.mostrarClientes();
+					txtReservas.setText(String.format("%20s%20s%20s%15s\n","NOMBRE","DNI","USUARIO","EDAD"));
+					for(int i=0;i<a.size();i++){
+						txtReservas.append(a.get(i));
+					}
+					
+					
 				}if(btnCambios.getText()=="Añadir"){
 					//Insertamos el nuevo usuario en la base de datos
+					esNuevo=true;
 					insertarEnBD();
 				
-				}if(btnCambios.getText()=="Editar"){
-					//Actualizamos el usuario en la base de datos
-					insertarEnBD();
+					//Volvemos a sacar en pantalla todos los usuarios, añadiendo el nuevo
+					ArrayList<String> a = VentanaLogin.bd.mostrarClientes();
+					txtReservas.setText(String.format("%20s%20s%20s%15s\n","NOMBRE","DNI","USUARIO","EDAD"));
+					for(int i=0;i<a.size();i++){
+						txtReservas.append(a.get(i));
+					}
+					
 				}
-				
 			}
 		});
 		panelSur.add(btnCambios);

@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import Data.Evento;
 import Data.Restaurante;
@@ -951,6 +949,20 @@ public class BD {
 			
 		}
 	}
+	
+	/**
+	 * Método para eliminar evento de la base de datos con el código
+	 * @param codigo:  int que contiene el codigo del cliente
+	 */
+	public void eliminarEventoCodigo(int codigo){
+		String query = "DELETE FROM Eventos WHERE codigo="+codigo;
+		try {
+			stm.executeQuery(query);
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Ha eliminado con éxito la reserva");
+		}
+	}
 
 	/**
 	 * Método para obtener eventos
@@ -1013,14 +1025,17 @@ public class BD {
 	public void actualizarCliente(String nombre, String dni, String usu, String contra, int edad){
 		
 		String query;
-		query="UPDATE USUARIO SET Nombre='"+nombre+"', DNI='"+dni+"', Usuario='"+usu+"', Contrasenia='"+contra+"', Edad="+edad+" WHERE Usuario='"+usu+"'";
+		query="UPDATE USUARIO SET Nombre='"+nombre+"', DNI='"+dni+"', Usuario='"+usu+"', Contrasenia='"+contra+"', Edad="+edad+" WHERE DNI='"+dni+"'";
 		try {
 			stm.executeUpdate(query);
 		} catch (SQLException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		
+		
 	}
+	
 	
 }

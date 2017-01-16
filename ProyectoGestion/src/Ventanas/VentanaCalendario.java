@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.FlowLayout;
 
 public class VentanaCalendario extends JFrame {
 
@@ -85,6 +86,7 @@ public class VentanaCalendario extends JFrame {
 		
 		//Se abre un calendario en la ventana
 		PanelCal pc = new PanelCal();
+		FlowLayout flowLayout = (FlowLayout) pc.getLayout();
 		panelCentro.add(pc,BorderLayout.CENTER);
 		
 		JButton btnAceptar = new JButton("Aceptar");

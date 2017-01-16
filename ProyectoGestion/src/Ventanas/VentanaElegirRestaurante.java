@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -29,25 +30,11 @@ import javax.swing.JTextArea;
 public class VentanaElegirRestaurante extends JFrame {
 
 	private JPanel contentPane;
+	private JFrame ventanaAnterior;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaElegirRestaurante frame = new VentanaElegirRestaurante();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}	
-
-	
-	public VentanaElegirRestaurante() {
+	public VentanaElegirRestaurante(JFrame va) {
+		setResizable(false);
+		ventanaAnterior=va;
 		setTitle("Haga Su Eleccion ;)");
 		setForeground(new Color(0, 0, 128));
 		setFont(new Font("Bookman Old Style", Font.BOLD, 12));
@@ -74,23 +61,14 @@ public class VentanaElegirRestaurante extends JFrame {
 		JButton btnAtras = new JButton("Atras ");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*VentanaComida vc= new VentanaComida();
-				vc.setVisible(true);
-				ver.dispose();*/
+				
+				va.setVisible(true);
+				ver.dispose();
 
 			}
 		});
 		btnAtras.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
 		panel_1.add(btnAtras);
-		
-		JButton btnNewButton = new JButton("Salir");
-		btnNewButton.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 13));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		panel_1.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setForeground(Color.WHITE);
@@ -101,15 +79,16 @@ public class VentanaElegirRestaurante extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		contentPane.add(panel_4, BorderLayout.CENTER);
-		ArrayList<Restaurante> a = VentanaLogin.bd.consultaLista();
+		ArrayList<Restaurante> a=null;
+		a = VentanaLogin.bd.consultaLista();
 		DefaultListModel dlm = new DefaultListModel();
 		for(Restaurante r: a){
 			dlm.addElement(r.toString());
 		}
 		JList list = new JList(dlm);
 		panel_4.add(list);
+	
 		list.addMouseListener(new MouseAdapter() {
-			  
 			public void mouseClicked(MouseEvent evt) {
 		        JList list = (JList)evt.getSource();
 		        if (evt.getClickCount() == 2){
@@ -118,9 +97,7 @@ public class VentanaElegirRestaurante extends JFrame {
 	        	
 		        }
 			}
-			
 		});
-	
 	}
 	
 }

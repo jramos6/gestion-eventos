@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -12,6 +13,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -43,6 +46,7 @@ public class VentanaEstadisticas extends JFrame {
 	private JTextField txtAnyo;
 	private JLabel lblTotal;
 	private JTextField txtTotal;
+	private JPanel panelCabajo;
 
 
 	/**
@@ -208,9 +212,13 @@ public class VentanaEstadisticas extends JFrame {
 		panelCarriba.add(txtNumeroTot);
 		txtNumeroTot.setColumns(10);
 		
+		panelCabajo = new JPanel();
+		panelReservasTot.add(panelCabajo);
+		panelCabajo.setLayout(new GridLayout(1, 1, 0, 0));
+		
 		txtReservas = new JTextArea();
+		panelCabajo.add(txtReservas);
 		txtReservas.setEditable(false);
-		panelReservasTot.add(txtReservas);
 		txtReservas.setColumns(10);
 		
 		panelGananciasTot = new JPanel();
@@ -267,7 +275,13 @@ public class VentanaEstadisticas extends JFrame {
 		txtTotal.setText(""+VentanaLogin.bd.gananciasTotal()+" €");
 	
 		fechasGanancias();
-	
+	/*TODO FALTA SCROLL QUE NO SE POR QUE NO ME SALE...
+		//Anyadimos scroll a la ventana para que se vean todos los campos
+		JScrollPane scroll = new JScrollPane(txtReservas);                                                     
+        ve.getContentPane().add(scroll);     
+		//Anyadimos scroll a la ventana para que se vean todos los campos                                                    
+        ve.getContentPane().add(scroll);
+		*/
 	}
 	
 	/**

@@ -63,7 +63,7 @@ public class VentanaEditarMB extends JFrame {
 				if(rdbtnBaile.isSelected()==false && rdbtnMusica.isSelected()==false){
 					estanInvisibles();
 				}
-				ArrayList<String>a=VentanaLogin.bd.mostrarTodasLasMusicas(); //TODO esto sale txapu, y le falta el scroll, que no se ponerle solo al txt :D
+				ArrayList<String>a=VentanaLogin.bd.mostrarTodasLasMusicas(); //TODO esto sale txapu
 				txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
 				for(int i=0;i<a.size();i++){
 					txtOpcionesActuales.append(a.get(i));
@@ -85,7 +85,7 @@ public class VentanaEditarMB extends JFrame {
 					estanInvisibles();
 				}
 				
-				ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes(); //TODO
+				ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes(); //TODO esto sale txapu
 				txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
 				for(int i=0;i<a.size();i++){
 					txtOpcionesActuales.append(a.get(i));
@@ -117,6 +117,7 @@ public class VentanaEditarMB extends JFrame {
 				VentanaAdministrador va = new VentanaAdministrador();
 				va.setVisible(true);
 				vemb.dispose();
+				
 			}
 		});
 		panelSur.add(btnGuardarCambios);
@@ -141,10 +142,8 @@ public class VentanaEditarMB extends JFrame {
 		//panelM.add(txtOpcionesActuales);
 		txtOpcionesActuales.setColumns(10);
 		
-		//TODO aquí está el scroll
 		//Anyadimos scroll a la ventana para que se vean todos los campos
-		JScrollPane scroll = new JScrollPane(txtOpcionesActuales);    
-        //scroll.setLayout(new GridLayout(30,30,100,200));                                                    
+		JScrollPane scroll = new JScrollPane(txtOpcionesActuales);                                                      
         panelM.add(scroll);
 		panelEtiquetas = new JPanel();
 		panelM.add(panelEtiquetas);
@@ -195,11 +194,24 @@ public class VentanaEditarMB extends JFrame {
 					int precio = Integer.parseInt(txtNuevoPrecio.getText());
 					VentanaLogin.bd.insertarEnMusica(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
 					vaciarTextos();
+						//Actualizamos lista con nueva información
+						ArrayList<String>a=VentanaLogin.bd.mostrarTodasLasMusicas();
+						txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
+						for(int i=0;i<a.size();i++){
+							txtOpcionesActuales.append(a.get(i));
+						}
 				}
 				if(rdbtnBaile.isSelected()){
 					int precio = Integer.parseInt(txtNuevoPrecio.getText());
 					VentanaLogin.bd.insertarEnBaile(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
 					vaciarTextos();
+					//Actualizamos lista con nueva información
+					ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes();
+					txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
+					for(int i=0;i<a.size();i++){
+						txtOpcionesActuales.append(a.get(i));
+					}
+					
 					}
 				}
 			}
@@ -218,12 +230,24 @@ public class VentanaEditarMB extends JFrame {
 					int precio = Integer.parseInt(txtNuevoPrecio.getText());
 					VentanaLogin.bd.eliminarEnMusica(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
 					vaciarTextos();
+					//Actualizamos lista con nueva información
+					ArrayList<String>a=VentanaLogin.bd.mostrarTodasLasMusicas();
+					txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
+					for(int i=0;i<a.size();i++){
+						txtOpcionesActuales.append(a.get(i));
+					}
 				}
 				if(rdbtnBaile.isSelected()){
 					int precio = Integer.parseInt(txtNuevoPrecio.getText());
 					VentanaLogin.bd.eliminarEnBaile(txtNuevoTipo.getText(), txtNuevaDur.getText(), precio);
 					vaciarTextos();
 					}
+				//Actualizamos lista con nueva información
+				ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes();
+				txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
+				for(int i=0;i<a.size();i++){
+					txtOpcionesActuales.append(a.get(i));
+				}
 				}
 			}
 		});

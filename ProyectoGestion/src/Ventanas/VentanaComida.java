@@ -67,25 +67,25 @@ public class VentanaComida extends JFrame {
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		
 		JFrame vc = this;
-		JButton btnMenPrincipal = new JButton("Menú principal");
-		btnMenPrincipal.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnMenPrincipal.addMouseListener(new MouseAdapter() {
+		JButton btnRestaurante = new JButton("Restaurantes");
+		btnRestaurante.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnRestaurante.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Volvemos al menú inicial
-				JOptionPane.showMessageDialog(null, "Cancelando reserva");
-				
-				VentanaMenuUsuario vmu = new VentanaMenuUsuario(getTitle());
-				vmu.setVisible(true);
+				//Abrimos la ventana restaurante
+	
+				VentanaElegirRestaurante ver= new VentanaElegirRestaurante(null);
+				ver.setVisible(true);
 				vc.dispose();
+
 			}
 		});
-		panelSur.add(btnMenPrincipal);
+		panelSur.add(btnRestaurante);
 		
 		
-		JButton btnCancelar = new JButton("Confirmar");
-		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		btnCancelar.addMouseListener(new MouseAdapter() {
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		btnConfirmar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Volvemos a la página de datos generales de evento
@@ -110,7 +110,7 @@ public class VentanaComida extends JFrame {
 			}
 		});
 		panelSur.add(btnCancelar_1);
-		panelSur.add(btnCancelar);
+		panelSur.add(btnConfirmar);
 		
 		JLabel lblTotal = new JLabel("Total =");
 		lblTotal.setForeground(Color.BLUE);
@@ -122,7 +122,7 @@ public class VentanaComida extends JFrame {
 		txtImporteAPagar.setEditable(false);
 		txtImporteAPagar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		panelSur.add(txtImporteAPagar);
-		txtImporteAPagar.setColumns(10);
+		txtImporteAPagar.setColumns(4);
 		
 		JPanel panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
@@ -142,7 +142,7 @@ public class VentanaComida extends JFrame {
 		panelCentro.add(rdbtnCatering);
 		
 		comboBoxCatering = new JComboBox();
-		comboBoxCatering.setModel(new DefaultComboBoxModel(new String[] {"", "Comida autóctona", "Comida asiática", "Comida africana", "Comida vegana", "Comida baja en grasas"}));
+		comboBoxCatering.setModel(new DefaultComboBoxModel(new String[] {"", "Comida autóctona", "Comida asiática", "Comida africana", "Comida vegana", "Comida sin grasas"}));
 		comboBoxCatering.addActionListener(new ActionListener() {
 			
 			@Override

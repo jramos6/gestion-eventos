@@ -32,6 +32,7 @@ public class VentanaMisReservas extends JFrame {
 
 	private JPanel contentPane;
 	private JTextArea txtReservas;
+	private JTextField txtCodigo;
 	
 
 	/**
@@ -79,6 +80,32 @@ public class VentanaMisReservas extends JFrame {
 		});
 		panelSur.add(btnVolver);
 		
+		JLabel lblIntroduzcaElCdigo = new JLabel("Introduzca el código:");
+		panelSur.add(lblIntroduzcaElCdigo);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setToolTipText("Código de la reserva a eliminar");
+		panelSur.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Eliminamos la reserva escogida con el método de la base de datos
+				int codigo = Integer.parseInt(txtCodigo.getText());
+				VentanaLogin.bd.eliminarEventoCodigo(codigo);
+				
+				//Volvemos a mostrar la lista actualizada en pantalla
+				ArrayList<String> a = VentanaLogin.bd.mostrarTodosLosEventos();
+				txtReservas.setText(String.format("%10s%10s%15s%10s%15s%15s%15s%15s%30s%20s%20s%20s%10s\n","USUARIO","PRECIO","INVITADOS","CODIGO","ACTIVIDAD","FECHA","COD_MUSICA","COD_BAILE","ESPACIO","NUM_MENU","CATERING","CAFES_INFUSIONES","VINOS"));
+				for(int i=0;i<a.size();i++){ 
+					txtReservas.append(a.get(i));
+				}
+			}
+		});
+		panelSur.add(btnEliminar);
+		
 		JPanel panelOeste = new JPanel();
 		contentPane.add(panelOeste, BorderLayout.WEST);
 		
@@ -98,7 +125,7 @@ public class VentanaMisReservas extends JFrame {
 		//Anyadimos scroll a la ventana para que se vean todos los campos
 		JScrollPane scroll = new JScrollPane(txtReservas);    
         scroll.setBounds(new Rectangle(30,30,100,200));                                                    
-        vmr.add(scroll);                   
+        vmr.getContentPane().add(scroll);                   
         
 
         //Si el usuario es el administrador tenemos que mostrar la información de todos las reservas de los usuarios
@@ -108,6 +135,12 @@ public class VentanaMisReservas extends JFrame {
 			for(int i=0;i<a.size();i++){ 
 				txtReservas.append(a.get(i));
 			}
+			txtCodigo.setVisible(true);
+			lblIntroduzcaElCdigo.setVisible(true);
+			btnEliminar.setVisible(true);
+			
+			
+			
 		}else{
 			//Mostramos todas las reservas del usuario (único), sacando la informacion almacenada en la base de datos
 			ArrayList<String> a = VentanaLogin.bd.mostrarEventos(nombre);
@@ -115,6 +148,9 @@ public class VentanaMisReservas extends JFrame {
 			for(int i=0;i<a.size();i++){
 				txtReservas.append(a.get(i));
 			}
+			txtCodigo.setVisible(false);
+			lblIntroduzcaElCdigo.setVisible(false);
+			btnEliminar.setVisible(false);
 		}
 		
       
