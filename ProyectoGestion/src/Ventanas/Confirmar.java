@@ -65,17 +65,24 @@ public class Confirmar extends JDialog {
 					if(numTarjeta.length()!=16){
 						JOptionPane.showMessageDialog(null, "Número de tarjeta incorrecto. Introduzca el número con 16 cifras, sin espacios", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}else{
-						System.out.println(numTarjeta);
-					
-						try { //Si el numero no lo podemos convertir en int quiere decir que tiene algún caracter que no es válido. Lanzamos la excepción
-						//TODO esto no funciona... Salta siempre al catch --> QUIERO COMPROBAR QUE ES UN NÚMERO, Y NO UN STRING
-						int i=Integer.parseInt(textFieldTarjeta.getText());
-						
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, "Sólo números, por favor","ERROR",JOptionPane.ERROR_MESSAGE);
+						if(isNumeric(numTarjeta)==true){ //Comprobamos que tenga solo caracteres numéricos
+							VentanaBarraProgreso vbp = new VentanaBarraProgreso(nombre);
+							vbp.setVisible(true);
+
+							Timer t = new Timer(13000, new ActionListener() { // Usamos esto para cerrar la ventana una vez hayan pasado 13 segundos (cuando la barra de progreso haya acabado)
+																				
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									c.dispose();
+								}
+							});
+							t.start();
+						}else{
+							JOptionPane.showMessageDialog(null, "Número incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+							textFieldTarjeta.setText("");
 						}
-					}
 					
+					}
 				}else if(seleccion.equals("Transferencia bancaria")){
 					
 					
@@ -151,12 +158,12 @@ public class Confirmar extends JDialog {
 				vc.dispose();
 			}
 		});
-		//cancelButton.setActionCommand("Cancel");
+		
 		buttonPane.add(cancelButton);
 				
-		//okButton.setActionCommand("OK");
+		
 		buttonPane.add(okButton);
-		//getRootPane().setDefaultButton(okButton);
+		
 	
 		
 		
@@ -193,7 +200,7 @@ public class Confirmar extends JDialog {
 			@Override
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
-				if (textField_Banc1.getText().length()== longit){
+				if (textField_Banc1.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
 					textField_Banc1.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -211,7 +218,7 @@ public class Confirmar extends JDialog {
 			@Override
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
-				if (textField_Banc2.getText().length()== longit){
+				if (textField_Banc2.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
 					textField_Banc2.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -229,7 +236,7 @@ public class Confirmar extends JDialog {
 			@Override
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
-				if (textField_Banc3.getText().length()== longit){
+				if (textField_Banc3.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
 					textField_Banc3.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -247,7 +254,7 @@ public class Confirmar extends JDialog {
 			@Override
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
-				if (textField_Banc4.getText().length()== longit){
+				if (textField_Banc4.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
 					textField_Banc4.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -298,7 +305,15 @@ public class Confirmar extends JDialog {
 			textField_Banc3.setEnabled(false);
 			textField_Banc4.setEnabled(false);
 			textField_Banc5.setEnabled(false);
-
+			textField_Banc1.setVisible(false);
+			textField_Banc2.setVisible(false);
+			textField_Banc3.setVisible(false);
+			textField_Banc4.setVisible(false);
+			textField_Banc5.setVisible(false);
+			textFieldTarjeta.setVisible(true);
+			okButton.setEnabled(true);
+			lblCuenta.setVisible(false);
+			lblTarjeta.setVisible(true);
 			
 		}else if(seleccion.equals("Transferencia bancaria")){
 			okButton.setToolTipText("Introduzca los 20 dígitos para continuar");
@@ -310,10 +325,25 @@ public class Confirmar extends JDialog {
 			textField_Banc3.setEnabled(true);
 			textField_Banc4.setEnabled(true);
 			textField_Banc5.setEnabled(true);
-			
+			textFieldTarjeta.setVisible(false);
+			textField_Banc1.setVisible(true);
+			textField_Banc2.setVisible(true);
+			textField_Banc3.setVisible(true);
+			textField_Banc4.setVisible(true);
+			textField_Banc5.setVisible(true);
+			lblCuenta.setVisible(true);
+			lblTarjeta.setVisible(false);
 			
 		}else{
-			okButton.setEnabled(true);
+			okButton.setEnabled(false);
+			textField_Banc1.setVisible(false);
+			textField_Banc2.setVisible(false);
+			textField_Banc3.setVisible(false);
+			textField_Banc4.setVisible(false);
+			textField_Banc5.setVisible(false);
+			textFieldTarjeta.setVisible(false);
+			lblCuenta.setVisible(false);
+			lblTarjeta.setVisible(false);
 		}
 		
 		
@@ -328,6 +358,9 @@ public class Confirmar extends JDialog {
 	        return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("")==false);
 	    }
 	 
+	 /**
+	  * Método para vaciar los campos de texto
+	  */
 	 public void ponemosEnBlanco(){
 			textField_Banc1.setText("");
 			textField_Banc2.setText("");
@@ -335,5 +368,6 @@ public class Confirmar extends JDialog {
 			textField_Banc4.setText("");
 			textField_Banc5.setText("");
 	 }
+
 }
 

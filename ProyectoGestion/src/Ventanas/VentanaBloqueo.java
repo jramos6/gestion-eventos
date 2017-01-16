@@ -79,7 +79,8 @@ public class VentanaBloqueo extends JFrame {
 					va.setVisible(true);
 					vb.dispose();
 				}else{
-					JOptionPane.showMessageDialog(null, "Contraseña incorrecta. Vuelva a introducir la contraseña de desbloqueo");
+					JOptionPane.showMessageDialog(null, "Contraseña incorrecta. Vuelva a introducir la contraseña de desbloqueo","ERROR",JOptionPane.ERROR_MESSAGE);
+					txtContrasenia.setText(""); //Vaciamos campo
 				}
 
 			}
