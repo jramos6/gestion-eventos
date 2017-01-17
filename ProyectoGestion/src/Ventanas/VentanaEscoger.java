@@ -1,16 +1,12 @@
 package Ventanas;
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollPaneUI.VSBChangeListener;
 
 import java.awt.GridLayout;
-import java.awt.JobAttributes;
-import java.awt.TrayIcon.MessageType;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,6 +19,10 @@ import java.awt.Font;
 
 public class VentanaEscoger extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNumInvitados;
 	

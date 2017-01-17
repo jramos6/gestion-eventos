@@ -1,6 +1,5 @@
 package Data;
 import java.awt.BorderLayout;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,7 +7,6 @@ import javax.swing.JPanel;
 import org.freixas.jcalendar.DateEvent;
 import org.freixas.jcalendar.DateListener;
 import org.freixas.jcalendar.JCalendar;
-import org.freixas.jcalendar.JCalendarCombo;
  
 /**
  * Clase calendario: muestra por pantalla un calendario

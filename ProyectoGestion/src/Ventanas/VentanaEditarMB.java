@@ -1,27 +1,21 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -29,6 +23,10 @@ import java.awt.Font;
 
 public class VentanaEditarMB extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, panelEtiquetas, panelTextos;
 	private JTextField txtNuevoTipo, txtNuevaDur, txtNuevoPrecio;
 	JTextArea txtOpcionesActuales;
@@ -63,7 +61,7 @@ public class VentanaEditarMB extends JFrame {
 				if(rdbtnBaile.isSelected()==false && rdbtnMusica.isSelected()==false){
 					estanInvisibles();
 				}
-				ArrayList<String>a=VentanaLogin.bd.mostrarTodasLasMusicas(); //TODO esto sale txapu
+				ArrayList<String>a=VentanaLogin.bd.mostrarTodasLasMusicas();
 				txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
 				for(int i=0;i<a.size();i++){
 					txtOpcionesActuales.append(a.get(i));

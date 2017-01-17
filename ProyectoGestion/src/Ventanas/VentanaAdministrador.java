@@ -1,31 +1,24 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JSplitPane;
-import javax.swing.JTextField;
 
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 
 public class VentanaAdministrador extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String numInvitados, nomUsuario;
 	private String actividad;
@@ -76,9 +69,17 @@ public class VentanaAdministrador extends JFrame {
 		panelCentro.add(panelIzd);
 		panelIzd.setLayout(new GridLayout(4, 1, 0, 0));
 		
-		JButton btnActualizarEspacios = new JButton("Actualizar espacios");
-		btnActualizarEspacios.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		panelIzd.add(btnActualizarEspacios);
+		JButton btnActualizarContraAdmin = new JButton("Actualizar contraseña administrador");
+		btnActualizarContraAdmin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaCambiarContrasenya vcc = new VentanaCambiarContrasenya();
+				vcc.setVisible(true);
+				va.dispose();
+			}
+		});
+		btnActualizarContraAdmin.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
+		panelIzd.add(btnActualizarContraAdmin);
 		
 		JButton btnModificarUsuarios = new JButton("Modificar usuarios");
 		btnModificarUsuarios.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
@@ -157,9 +158,9 @@ public class VentanaAdministrador extends JFrame {
 		});
 		panelDrch.add(btnMusicaBaile);
 		
-		JButton btnEstadisticas = new JButton("Estadísticas");
-		btnEstadisticas.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		btnEstadisticas.addMouseListener(new MouseAdapter() {
+		JButton btnCifras = new JButton("Cifras - Estadísticas");
+		btnCifras.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
+		btnCifras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				VentanaEstadisticas ves = new VentanaEstadisticas();
@@ -167,6 +168,6 @@ public class VentanaAdministrador extends JFrame {
 				va.dispose();
 			}
 		});
-		panelDrch.add(btnEstadisticas);
+		panelDrch.add(btnCifras);
 	}
 }

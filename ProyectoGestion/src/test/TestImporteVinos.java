@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ public class TestImporteVinos extends TestCase{
 
 	VentanaComida vc;
 	public TestImporteVinos() {
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 		super();
 		vc = new VentanaComida("1", "", 0, 0, 0, 0, false, false,"","",0,0);
 	

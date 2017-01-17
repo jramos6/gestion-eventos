@@ -1,7 +1,7 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,8 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import BasesDeDatos.BD;
-import Data.Evento;
 import Data.Usuario;
 
 import javax.swing.JLabel;
@@ -19,15 +17,12 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
@@ -36,10 +31,13 @@ import javax.swing.JPasswordField;
 
 public class VentanaMisClientes extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, panelEste ;
 	private JTextArea txtReservas;
 	private JTextField txtUsuModif;
-	private String nombre;
 	private JButton btnCambios;
 	private JTextField txtNombre;
 	private JTextField txtDNI1;

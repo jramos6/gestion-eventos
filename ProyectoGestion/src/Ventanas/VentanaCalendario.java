@@ -1,28 +1,27 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import BasesDeDatos.BD;
 import Data.PanelCal;
-import Data.Usuario;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
 public class VentanaCalendario extends JFrame {
 
+	/**
+	 * Serial numbre
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
 	/**
@@ -49,7 +48,6 @@ public class VentanaCalendario extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//TODO TENEMOS QUE COMPROBAR SI VIENE DEL MENU DE USUARIOS, PORQUE SI ES ASÍ TIENE QUE VOLVER A ESE MENÚ, NO A LA PÁGINA DE RESERVAS (parecido a lo del admin)
 				
 				if(VentanaLogin.u.esAdmin==true){
 					VentanaAdministrador va = new VentanaAdministrador();
@@ -88,7 +86,6 @@ public class VentanaCalendario extends JFrame {
 		
 		//Se abre un calendario en la ventana
 		PanelCal pc = new PanelCal();
-		FlowLayout flowLayout = (FlowLayout) pc.getLayout();
 		panelCentro.add(pc,BorderLayout.CENTER);
 		
 		JButton btnAceptar = new JButton("Aceptar");

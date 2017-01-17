@@ -6,7 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -15,13 +14,15 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JSplitPane;
-import javax.swing.JDesktopPane;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class VentanaPrincipal extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, panelNorte, panelSur, panelEste, panelCentro;
 	static JPanel panelOeste;
 	JLabel labelCentro, labelEste;

@@ -1,17 +1,12 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-
-import BasesDeDatos.BD;
-import Data.Evento;
-import Data.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -25,11 +20,13 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Locale;
 
 public class VentanaMisReservas extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextArea txtReservas;
 	private JTextField txtCodigo;
@@ -99,6 +96,7 @@ public class VentanaMisReservas extends JFrame {
 				//Eliminamos la reserva escogida con el método de la base de datos
 				int codigo = Integer.parseInt(txtCodigo.getText());
 				VentanaLogin.bd.eliminarEventoCodigo(codigo);
+				txtCodigo.setText("");
 				
 				//Volvemos a mostrar la lista actualizada en pantalla
 				ArrayList<String> a = VentanaLogin.bd.mostrarTodosLosEventos();

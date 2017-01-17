@@ -1,15 +1,12 @@
 package Ventanas;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-import javax.swing.JTable;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -27,13 +23,16 @@ import javax.swing.SwingConstants;
 
 public class Confirmar extends JDialog {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JLabel lblFormaPago, lblTarjeta, lblCuenta;
+	private JLabel lblFormaPago;
 	private JTextField textFieldTarjeta,textField_Banc1, textField_Banc2, textField_Banc3, textField_Banc4;
 	private JTextField textField_Banc5;
 	private int longit=4;
 	private boolean dentro=false;
-	private boolean esElFinal=false;
 
 	/**
 	 * Create the dialog.
@@ -144,10 +143,21 @@ public class Confirmar extends JDialog {
 						});
 						t.start();
 					}
-					
+					dentro=false;
 				}
-				dentro=false;
-				
+			else{
+					VentanaBarraProgreso vbp = new VentanaBarraProgreso(nombre);
+					vbp.setVisible(true);
+
+					Timer t = new Timer(13000, new ActionListener() { // Usamos esto para cerrar la ventana una vez hayan pasado 13 segundos (cuando la barra de progreso haya acabado)
+																		
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							c.dispose();
+						}
+					});
+					t.start();
+				}
 			}
 			});
 			

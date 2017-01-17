@@ -1,6 +1,5 @@
 package Ventanas;
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,11 +21,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuarios... :(
+public class VentanaLogin extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, pnlNorte, panelSur;
 	private JTextField txtUsuario, txtNombre, txtDNI, txtEdad;
 	private JPasswordField txtContrasenia;
@@ -35,8 +36,7 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 	private boolean activado=false;
 	private boolean estaRegistrandose;
 	public static BD bd; //Aquí tenemos la Base De Datos
-	private String usuAdmin="admin123"; //Datos de acceso de administrador
-	private String contraAdmin="123";
+	private String usuAdmin="admin123"; //Datos de acceso de administrador (usuario)
 	public static Usuario u;
 
 	/**

@@ -1,7 +1,6 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +15,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
@@ -24,6 +22,10 @@ import java.awt.event.ActionEvent;
 
 public class VentanaEscogerPago extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, panelS, panelCentro, panelCiz, panelCder, panelCizNom, panelCizNumInv, panelCizFecha;
 	private JPanel panelCizTotPre;
 	private JRadioButton rdbtnMetalico, rdbtnTarjeta, rdbtnTransferenciaBancaria;

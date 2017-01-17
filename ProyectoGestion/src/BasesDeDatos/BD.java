@@ -210,31 +210,6 @@ public class BD {
 		return a;
 	}
 	
-	/**TODO Lo que se quiere hacer es en la ventana calendario viniendo de admin poder ver qué eventos hay en los días que clickas
-	 * Método para mostrar solo el usuario, espacio y actividad en una fecha concreta. 
-	 * @param fecha
-	 * @return
-	 */
-	public ArrayList<String> mostarEventoShort(int fecha){
-		String query;
-		ArrayList<String> a = new ArrayList<String>();
-		query="SELECT (usuario, espacio, actividad) FROM Eventos WHERE fecha="+fecha;
-		try {
-			ResultSet rs = stm.executeQuery(query);
-			while(rs.next()){
-				for(int i=0; i<a.size();i++){
-					a.set(i, query);
-					System.out.println(a.get(i));
-				}
-			}
-		} catch (SQLException e) {
-			//  Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return a;
-	}
-	
 	/**
 	 * Método que muestra por pantalla todos los eventos de todos los usuario (VentanaMisReservas)
 	 * @return a: arrayList de todos los eventos
@@ -1020,18 +995,33 @@ public class BD {
 	 */
 	public String obtenerContraAdmin(){
 		String query;
-		String contra=null;
+		String contra="";
 		query="SELECT Contrasenia FROM USUARIO Where DNI='99999999Z'";
 		try {
 			ResultSet rs = stm.executeQuery(query);
 			if(rs.next()){
-				contra=rs.getString("contrasenia");
+				contra=rs.getString("Contrasenia");
 			}
 		} catch (SQLException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		return contra;
+	}
+	
+	/**
+	 * Método para actualizar la contraseña del administrador
+	 * @param contra: String que tiene la nueva contraseña del administrador
+	 */
+	public void actualizarContraAdmin(String contra){
+		String query;
+		query="UPDATE USUARIO SET Contrasenia='"+contra+"' WHERE DNI='99999999Z'";
+		try {
+			int rs = stm.executeUpdate(query);
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -2,7 +2,6 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +10,10 @@ import javax.swing.border.EmptyBorder;
 
 public class VentanaCierre extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public JLabel aEtiquetas[];
 

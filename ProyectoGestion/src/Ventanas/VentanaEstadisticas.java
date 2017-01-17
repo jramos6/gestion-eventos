@@ -1,19 +1,16 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -23,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -32,6 +28,10 @@ import java.awt.Font;
 
 public class VentanaEstadisticas extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, panelS, panelN, panelE, panelO, panelReservasTot, panelGananciasTot, panelCarriba;
 	private JTextArea txtReservas;
 	private JTextField txtNumeroTot;
@@ -276,13 +276,11 @@ public class VentanaEstadisticas extends JFrame {
 		txtTotal.setText(""+VentanaLogin.bd.gananciasTotal()+" €");
 	
 		fechasGanancias();
-	/*TODO FALTA SCROLL QUE NO SE POR QUE NO ME SALE...
-		//Anyadimos scroll a la ventana para que se vean todos los campos
-		JScrollPane scroll = new JScrollPane(txtReservas);                                                     
-        ve.getContentPane().add(scroll);     
-		//Anyadimos scroll a la ventana para que se vean todos los campos                                                    
-        ve.getContentPane().add(scroll);
-		*/
+	
+		//Añadimos scroll
+		
+		JScrollPane scroll = new JScrollPane(txtReservas);
+		panelCabajo.add(scroll);
 	}
 	
 	/**

@@ -1,7 +1,6 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,15 +16,17 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class VentanaEspacio extends JFrame {
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String espacio;
 	private JRadioButton radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7;
 	private JLabel lblPre1,lblPre2,lblPre3,lblPre4,lblPre5,lblPre6,lblPre7;
 	private long precioFinal;

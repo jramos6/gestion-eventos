@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
-import java.awt.Window;
 
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -20,6 +19,10 @@ import java.awt.Font;
  */
 public class VentanaBarraProgreso extends JFrame {
 	
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private int progress;
 	
 	public VentanaBarraProgreso(String nombre){

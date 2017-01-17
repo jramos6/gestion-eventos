@@ -9,11 +9,11 @@ private String servicio;
 
 	public Laborales() {
 		super(presupuesto, codigo, codigo, sala);
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 	public Laborales(double presupuesto, int invitados, String lugar, int fecha) {
 		super(presupuesto, invitados, codigo, actividad);
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 		
 		
 	}

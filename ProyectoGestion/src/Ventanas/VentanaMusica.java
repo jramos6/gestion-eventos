@@ -1,7 +1,6 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,9 +17,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.spi.TimeZoneNameProvider;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -30,15 +26,17 @@ import java.awt.event.ActionEvent;
 
 public class VentanaMusica extends JFrame{
 
+	/**
+	 * Serial number
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, panelCentroBaile ;
 	private JTextField textFieldPrecio, textFieldPrecioBaile;
 	private JLabel lblTipo, lblDuracin, lblPrecio, lblBaile, lblTipo_1, lblDuracin_1, lblPrecio_1, lblMusica;
 	private JComboBox comboBoxDuracion,comboBoxTipoMusica, comboBoxTipoBaile, comboBoxDuracionBaile;
 	private JRadioButton radioButtonBaile, radioButtonMusica ;
-	private JTextField txtNumInvitados;
 	private JButton btnMenPrincipal;
 	private String nomUsuario;
-	private int anio, mes, dia;
 	private long precioF, precioMusica, precioBaile;
 	private int cod_m, cod_b;
 	
