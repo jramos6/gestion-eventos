@@ -1014,28 +1014,48 @@ public class BD {
 
 	}
 	
-	/** TODO no funciona, porque no se actualizan los clientes de la BD
-	 * Método para actualizar clientes de la base de datos
-	 * @param nombre: string que guarda el nombre del usuario
-	 * @param dni: string de 9 caracteres
-	 * @param usu: Nombre de usuario del usuario, string
-	 * @param contra: contraseña del usuario, string
-	 * @param edad: : int con la edad del usuario, mayor que 18
+	/**
+	 * Método para obtener la contraseña del administrador
+	 * @return: contraseña en formato String
 	 */
-	public void actualizarCliente(String nombre, String dni, String usu, String contra, int edad){
-		
+	public String obtenerContraAdmin(){
 		String query;
-		query="UPDATE USUARIO SET Nombre='"+nombre+"', DNI='"+dni+"', Usuario='"+usu+"', Contrasenia='"+contra+"', Edad="+edad+" WHERE DNI='"+dni+"'";
+		String contra=null;
+		query="SELECT Contrasenia FROM USUARIO Where DNI='99999999Z'";
 		try {
-			stm.executeUpdate(query);
+			ResultSet rs = stm.executeQuery(query);
+			if(rs.next()){
+				contra=rs.getString("contrasenia");
+			}
 		} catch (SQLException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
-			
+		}
+		return contra;
+	}
+	
+	/**
+	 * Método que comprueba si un DNI está usado por otro usuario
+	 * @param dni: String con el número de DNI
+	 * @return esta: boolean que contiene true si el DNI ya está siendo usado, o false si no está siendo usado
+	 */
+	public boolean dniUsado(String dni){
+		String query;
+		boolean esta=false;
+		query="SELECT * FROM USUARIO WHERE DNI='"+dni+"'";
+		try {
+			ResultSet rs = stm.executeQuery(query);
+			if(rs.next()){
+				esta=true;
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		
+		return esta;
 	}
+	
 	
 	
 }

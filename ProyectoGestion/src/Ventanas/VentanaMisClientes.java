@@ -135,8 +135,16 @@ public class VentanaMisClientes extends JFrame {
 				
 				if(btnCambios.getText()=="Eliminar"){
 					//Si el comboBox es eliminar eliminamos el usuario de la base de datos
-					VentanaLogin.bd.eliminarCliente(txtUsuModif.getText());
+					
+					//Pero primero comprobamos que no sea el administrador, porque ese no se puede eliminar
+					
+					if(txtUsuModif.getText().equals("admin123")){
+						JOptionPane.showMessageDialog(null, "No se puede eliminar al usuario administrador","ERROR",JOptionPane.ERROR_MESSAGE);
+						txtUsuModif.setText("");
+					}else{
+					
 					VentanaLogin.bd.eliminarEvento(txtUsuModif.getText()); //Tenemos que borrar tambien los eventos del usuario
+					VentanaLogin.bd.eliminarCliente(txtUsuModif.getText()); 
 					txtUsuModif.setText("");
 					
 					//Volvemos a sacar en pantalla todos los usuarios, sin el que acabamos de quitar
@@ -145,7 +153,8 @@ public class VentanaMisClientes extends JFrame {
 					for(int i=0;i<a.size();i++){
 						txtReservas.append(a.get(i));
 					}
-					
+					txtUsuModif.setText("");
+					}
 					
 				}if(btnCambios.getText()=="Añadir"){
 					//Insertamos el nuevo usuario en la base de datos
@@ -158,6 +167,7 @@ public class VentanaMisClientes extends JFrame {
 					for(int i=0;i<a.size();i++){
 						txtReservas.append(a.get(i));
 					}
+					txtUsuModif.setText("");
 					
 				}
 			}
@@ -255,9 +265,17 @@ public class VentanaMisClientes extends JFrame {
 			haEntrado=true;
 		}
 		//Comprobaciones de edad y DNI
-		else if(dniA.length()!=9){ //DNI de tamaño 9
-			JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A", "Error", JOptionPane.ERROR_MESSAGE);
+		else if(dniA.length()!=9 || isNumeric(dniA.substring(0, 7))==false || isNumeric(dniA.substring(8))==true){
+			//DNI de tamaño 9, numeros del 0 al 7, letra el 8
+			JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A", "ERROR", JOptionPane.ERROR_MESSAGE);
 			txtDNI1.setText("");
+			haEntrado=true;
+		}
+
+		else if(VentanaLogin.bd.dniUsado(dniA)==true){
+			//Significa que el DNI ya está siendo usado --> Salta un error
+			JOptionPane.showMessageDialog(null, "El DNI ya está siendo usado. No puede usar ese DNI.\nSi consideras que es un error póngase en contacto con el administrador del programa", "Error", JOptionPane.ERROR_MESSAGE);
+			vaciarCampos();
 			haEntrado=true;
 		}
 		
@@ -285,10 +303,6 @@ public class VentanaMisClientes extends JFrame {
 			JOptionPane.showMessageDialog(null, "Usuario registrado satisfactoriamente","Correcto", JOptionPane.INFORMATION_MESSAGE);
 			vaciarCampos();
 			
-		}else if(haEntrado==false && esNuevo==false){	
-			int ed = Integer.parseInt(eda);
-			VentanaLogin.bd.actualizarCliente(nom, dniA, usu, con, ed);
-			JOptionPane.showMessageDialog(null, "Usuario actualizado satisfactoriamente","Correcto", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
@@ -299,5 +313,15 @@ public class VentanaMisClientes extends JFrame {
 		txtContra.setText("");
 		txtEdad.setText("");
 	}
+	
+	/**
+	 * Método que comprueba si el texto seleccionado es un número
+	 * Sacado de: http://www.aprenderaprogramar.com/foros/index.php?topic=809.0
+	 * @param str
+	 * @return true si es un número, false si no lo es
+	 */
+	 public static boolean isNumeric(String str) {
+	        return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("")==false);
+	    }
 	
 }

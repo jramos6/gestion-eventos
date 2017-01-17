@@ -186,7 +186,7 @@ public class Confirmar extends JDialog {
 		textFieldTarjeta.setFont(new Font("Consolas", Font.PLAIN, 14));
 		textFieldTarjeta.setToolTipText("16 dígitos sin espacios");
 		textFieldTarjeta.setEnabled(false);
-		textFieldTarjeta.setBounds(275, 131, 130, 26);
+		textFieldTarjeta.setBounds(275, 131, 212, 26);
 		getContentPane().add(textFieldTarjeta);
 		textFieldTarjeta.setColumns(10);
 		
@@ -204,6 +204,7 @@ public class Confirmar extends JDialog {
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc1.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				}if(textField_Banc1.getText().length()==longit-1){
 					textField_Banc1.transferFocus(); //Y salta a la siguiente celda
 				}
 			}
@@ -222,6 +223,7 @@ public class Confirmar extends JDialog {
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc2.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				}if(textField_Banc2.getText().length()==longit-1){
 					textField_Banc2.transferFocus(); //Y salta a la siguiente celda
 				}
 			}
@@ -240,6 +242,7 @@ public class Confirmar extends JDialog {
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc3.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				}if(textField_Banc3.getText().length()==longit-1){
 					textField_Banc3.transferFocus(); //Y salta a la siguiente celda
 				}
 			}
@@ -258,6 +261,7 @@ public class Confirmar extends JDialog {
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc4.getText().length()==longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				}if(textField_Banc4.getText().length()==longit-1){
 					textField_Banc4.transferFocus(); //Y salta a la siguiente celda
 				}
 			}
@@ -286,9 +290,11 @@ public class Confirmar extends JDialog {
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc5.getText().length()== longit){
 				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+
+				}if(textField_Banc5.getText().length()==longit-1){
+					//textField_Banc5.transferFocus(); //Y salta a la siguiente celda
 					okButton.setEnabled(true);
 					okButton.setToolTipText("");
-					
 				}
 			}
 		});
@@ -337,7 +343,7 @@ public class Confirmar extends JDialog {
 			lblTarjeta.setVisible(false);
 			
 		}else{
-			okButton.setEnabled(false);
+			okButton.setEnabled(true);
 			textField_Banc1.setVisible(false);
 			textField_Banc2.setVisible(false);
 			textField_Banc3.setVisible(false);

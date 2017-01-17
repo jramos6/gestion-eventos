@@ -123,7 +123,7 @@ public class VentanaComida extends JFrame {
 		txtImporteAPagar.setEditable(false);
 		txtImporteAPagar.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		panelSur.add(txtImporteAPagar);
-		txtImporteAPagar.setColumns(4);
+		txtImporteAPagar.setColumns(6);
 		
 		JPanel panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);

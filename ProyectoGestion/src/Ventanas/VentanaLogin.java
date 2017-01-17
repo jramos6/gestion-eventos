@@ -296,18 +296,20 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 		String txtContr2 = txtContra2.getText();
 		String txtEd = txtEdad.getText();
 		String txtUsu = txtUsuario.getText();
+		boolean haEntrado=false;
 		
 		//Si activado esta en true significa que es un nuevo registro
 		
 		if(activado==true){
 			//Nuevo registro para la base de datos
-			
+			haEntrado=false;
 			//1- Comprobamos que todos los campos estan escritos
 			
 			if(txtDni.equals("")||txtNom.equals("")||txtUsu.equals("")||txtContr1.equals("")||txtContr2.equals("")||txtEd.equals("") ){
 				JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
 				//Si ha escrito algo en uno de los campos los borramos
 				vaciarCampos();
+				haEntrado=true;
 			}
 			
 			//2-Comprobamos que los campos tienen un tipo de datos correcto
@@ -316,19 +318,30 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 			 * Edad: 0-140
 			 */
 			
-			else if(txtDni.length()!=9){ //DNI de tamaño 9
-				JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A");
+			else if(txtDni.length()!=9 || isNumeric(txtDni.substring(0, 7))==false || isNumeric(txtDni.substring(8))==true){
+				//DNI de tamaño 9, numeros del 0 al 7, letra el 8
+				JOptionPane.showMessageDialog(null, "Formato de DNI incorrecto. Por favor, introduzca un DNI que siga el siguiente formato: 00000000A", "ERROR", JOptionPane.ERROR_MESSAGE);
 				txtDNI.setText("");
+				haEntrado=true;
+			}
+			
+			else if(VentanaLogin.bd.dniUsado(txtDni)==true){
+				//Significa que el DNI ya está siendo usado --> Salta un error
+				JOptionPane.showMessageDialog(null, "El DNI ya está siendo usado. No puede usar ese DNI.\nSi consideras que es un error póngase en contacto con el administrador del programa", "Error", JOptionPane.ERROR_MESSAGE);
+				vaciarCampos();
+				haEntrado=true;
 			}
 			
 			else if(txtEd.startsWith("-")){ //Descartamos los numeros negativos
 				JOptionPane.showMessageDialog(null, "Edad incorrecta. No se puede tener una edad negativa");
 				txtEdad.setText("");
+				haEntrado=true;
 			}
 			
 			else if(txtEd.length()==1 || txtEd.startsWith("1") && !(txtEd.endsWith("8") || txtEd.endsWith("9"))){ //Descartamos a niñ@s menores de 18 años
 				JOptionPane.showMessageDialog(null, "Para usar este programa hay que tener al menos 18 años");
 				txtEdad.setText("");
+				haEntrado=true;
 			}
 			
 			//3- Comprobamos que el usuario no existe
@@ -336,6 +349,7 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 			if(u!=null){
 				JOptionPane.showMessageDialog(null, "El nombre de usuario escogido ya existe. Por favor, introduzca otro nombre de usuario", "Error", JOptionPane.ERROR_MESSAGE);
 				txtUsuario.setText("");
+				haEntrado=true;
 			}
 			
 			
@@ -344,10 +358,11 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 			else if(!txtContr1.equals(txtContr2)){
 				JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
 				vaciarCamposContrasenia(); //Vaciamos sólo los campos de contraseñas
+				haEntrado=true;
 			}
 			
 			//5- registramos el nuevo usuario en la base de datos:
-	 
+			else if(haEntrado==false){
 					//b.insertarNuevoUsuario(u);
 					bd.insertarNuevoUsuario(txtNombre.getText(),txtDNI.getText(),txtUsuario.getText(),txtContrasenia.getText(),Integer.parseInt(txtEdad.getText()));
 					JOptionPane.showMessageDialog(null, "Bienvenido al programa "+txtNom);
@@ -357,7 +372,7 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 					VentanaMenuUsuario v = new VentanaMenuUsuario(nombre);
 					v.setVisible(true);
 					vl.dispose();
-					
+			}	
 			
 		}else{
 			//Usuario que existe en la base de datos
@@ -381,7 +396,7 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 				//Cuando se registra satisfactoriamente
 				
 				//Si el usuario se trata del administrador abrimos una ventana a la que solo pueden acceder los administradores
-				if(txtUsu.equals(usuAdmin) && txtContr1.equals(contraAdmin)){
+				if(txtUsu.equals(usuAdmin) && txtContr1.equals(VentanaLogin.bd.obtenerContraAdmin())){
 						VentanaAdministrador va= new VentanaAdministrador();
 						va.setVisible(true);
 						vl.dispose();
@@ -408,4 +423,14 @@ public class VentanaLogin extends JFrame { //TODO no funciona el registrar usuar
 		
 	
 	}
+	
+	/**
+	 * Método que comprueba si el texto seleccionado es un número
+	 * Sacado de: http://www.aprenderaprogramar.com/foros/index.php?topic=809.0
+	 * @param str
+	 * @return true si es un número, false si no lo es
+	 */
+	 public static boolean isNumeric(String str) {
+	        return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("")==false);
+	    }
 }
