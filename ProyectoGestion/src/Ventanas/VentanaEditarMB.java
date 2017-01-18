@@ -21,6 +21,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.Font;
 
+/**
+ * Ventana en la que podemos modificar lo que tenemos en la base de datos relacionado con la música y el baile
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaEditarMB extends JFrame {
 
 	/**
@@ -83,7 +88,7 @@ public class VentanaEditarMB extends JFrame {
 					estanInvisibles();
 				}
 				
-				ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes(); //TODO esto sale txapu
+				ArrayList<String>a=VentanaLogin.bd.mostrarTodosLosBailes(); 
 				txtOpcionesActuales.setText(String.format("%30s%30s%30s%30s\n","TIPO","DURACION","PRECIO","CODIGO"));
 				for(int i=0;i<a.size();i++){
 					txtOpcionesActuales.append(a.get(i));

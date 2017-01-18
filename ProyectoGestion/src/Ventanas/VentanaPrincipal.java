@@ -3,6 +3,10 @@ package Ventanas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,9 +18,16 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Ventana de introducción al programa. Incorpora efecto de sonido
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaPrincipal extends JFrame {
 
 	/**
@@ -158,8 +169,44 @@ public class VentanaPrincipal extends JFrame {
 		labelCentro.setIcon (new ImageIcon("src/imagenes/imagenevento.jpg"));
 		contentPane.add(panelCentro, BorderLayout.CENTER);
 	
+		
+		Clip sonido;
+
+		/** try/catch que implementa el audio del proyecto**/ 
+
+		try {
+
+		sonido = AudioSystem.getClip();
+
+		sonido.open(AudioSystem.getAudioInputStream(new File("audio/cancion.wav")));
+
+		sonido.start();
+
+		} catch (LineUnavailableException e1) {
+
+		// Auto-generated catch block
+
+		e1.printStackTrace();
+
+		} catch (IOException e1) {
+
+		// Auto-generated catch block
+
+		e1.printStackTrace();
+
+		} catch (UnsupportedAudioFileException e1) {
+
+		// Auto-generated catch block
+
+		e1.printStackTrace();
+
 		}
-	
+		
+		
+		
+		
+		}
+
 	class MiThread extends Thread{
 		public MiThread(){
 			super();

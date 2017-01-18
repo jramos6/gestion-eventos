@@ -17,6 +17,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
 
+/**
+ * Ventana que bloquea el uso del programa. Se desbloqueará con la introducción de la contraseña correcta
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaBloqueo extends JFrame {
 
 	/**

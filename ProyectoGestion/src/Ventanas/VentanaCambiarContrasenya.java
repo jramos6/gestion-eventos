@@ -16,6 +16,11 @@ import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Ventana que da la opción de cambiar la contraseña al administrador del programa
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaCambiarContrasenya extends JFrame {
 
 	/**

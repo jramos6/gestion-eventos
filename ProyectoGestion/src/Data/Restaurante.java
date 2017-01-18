@@ -1,5 +1,10 @@
 package Data;
 
+/**
+ * Clase que almacena la información de los restaurantes
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Restaurante {
 
 	protected String titulo;

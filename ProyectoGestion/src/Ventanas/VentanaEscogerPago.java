@@ -20,6 +20,11 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Ventana para escoger entre las diferentes formas de pago
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaEscogerPago extends JFrame {
 
 	/**
@@ -35,7 +40,7 @@ public class VentanaEscogerPago extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaEscogerPago(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal) {
+	public VentanaEscogerPago(String numInvitados, String nombre, int anio, int mes, int dia, long precioFinal, int vez) {
 		setResizable(false);
 		setTitle("Pago");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,9 +55,9 @@ public class VentanaEscogerPago extends JFrame {
 		panelS = new JPanel();
 		contentPane.add(panelS, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Cancelar reserva");
-		panelS.add(btnNewButton);
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnCancelar = new JButton("Cancelar reserva");
+		panelS.add(btnCancelar);
+		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				VentanaMenuUsuario vmu = new VentanaMenuUsuario(nombre);
@@ -61,9 +66,9 @@ public class VentanaEscogerPago extends JFrame {
 				
 			}
 		});
-		btnNewButton.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-		JButton btnAtras = new JButton("Confirmar");
-		btnAtras.addActionListener(new ActionListener() {
+		btnCancelar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String seleccion=null;
@@ -87,8 +92,8 @@ public class VentanaEscogerPago extends JFrame {
 				}
 			}
 		});
-		panelS.add(btnAtras);
-		btnAtras.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
+		panelS.add(btnConfirmar);
+		btnConfirmar.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		
 		panelCentro = new JPanel();
 		contentPane.add(panelCentro, BorderLayout.CENTER);
@@ -209,5 +214,12 @@ public class VentanaEscogerPago extends JFrame {
 				}
 			}
 		});
+	
+		if(vez==0){
+			btnCancelar.setVisible(true);
+		}else{
+			btnCancelar.setVisible(false);
+		}
+		
 	}
 }

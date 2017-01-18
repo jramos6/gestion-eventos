@@ -21,6 +21,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+/**
+ * Ventana que muestra todas las reservas. En caso del administrador también se da la opción de eliminar reservas
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaMisReservas extends JFrame {
 
 	/**

@@ -1,5 +1,10 @@
 package Data;
 
+/**
+ * Clase que almacena toda la información de los usuarios
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Usuario {
 		private String dni;
 		private String nombre;

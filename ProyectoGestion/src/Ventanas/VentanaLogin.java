@@ -22,6 +22,12 @@ import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Ventana que valida el usuario y la contraseña para poder utilizar el programa. En caso de no estar registrado
+ * se da la opción de registro
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaLogin extends JFrame {
 
 	/**

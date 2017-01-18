@@ -19,6 +19,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * Ventana en la que se elige el tipo de evento y el número de invitados que va a acoger
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaEventos extends JFrame {
 
 	/**

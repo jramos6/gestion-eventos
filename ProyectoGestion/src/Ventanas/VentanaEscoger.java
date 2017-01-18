@@ -17,6 +17,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 
+/**
+ * Ventana para escoger entre los servicios adicionales que se le presentan al usuario
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaEscoger extends JFrame {
 
 	/**
@@ -134,7 +139,7 @@ public class VentanaEscoger extends JFrame {
 				//Insertamos la información
 				VentanaLogin.bd.insertarNuevoEvento(nombre, precioFinal, invitadosNumero, actividad, fechaTotal, cod_musica, cod_baile, espacio, num_menu, catering, cafes_infusiones, vinos);
 				
-				VentanaEscogerPago vep = new VentanaEscogerPago(numInvitados, nombre, anio, mes, dia, precioFinal);
+				VentanaEscogerPago vep = new VentanaEscogerPago(numInvitados, nombre, anio, mes, dia, precioFinal,0);
 				vep.setVisible(true);
 				ve.dispose();
 			}

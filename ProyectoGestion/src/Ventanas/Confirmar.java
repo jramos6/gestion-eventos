@@ -20,7 +20,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
 
-
+/**
+ * Ventana para confirmar la reserva y pasar directamente a pagar
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Confirmar extends JDialog {
 
 	/**
@@ -165,7 +169,7 @@ public class Confirmar extends JDialog {
 		cancelButton.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaEscogerPago vep= new VentanaEscogerPago(numInvitados, nombre, anio, mes, dia, precioFinal);
+				VentanaEscogerPago vep= new VentanaEscogerPago(numInvitados, nombre, anio, mes, dia, precioFinal,1);
 				vep.setVisible(true);
 				vc.dispose();
 			}

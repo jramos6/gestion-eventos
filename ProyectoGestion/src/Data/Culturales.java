@@ -1,5 +1,10 @@
 package Data;
 
+/**
+ * Clase que almacena los eventos culturales
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Culturales extends Evento {
 
 	private static String funcion;

@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 
 /**
+ * Ventana que muestra una barra de progreso, que carga con el paso del tiempo
  * Fragmento de código cogido de:
  * @author from   www.java2s.com
  */

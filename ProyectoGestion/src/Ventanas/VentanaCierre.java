@@ -8,6 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Ventana que con un hilo cierra el programa
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaCierre extends JFrame {
 
 	/**

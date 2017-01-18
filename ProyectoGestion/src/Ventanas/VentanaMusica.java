@@ -24,6 +24,11 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Ventana que muestra todas las opciones relacionadas con la música y el baile
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaMusica extends JFrame{
 
 	/**

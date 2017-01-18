@@ -24,6 +24,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 
+/**
+ * Ventana que muestra las diferentes opciones relacionadas con la comida
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaComida extends JFrame {
 
 	/**

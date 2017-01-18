@@ -13,6 +13,11 @@ import Data.Evento;
 import Data.Restaurante;
 import Data.Usuario;
 
+/**
+ * Clase que contiene todos los métodos referentes a la base de datos
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class BD {
 
 	private Connection connect;

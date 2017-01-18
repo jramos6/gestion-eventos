@@ -16,6 +16,11 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Ventana que muestra el mençu del usuario
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaMenuUsuario extends JFrame {
 
 	/**

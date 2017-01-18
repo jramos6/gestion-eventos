@@ -1,5 +1,10 @@
 package Data;
 
+/**
+ * Clase que guarda todos los eventos laborales
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Laborales extends Evento  {
 
 

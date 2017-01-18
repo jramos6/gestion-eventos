@@ -1,11 +1,15 @@
 package test;
 
-
 import org.junit.Test;
 
 import Ventanas.VentanaComida;
 import junit.framework.TestCase;
 
+/**
+ * Unidad de test que comprueba el correcto funcionamiento de los métodos de importe de vinos, en dos casos diferentes
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class TestImporteVinos extends TestCase{
 
 	VentanaComida vc;

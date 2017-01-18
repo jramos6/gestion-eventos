@@ -21,6 +21,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+/**
+ * Ventana para elegir el restaurante
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaElegirRestaurante extends JFrame {
 
 	/**

@@ -1,6 +1,10 @@
 package Data;
 
-
+/**
+ * Clase que almacena todos los eventos. De esta clase extienden las demás relacionadas con los eventos
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Evento {
 	
 	protected static double presupuesto;

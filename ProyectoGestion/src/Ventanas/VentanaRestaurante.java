@@ -10,6 +10,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Ventana que muestra la información de los restaurantes
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaRestaurante extends JFrame {
 
 	/**

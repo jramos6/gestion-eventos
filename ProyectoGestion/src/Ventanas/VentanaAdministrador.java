@@ -13,6 +13,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 
+/**
+ * Ventana que da acceso a todas las opciones de administración del sistema
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaAdministrador extends JFrame {
 
 	/**

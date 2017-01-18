@@ -20,6 +20,11 @@ import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Ventana para escoger entre los distintos espacios que se ofertan
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaEspacio extends JFrame {
 
 	/**

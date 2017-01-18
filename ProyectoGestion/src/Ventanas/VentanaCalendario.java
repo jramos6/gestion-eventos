@@ -13,9 +13,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
+/**
+ * Ventana que muestra por pantalla el calendario
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaCalendario extends JFrame {
 
 	/**

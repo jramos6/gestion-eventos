@@ -26,6 +26,11 @@ import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.Font;
 
+/**
+ * Ventana que muestra las cifras que maneja el programa, sólo visible para el administrador
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class VentanaEstadisticas extends JFrame {
 
 	/**

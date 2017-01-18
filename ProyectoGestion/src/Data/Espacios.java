@@ -1,5 +1,10 @@
 package Data;
 
+/**
+ * Clase que almacena los espacios disponibles
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Espacios {
 
 	public boolean comedorGrande;

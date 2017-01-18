@@ -1,5 +1,10 @@
 package Data;
 
+/**
+ * Clase que almacena toda la información de los eventos sociales
+ * @author Javier Rivero y Aitor Santamaria
+ *
+ */
 public class Sociales extends Evento {
 
 	private static String restaurante;
