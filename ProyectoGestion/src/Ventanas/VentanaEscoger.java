@@ -92,7 +92,7 @@ public class VentanaEscoger extends JFrame {
 		panelCentro.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		/**
-		 * Al pulsar el botón se abrirá la ventana de comida
+		 * Al pulsar el botón se abrira la ventana de comida
 		 */
 		JButton btnComida = new JButton("Comida");
 		VentanaEscoger ve=this;
@@ -109,7 +109,7 @@ public class VentanaEscoger extends JFrame {
 		panelCentro.add(btnComida);
 		
 		/**
-		 * Al pulsar el botón se abrirá la ventana de música
+		 * Al pulsar el botón se abrira la ventana de música
 		 */
 		JButton btnMsica = new JButton("Música");
 		btnMsica.addMouseListener(new MouseAdapter() {

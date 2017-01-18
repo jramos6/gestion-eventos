@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Clase que almacena toda la información de los eventos sociales
+ * Clase que almacena toda la informacion de los eventos sociales
  * @author Javier Rivero y Aitor Santamaria
  *
  */

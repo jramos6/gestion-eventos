@@ -6,7 +6,7 @@ import Ventanas.VentanaComida;
 import junit.framework.TestCase;
 
 /**
- * Unidad de test que comprueba el correcto funcionamiento de los métodos de importe de vinos, en dos casos diferentes
+ * Unidad de test que comprueba el correcto funcionamiento de los metodos de importe de vinos, en dos casos diferentes
  * @author Javier Rivero y Aitor Santamaria
  *
  */
@@ -29,7 +29,7 @@ public class TestImporteVinos extends TestCase{
 	}
 
 	/**
-	 * Esta vez comprobamos que el importe es el esperado, activando previamente el radioBotón
+	 * Esta vez comprobamos que el importe es el esperado, activando previamente el radioBoton
 	 */
 	public void testImporteSeleccionado(){
 		vc.seleccionarRbVinos();

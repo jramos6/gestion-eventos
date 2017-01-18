@@ -261,7 +261,7 @@ public class VentanaMisClientes extends JFrame {
 		String con = txtContra.getText();
 		String eda = txtEdad.getText();
 		
-		//Comprobamos que todos los campos están escritos
+		//Comprobamos que todos los campos estan escritos
 		if(nom.equals("") || dniA.equals("") || usu.equals("") || con.equals("")|| eda.equals("")){
 			JOptionPane.showMessageDialog(null, "No se pueden dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
 			vaciarCampos();
@@ -276,7 +276,7 @@ public class VentanaMisClientes extends JFrame {
 		}
 
 		else if(VentanaLogin.bd.dniUsado(dniA)==true){
-			//Significa que el DNI ya está siendo usado --> Salta un error
+			//Significa que el DNI ya esta siendo usado --> Salta un error
 			JOptionPane.showMessageDialog(null, "El DNI ya está siendo usado. No puede usar ese DNI.\nSi consideras que es un error póngase en contacto con el administrador del programa", "Error", JOptionPane.ERROR_MESSAGE);
 			vaciarCampos();
 			haEntrado=true;

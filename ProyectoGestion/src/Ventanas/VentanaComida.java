@@ -94,7 +94,7 @@ public class VentanaComida extends JFrame {
 		btnConfirmar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Volvemos a la página de datos generales de evento
+				//Volvemos a la pagina de datos generales de evento
 				
 				//Obtenemos el catering del comboBox
 				catering = (String) comboBoxCatering.getSelectedItem();
@@ -149,7 +149,7 @@ public class VentanaComida extends JFrame {
 		panelCentro.add(rdbtnCatering);
 		
 		comboBoxCatering = new JComboBox();
-		comboBoxCatering.setModel(new DefaultComboBoxModel(new String[] {"", "Comida autóctona", "Comida asiática", "Comida africana", "Comida vegana", "Comida sin grasas"}));
+		comboBoxCatering.setModel(new DefaultComboBoxModel(new String[] {"", "Comida autóctona", "Comida asiatica", "Comida africana", "Comida vegana", "Comida sin grasas"}));
 		comboBoxCatering.addActionListener(new ActionListener() {
 			
 			@Override
@@ -242,7 +242,7 @@ public class VentanaComida extends JFrame {
 				if(radioButton2.isSelected()){
 					radioButton2.setSelected(false);
 					suma=suma-35*VentanaComida.this.numIn;
-					num_menu=0; //Ponemos el menú a 0, porque puede que no quiera nada de menú. Sólo si le da al apropiado se sumará en el menú el número
+					num_menu=0; //Ponemos el menú a 0, porque puede que no quiera nada de menú. Sólo si le da al apropiado se sumara en el menú el número
 				}
 				if(radioButton3.isSelected()){
 					radioButton3.setSelected(false);
@@ -346,7 +346,7 @@ public class VentanaComida extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				double totalCafes=4*VentanaComida.this.numIn;
-				if(rdbtnCafsInfusiones.isSelected()){ //Precios: cafes más infusiones = 4€
+				if(rdbtnCafsInfusiones.isSelected()){ //Precios: cafes mas infusiones = 4€
 					suma = suma + totalCafes;
 					txtImporteAPagar.setText(suma + " €");
 					cafes_infusiones="Si";

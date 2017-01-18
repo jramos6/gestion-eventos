@@ -78,7 +78,7 @@ public class VentanaEscogerPago extends JFrame {
 				}
 				else {
 				if(rdbtnMetalico.isSelected()){
-					seleccion="Metálico";
+					seleccion="Metalico";
 				}else if(rdbtnTarjeta.isSelected()){
 					seleccion="Tarjeta de credito";
 				}else if(rdbtnTransferenciaBancaria.isSelected()){

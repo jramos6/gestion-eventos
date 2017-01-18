@@ -217,7 +217,7 @@ public class Confirmar extends JDialog {
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc1.getText().length()==longit){
-				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				    e.consume(); //Cuando se cumple la condición no permite que se inserten mas números
 				}if(textField_Banc1.getText().length()==longit-1){
 					textField_Banc1.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -236,7 +236,7 @@ public class Confirmar extends JDialog {
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc2.getText().length()==longit){
-				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				    e.consume(); //Cuando se cumple la condición no permite que se inserten mas números
 				}if(textField_Banc2.getText().length()==longit-1){
 					textField_Banc2.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -255,7 +255,7 @@ public class Confirmar extends JDialog {
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc3.getText().length()==longit){
-				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				    e.consume(); //Cuando se cumple la condición no permite que se inserten mas números
 				}if(textField_Banc3.getText().length()==longit-1){
 					textField_Banc3.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -274,7 +274,7 @@ public class Confirmar extends JDialog {
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc4.getText().length()==longit){
-				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				    e.consume(); //Cuando se cumple la condición no permite que se inserten mas números
 				}if(textField_Banc4.getText().length()==longit-1){
 					textField_Banc4.transferFocus(); //Y salta a la siguiente celda
 				}
@@ -303,7 +303,7 @@ public class Confirmar extends JDialog {
 			//Cada vez que escriba el usuario una letra comprobamos que en total ha escrito menos de longit caracteres (4)
 			public void keyTyped(KeyEvent e) {
 				if (textField_Banc5.getText().length()== longit){
-				    e.consume(); //Cuando se cumple la condición no permite que se inserten más números
+				    e.consume(); //Cuando se cumple la condición no permite que se inserten mas números
 
 				}if(textField_Banc5.getText().length()==longit-1){
 					//textField_Banc5.transferFocus(); //Y salta a la siguiente celda

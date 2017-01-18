@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Clase que almacena toda la información de los usuarios
+ * Clase que almacena toda la informacion de los usuarios
  * @author Javier Rivero y Aitor Santamaria
  *
  */

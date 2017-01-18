@@ -18,7 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Font;
 
 /**
- * Ventana que bloquea el uso del programa. Se desbloqueará con la introducción de la contraseña correcta
+ * Ventana que bloquea el uso del programa. Se desbloqueara con la introducción de la contraseña correcta
  * @author Javier Rivero y Aitor Santamaria
  *
  */
@@ -111,7 +111,7 @@ public class VentanaBloqueo extends JFrame {
 		panelNorte.setBackground(Color.RED);
 		contentPane.add(panelNorte, BorderLayout.NORTH);
 		
-		JLabel lblElProgramaDe = new JLabel("EL PROGRAMA DE GESTIÓN DE EVENTOS ESTÁ BLOQUEADO");
+		JLabel lblElProgramaDe = new JLabel("EL PROGRAMA DE GESTIÓN DE EVENTOS ESTA BLOQUEADO");
 		lblElProgramaDe.setForeground(Color.WHITE);
 		panelNorte.add(lblElProgramaDe);
 		

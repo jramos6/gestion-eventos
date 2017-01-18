@@ -157,7 +157,7 @@ public class VentanaLogin extends JFrame {
 		txtContrasenia.setBounds(281, 159, 130, 26);
 		panelCentro.add(txtContrasenia);
 		
-		//Por defecto los parámetros a partir de este punto serán invisibles y estarán desabilitados. Para activarlos -> método campoRegistro()
+		//Por defecto los parametros a partir de este punto seran invisibles y estaran desabilitados. Para activarlos -> método campoRegistro()
 		
 		lblNombre = new JLabel("Nombre: ");
 		lblNombre.setEnabled(false);
@@ -220,7 +220,7 @@ public class VentanaLogin extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(512, 260, 61, 26);
 		panelCentro.add(label);
-		label.setToolTipText("Introduzca su usuario y contraseña. Si no está registrado, pulse el botón de registrarse");
+		label.setToolTipText("Introduzca su usuario y contraseña. Si no esta registrado, pulse el botón de registrarse");
 		
 	}
 	
@@ -294,7 +294,7 @@ public class VentanaLogin extends JFrame {
 		// 1. Comprobamos que los datos estén bien
 		// 2. Pasamos a la siguiente ventana  
 	
-		//Comprobamos que ningún campo está vacío:
+		//Comprobamos que ningún campo esta vacío:
 		
 		String txtNom = txtNombre.getText();
 		String txtDni = txtDNI.getText();
@@ -332,7 +332,7 @@ public class VentanaLogin extends JFrame {
 			}
 			
 			else if(VentanaLogin.bd.dniUsado(txtDni)==true){
-				//Significa que el DNI ya está siendo usado --> Salta un error
+				//Significa que el DNI ya esta siendo usado --> Salta un error
 				JOptionPane.showMessageDialog(null, "El DNI ya está siendo usado. No puede usar ese DNI.\nSi consideras que es un error póngase en contacto con el administrador del programa", "Error", JOptionPane.ERROR_MESSAGE);
 				vaciarCampos();
 				haEntrado=true;

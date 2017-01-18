@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Clase que almacena la información de los restaurantes
+ * Clase que almacena la informacion de los restaurantes
  * @author Javier Rivero y Aitor Santamaria
  *
  */

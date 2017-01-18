@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Clase que almacena todos los eventos. De esta clase extienden las demás relacionadas con los eventos
+ * Clase que almacena todos los eventos. De esta clase extienden las demas relacionadas con los eventos
  * @author Javier Rivero y Aitor Santamaria
  *
  */
